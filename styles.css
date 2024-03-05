@@ -544,6 +544,10 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.m-2 {
+  margin: 0.5rem;
+}
+
 .flex {
   display: flex;
 }
@@ -564,14 +568,19 @@ video {
   border-width: 4px;
 }
 
+.border-orange-600 {
+  --tw-border-opacity: 1;
+  border-color: rgb(234 88 12 / var(--tw-border-opacity));
+}
+
 .border-yellow-600 {
   --tw-border-opacity: 1;
   border-color: rgb(202 138 4 / var(--tw-border-opacity));
 }
 
-.bg-lime-800 {
+.bg-lime-600 {
   --tw-bg-opacity: 1;
-  background-color: rgb(63 98 18 / var(--tw-bg-opacity));
+  background-color: rgb(101 163 13 / var(--tw-bg-opacity));
 }
 
 .p-1 {
@@ -584,6 +593,11 @@ video {
 
 .font-comicNeue {
   font-family: comic neue, sans-serif;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 
 .text-6xl {
