@@ -548,10 +548,6 @@ video {
   margin: 0.5rem;
 }
 
-.inline {
-  display: inline;
-}
-
 .flex {
   display: flex;
 }
@@ -612,6 +608,10 @@ video {
   padding: 0.25rem;
 }
 
+.p-2 {
+  padding: 0.5rem;
+}
+
 .p-3 {
   padding: 0.75rem;
 }
@@ -622,10 +622,6 @@ video {
 
 .pt-5 {
   padding-top: 1.25rem;
-}
-
-.font-comicNeue {
-  font-family: comic neue, sans-serif;
 }
 
 .text-3xl {
