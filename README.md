@@ -4,9 +4,10 @@ an open studio where playtime is never over
 my creative "safe" space 
 # sections
 ## forest
-a jukebox
+a sound playground aka a jukebox 
 ### description
 an audio archive, created using react. My first experiment with making a react app
+[source code available here](https://github.com/justinmsaga/audio_player)
 ### options
 - field recording: sounds from the deerverse
 - wind recording: woodwind vs birds
@@ -14,7 +15,7 @@ an audio archive, created using react. My first experiment with making a react a
 ## bakery
 we explore recipes here
 ### description
-a recipe zine document in the evolution or a baker and their recipes
+a recipe zine documenting in the evolution of a baker and their recipes
 ### vol 0 - the proof of concept
 the beginning of a recipe book...which will evolve into a recipe-verse
 ### vol 1 - sweat the technique
@@ -26,4 +27,6 @@ the croissant
 ## archive
 how did we get here
 ### description
-these are not prototypes
+these are not prototypes...but I am not sure if they were "finished" either
+please feel free to add/remix/make fun of these
+[CC0 vibes](https://creativecommons.org/public-domain/cc0/)
