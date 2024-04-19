@@ -2,9 +2,14 @@
 an open studio where playtime is never over
 # intro
 my creative "safe" space 
+## who am "i"
+a human mastering the art of war, war between my egos. 
+"the tourist" vs "the purist"
+
+all creations are the result of a battle...you decide the winner...I am too biased to pick
 # sections
 ## forest
-a sound playground aka a jukebox 
+a sound playground aka jukebox 
 ### description
 an audio archive, created using react. My first experiment with making a react app
 [source code available here](https://github.com/justinmsaga/audio_player)
