@@ -1,3 +1,7 @@
+section{
+  display: none;
+}
+
 /*
 ! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com
 */
@@ -552,14 +556,6 @@ video {
   display: flex;
 }
 
-.table {
-  display: table;
-}
-
-.table-auto {
-  table-layout: auto;
-}
-
 .list-inside {
   list-style-position: inside;
 }
@@ -576,10 +572,6 @@ video {
   justify-content: space-around;
 }
 
-.border {
-  border-width: 1px;
-}
-
 .border-4 {
   border-width: 4px;
 }
@@ -587,11 +579,6 @@ video {
 .border-orange-600 {
   --tw-border-opacity: 1;
   border-color: rgb(234 88 12 / var(--tw-border-opacity));
-}
-
-.border-slate-500 {
-  --tw-border-opacity: 1;
-  border-color: rgb(100 116 139 / var(--tw-border-opacity));
 }
 
 .border-yellow-600 {
@@ -608,10 +595,6 @@ video {
   padding: 0.25rem;
 }
 
-.p-2 {
-  padding: 0.5rem;
-}
-
 .p-3 {
   padding: 0.75rem;
 }
@@ -622,6 +605,10 @@ video {
 
 .pt-5 {
   padding-top: 1.25rem;
+}
+
+.text-right {
+  text-align: right;
 }
 
 .text-3xl {

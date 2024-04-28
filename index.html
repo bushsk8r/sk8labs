@@ -9,14 +9,18 @@
 </head>
 
 <body class="text-3xl p-1">
-    <p >[these are prototypes...for now]</p>
-     
-    <h1 class="text-6xl flex justify-center"><marquee>🦌welcome to the deerverse🦌</marquee></h1>
-    
+    <p>[these are prototypes...for now]</p>
+
+    <h1 class="text-6xl flex justify-center">
+        <marquee>🦌welcome to the deerverse🦌</marquee>
+    </h1>
+
     <nav class="flex justify-around border-4 border-orange-600">
         <a class="p-1" href="who.html">▶️characters</a>
         <a class="p-1" href="archive/">▶️archive</a>
     </nav>
+
+    <h1 id="text"></h1>
 
     <div class="flex justify-center">
         <p class="pt-5">a creative sandbox</p>
@@ -26,21 +30,45 @@
         <p>current projects:</p>
         <ul class="list-disc list-inside">
             <li class="p-3"> this website 👉
-                [<a href="https://github.com/bushsk8r/sk8labs">site source code</a>]🛠️
+                <button onclick="toggleDisplay('siteDesc')">open source</button>
+                <section class="text-right" id="siteDesc">
+                    <p>made using html, css and javascript</p>
+                    <p>css with tailwind</p>
+                    <p>site served through netlify</p>
+                    👉<a href="https://github.com/bushsk8r/sk8labs">github repo</a>🛠️
+                </section>
             </li>
             <li class="p-3">the forest 👉
-                <a class="bg-lime-600 p-1" href="forest/">a sonic playground</a>🌳 
+                <button onclick="toggleDisplay('forestDesc')">a sonic playground</button>
+                <section class="text-right" id="forestDesc">
+                    <p>an audio archive in the form of a jukebox</p>
+                    <p>updated each month with all recording created</p>
+                    👉<a class="bg-lime-600 p-1" href="forest/">jump in</a>🌳
+                </section>
             </li>
             <li class="p-3">baked chronicles 👉
-                <a class="border-4 border-yellow-600" href="bakery/"> a hypermedia zine</a>🥐
+                <button onclick="toggleDisplay('bakedDesc')">a hypermedia zine</button>
+                <section class="text-right" id="bakedDesc">
+                    <p><b>hypermedia</b>: media which includes non-linear branching from one location to another </p>
+                    <p><b>zine</b>: is a small-circulation self-published work of original or appropriated texts and images,
+                        usually reproduced via a copy machine</p>
+                    <a class="border-4 border-yellow-600" href="bakery/">volume 0 - 1</a>🥐
+                </section>
             </li>
-            <li class="p-3">playin' with poly: into the deerverse(soon come)</li>
+            <li class="p-3">playin' with poly: into the deerverse 👉 
+                <button onclick="toggleDisplay('polyDesc')">soon come</button>
+                <section class="text-right" id="polyDesc">
+                    <p>playing with light and polygons</p>
+                    <p>expriments with photography and stencil graffiti</p>
+                </section>
+            </li>
         </ul>
     </div>
 
     <p class="pt-5">
         dark mode soon come
     </p>
+    <script src="index.js"></script>
 </body>
 
 </html>
