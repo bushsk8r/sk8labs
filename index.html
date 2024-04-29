@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="text-3xl p-1">
+<body class="text-3xl text-white bg-slate-600 p-1">
     <p>[these are prototypes...for now]</p>
 
     <h1 class="text-6xl flex justify-center">
         <marquee>🦌welcome to the deerverse🦌</marquee>
     </h1>
 
-    <nav class="flex justify-around border-4 border-orange-600">
+    <nav class="flex justify-around border-4 border-orange-600 rounded-lg">
         <a class="p-1" href="who.html">▶️characters</a>
         <a class="p-1" href="archive/">▶️archive</a>
     </nav>
@@ -30,7 +30,7 @@
         <p>current projects:</p>
         <ul class="list-disc list-inside">
             <li class="p-3"> this website ⏯️
-                <button class="border-4 border-orange-600" onclick="toggleDisplay('siteDesc')">open source code</button>
+                <button class="border-4 border-orange-600 p-1 rounded-lg" onclick="toggleDisplay('siteDesc')">open source code</button>
                 <section class="text-right" id="siteDesc">
                     <p>made using html, css and javascript</p>
                     <p>css with tailwind</p>
@@ -39,16 +39,16 @@
                 </section>
             </li>
             <li class="p-3">the forest 🔀
-                <button class="border-4 border-orange-600" onclick="toggleDisplay('forestDesc')">a sonic playground</button>
+                <button class="border-4 border-orange-600 p-1 rounded-lg" onclick="toggleDisplay('forestDesc')">a sonic playground</button>
                 <section class="text-right" id="forestDesc">
                     <p>a jukebox <b>:tldr</b></p>
                     <p>an audio archive created by "the tourist" and curated by "the purist"</p>
-                    <p>updated each month with all recording created</p>
+                    <p>updated each month with all recordings taken</p>
                     🦌<a class="bg-lime-600 p-1" href="forest/">jump in</a>🌳
                 </section>
             </li>
             <li class="p-3">baked chronicles ⏩
-                <button class="border-4 border-orange-600" onclick="toggleDisplay('bakedDesc')">a hypermedia zine</button>
+                <button class="border-4 border-orange-600 p-1 rounded-lg" onclick="toggleDisplay('bakedDesc')">a hypermedia zine</button>
                 <section class="text-right" id="bakedDesc">
                     <p>documenting mastery of a craft <b>:tldr</b></p>
                     <p><b>hypermedia</b>: media which includes non-linear branching from one location to another </p>
@@ -58,7 +58,7 @@
                 </section>
             </li>
             <li class="p-3">playin' with poly 🔁 
-                <button class="border-4 border-orange-600" onclick="toggleDisplay('polyDesc')">soon come</button>
+                <button class="border-4 border-orange-600 p-1 rounded-lg" onclick="toggleDisplay('polyDesc')">soon come</button>
                 <section class="text-right" id="polyDesc">
                     <p>visuals from the deerverse <b>:tldr</b></p>
                     <p>playing with light and polygons</p>
@@ -68,9 +68,6 @@
         </ul>
     </div>
 
-    <p class="pt-5">
-        dark mode soon come
-    </p>
     <script src="index.js"></script>
 </body>
 

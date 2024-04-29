@@ -576,6 +576,10 @@ video {
   justify-content: space-around;
 }
 
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
 .border-4 {
   border-width: 4px;
 }
@@ -593,6 +597,11 @@ video {
 .bg-slate-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(148 163 184 / var(--tw-bg-opacity));
+}
+
+.bg-slate-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(71 85 105 / var(--tw-bg-opacity));
 }
 
 .bg-yellow-600 {
@@ -628,4 +637,9 @@ video {
 .text-6xl {
   font-size: 3.75rem;
   line-height: 1;
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
