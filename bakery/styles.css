@@ -24,6 +24,7 @@ body{
 .tldr{
     background-color: blue;
     color: aqua;
+    display: inline;
 }
 
 /*to next page*/
