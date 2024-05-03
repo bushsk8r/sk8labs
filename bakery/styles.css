@@ -5,3 +5,47 @@
 body{
     font-family: Helvetica, sans-serif;
 }
+
+/*header and nav back*/
+.head{
+    background-color: orange;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+
+}
+/*page description*/
+.desc{
+    background-color: skyblue;
+    padding: 1em;
+}
+
+.tldr{
+    background-color: blue;
+    color: aqua;
+}
+
+/*to next page*/
+.vols{
+    background-color: chocolate;
+    text-align: right;
+    padding: 1em;
+}
+
+li{
+    list-style-type: none;
+    padding: 10px;
+}
+
+/*credits*/
+
+.foot{
+    background-color: red;
+    display: flex;
+    justify-content: center;
+}
+
+.jukebox{
+    background-color: pink;
+}
