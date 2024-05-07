@@ -27,11 +27,20 @@ body{
     display: inline;
 }
 
-/*to next page*/
+/*nav*/
+.toc{
+    display: flex;
+    justify-content: space-evenly;
+}
+.zineCover{
+    width: 50%;
+}
+
 .vols{
     background-color: chocolate;
     text-align: right;
     padding: 1em;
+    width: 50%;
 }
 
 li{
@@ -42,8 +51,6 @@ li{
 
 .foot{
     background-color: red;
-    display: flex;
-    justify-content: center;
 }
 
 .jukebox{
