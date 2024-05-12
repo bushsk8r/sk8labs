@@ -35,6 +35,7 @@ body{
     display: flex;
     justify-content: space-evenly;
 }
+
 .toc img{
     width: 50%;
 }
@@ -50,8 +51,27 @@ li{
     padding: 5px;
 }
 
-/*credits*/
+/*recipe*/
+.recipe{
+    background-color: skyblue;
+}
 
+.recipe table{
+    background-color: yellow;
+}
+
+.ingredients{
+    background-color: green;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.mix{
+    background-color: yellow;
+    padding: 3px;
+}
+
+/*credits*/
 .foot{
     background-color: red;
 }
