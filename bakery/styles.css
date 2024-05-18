@@ -56,6 +56,10 @@ li{
     background-color: skyblue;
 }
 
+.recipe-head{
+    background-color: orange;
+}
+
 .recipe table{
     background-color: yellow;
 }
@@ -68,12 +72,13 @@ li{
 
 .mix{
     background-color: yellow;
-    padding: 3px;
+    padding: 2px;
 }
 
 /*credits*/
 .foot{
     background-color: red;
+    padding: 10px;
 }
 
 .jukebox{
