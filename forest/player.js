@@ -44,9 +44,15 @@ function updatePlayer(fileNum) {
 const buttons = document.querySelectorAll("button");
 for (let b of buttons) {
     b.addEventListener("click", () => {
-        updatePlayer(b.getAttribute("name"))
+        removeClick();
+        updatePlayer(b.getAttribute("name"));
+        b.classList.add("clicked");
     });
 }
 
-
+function removeClick() {
+    for (let b of buttons) {
+        b.classList.remove("clicked");
+    }
+}
 

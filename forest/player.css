@@ -12,3 +12,7 @@ ol{
     flex-wrap: wrap;
     justify-content: space-around;
 }
+
+.clicked{
+    background-color: black;
+}
