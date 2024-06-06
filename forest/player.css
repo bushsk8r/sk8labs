@@ -3,9 +3,11 @@ button{
     margin: 1em;
     padding: 5px;
     border-radius: 5px;
+    width: 300px;
 }
 
 ol{
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
 }

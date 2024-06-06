@@ -1,31 +1,31 @@
 //audio tracks
 const audioObj = [
     {
-        name: "may_field_1.wav",
+        name: "by08OmJlCMkvmUqGLssEA2JkyNzniKDqlbwr0zq9IN4",
         description: "may field recording 1"
     },
     {
-        name: "may_wind_1.wav",
+        name: "YAyZuianviXMTYAL1yYB6_atw98if5HpaSTBcnLAqHE",
         description: "may wind recording 1"
     },
     {
-        name: "may_field_2.wav",
+        name: "_bCBWWceJmt4xJQdITwteR4qLGkVfkkDnX1i-abGE-w",
         description: "may field recording 2"
     },
     {
-        name: "may_field_3.wav",
+        name: "cpDk4O3n46NbJoKdhVWcJc-gb92Y9R8s8LbYnLjuQAo",
         description: "may field recording 3"
     },
     {
-        name: "may_wind_2.wav",
+        name: "JmQQ01WASIzr8jt9K-_CusOB6MV1ImhNNCMDoubUDkQ",
         description: "may wind recording 2"
     },
     {
-        name: "may_field_4.wav",
+        name: "NfjOq1YRDbCd60kpNml_sZFSnCAsyV40VTYm4X6xn1I",
         description: "may field recording 4"
     },
     {
-        name: "may_wind_3.wav",
+        name: "_s_wmH0id0PK5kyGpdxj3PNxO5s5Et2BKV_cqG3Cx9o",
         description: "may wind recording 3"
     }
 ]
@@ -36,7 +36,7 @@ const desc = document.getElementById("desc")
 
 //update audio source and file desctiption
 function updatePlayer(fileNum) {
-    player.src = audioObj[fileNum].name;
+    player.src = `http://arweave.net/${audioObj[fileNum].name}`;
     desc.textContent = audioObj[fileNum].description;
 }
 
