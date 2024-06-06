@@ -2,8 +2,9 @@ button{
     background-color: skyblue;
     margin: 1em;
     padding: 5px;
-    border-radius: 5px;
+    border-radius: 50px;
     width: 300px;
+    height: 200px;
 }
 
 ol{
