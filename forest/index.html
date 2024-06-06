@@ -1,14 +1,42 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>player</title>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>the forest</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="player.css">
+</head>
+
+
+<body class="p-3 text-2xl">
+    <nav>
+        <a class="p-1" href="../">🌍back to the studio</a>
+        <h1 class="text-6xl flex justify-center pb-5">
+           sounds of the deerverse 
+        </h1>
+    </nav>
+
+    <!--audio player-->
+    <div class="flex justify-center">
+        <audio id="player" controls src="may_field_1.wav"></audio>
+    </div>
+
+    <h2 id="desc" class="flex justify-center">may sessions</h2>
     
-    <script type="module" crossorigin src="index.js"></script>
-    <link rel="stylesheet" href="index.css">
-  </head>
-  <body>
-    <a href="../">back to the studio</a>
-    <div id="root"></div>
-    
-  </body>
+    <!--track selector-->
+    <article class="p-3">
+        <ol>
+            <li><button name="0"> field 1</button></li>
+            <li><button name="1" > wind 1</button></li>
+            <li><button name="2" > field 2</button></li>
+            <li><button name="3" > field 3</button></li>
+            <li><button name="4" > wind 2</button></li>
+            <li><button name="5" > field 4</button></li>
+            <li><button name="6" > wind 3</button></li>
+        </ol>
+    </article>
+
+    <script src="player.js"></script>
+</body>
+
 </html>
