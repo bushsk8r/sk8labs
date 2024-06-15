@@ -7,38 +7,31 @@
     <link rel="stylesheet" href="player.css">
 </head>
 
-
 <body class="p-3 text-2xl">
+    
+    <!--nav back and main title-->
     <nav>
         <a class="p-1" href="../">🌍back to the studio</a>
         <h1 class="text-6xl flex justify-center pb-5">
            sounds of the deerverse 
         </h1>
     </nav>
-    
+
+    <!--track list tldr-->
     <h2 class="flex justify-center">may sessions</h2>
 
     <!--audio player-->
     <div class="flex justify-center">
         <audio id="player" controls src="may_field_1.wav"></audio>
     </div>
-
     <h2 id="desc" class="flex justify-center"></h2>
-    
+
     <!--track selector-->
     <article class="p-3">
-        <ol>
-            <li><button name="0"> field 1</button></li>
-            <li><button name="1" > wind 1</button></li>
-            <li><button name="2" > field 2</button></li>
-            <li><button name="3" > field 3</button></li>
-            <li><button name="4" > wind 2</button></li>
-            <li><button name="5" > field 4</button></li>
-            <li><button name="6" > wind 3</button></li>
-        </ol>
+        <div id="selectAudio"></div>
     </article>
 
+    <!--audio player script-->
     <script src="player.js"></script>
 </body>
-
 </html>
