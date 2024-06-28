@@ -1,0 +1,27 @@
+button{
+    background-color: skyblue;
+    margin: 1em;
+    padding: 5px;
+    border-radius: 50px;
+    width: 400px;
+    height: 200px;
+}
+
+#selectAudio{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.clicked{
+    background-color: black;
+    color: white;
+}
+
+#description{
+    background-color: black;
+}
+
+#credits{
+    background-color: black;
+}

@@ -1,1 +1,52 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+    <title>the forest</title>
+    <link rel="stylesheet" href="../../../styles.css">
+    <link rel="stylesheet" href="player.css">
+</head>
+
+<body class="p-3 text-2xl">
+
+    <!--nav back and main title-->
+    <nav>
+        <a class="p-1" href="../">🌍back to the archive</a>
+        <h1 class="text-6xl flex justify-center pb-5">
+            human in the loop
+        </h1>
+    </nav>
+
+    <!--project description-->
+    <section id="desctiption">
+        <p><b>theme</b>: somewhere between yesterday and tomorrow</p>
+        <p><b>method</b>: freestyle on drum and flute</p>
+    </section>
+
+        <!--track list tldr-->
+        <h2 class="flex justify-center">volume 0</h2>
+
+        <!--audio player-->
+        <div class="flex justify-center">
+            <audio id="player" controls src=""></audio>
+        </div>
+        <h2 id="desc" class="flex justify-center"></h2>
+
+        <!--track selector-->
+        <article class="p-3">
+            <div id="selectAudio"></div>
+        </article>
+
+        <!--credits-->
+        <section id="credits">
+            <h2>credits</h2>
+            <p>recorded on the unceded land of the Coast Salish, səl̓ilwətaɁɬ təməxʷ (Tsleil-Waututh), Skwxwú7mesh-ulh
+                Temíx̱w
+                (Squamish), S’ólh Téméxw (Stó:lō), Stz'uminus, and xʷməθkʷəy̓əm</p>
+        </section>
+
+        <!--audio player script-->
+        <script src="player.js"></script>
+</body>
+
+</html>
