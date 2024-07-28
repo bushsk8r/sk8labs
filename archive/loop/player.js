@@ -70,7 +70,7 @@ function updatePlayer(fileNum) {
 //add buttons to page from audio objects
 for (let i = 0; i < audioObj.length; i++) {
     let audioBtn = document.createElement("button");
-    audioBtn.innerHTML = `${audioObj[i].name} (${audioObj[i].length})`;
+    audioBtn.innerHTML = `${audioObj[i].name} <br> (${audioObj[i].length})`;
     audioBtn.setAttribute("name", i);
     trackList.appendChild(audioBtn);
 }

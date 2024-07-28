@@ -1,16 +1,29 @@
+html{
+    box-sizing: border-box;
+}
+
+*{
+    box-sizing: inherit;
+}
+
+body{
+    background-color: rgb(185, 184, 184);
+}
+
 button{
     background-color: skyblue;
     margin: 1em;
     padding: 5px;
     border-radius: 50px;
-    width: 400px;
-    height: 200px;
 }
 
 #selectAudio{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
+    margin: 0 auto;
+    border: 2px solid red;
 }
 
 .clicked{
