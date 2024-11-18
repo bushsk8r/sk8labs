@@ -1,66 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+    <head>
+        <title>Jukebox</title>
+        <link rel="stylesheet" href="./index.css" />
+        <script src="./script.js" type="module"></script>
+    </head>
 
-<head>
-    <title>
-        complete works
-    </title>
-    <link rel="stylesheet" href="../../styles.css">
-</head>
-
-<body class="p-2 text-3xl">
-    
-    <a href="../">🌍back to the studio</a>
-    <h1 class="text-6xl flex justify-center pb-5">
-        how did we get here?
-    </h1>
-
-    <div class="key">
-        <ul>
-            <li>▶️ - select here</li>
-            <li>🍃 - loading</li>
-        </ul>
-    </div>
-    
-    <div class="flex justify-center">
-        <table class="table-auto border border-slate-500">
-            <thead>
-                <tr>
-                    <th class="p-1">title</th>
-                    <th class="p-1">curation</th>
-                    <th class="p-1">craft</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr >
-                    <td class="p-3 border border-slate-500"><a href="light.html">🍃let there be light</a></td>
-                    <td class="p-3 border border-slate-500">playlist</td>
-                    <td class="p-3 border border-slate-500">video</td>
-                </tr>
-            </tbody>
-            <tbody>
-                <tr >
-                    <td class="p-3 border border-slate-500"><a href="loop/">▶️human in the loop</a></td>
-                    <td class="p-3 border border-slate-500">audio recording</td>
-                    <td class="p-3 border border-slate-500">improvisation</td>
-                </tr>
-            </tbody>
-            <tbody>
-                <tr>
-                    <td class="p-3 border border-slate-500">🍃playin' with poly</td>
-                    <td class="p-3 border border-slate-500">photography</td>
-                    <td class="p-3 border border-slate-500">stencil graffiti</td>
-                </tr>
-            </tbody>
-            <tbody>
-                <tr>
-                    <td class="p-3 border border-slate-500"><a href="recording/">▶️forest</a> </td>
-                    <td class="p-3 border border-slate-500">playlist</td>
-                    <td class="p-3 border border-slate-500">radio</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</body>
-
+    <body>
+        <header>
+            <h1>archive</h1>
+        </header>
+        <main>
+            <section class="selectors">
+                <button>2024</button>
+                <button>2023</button>
+                <button>2022</button>
+                <button>2021</button>
+                <button>2020</button>
+                <button>2019</button>
+                <button>2018</button>
+                <button>2017</button>
+                <button>2016</button>
+                <button>2013</button>
+            </section>
+            <p class="desc">select title for more details</p>
+            <dl id="dataList"></dl>
+        </main>
+    </body>
 </html>
