@@ -59,7 +59,7 @@ const crate = {
   ],
   2018: [
     [
-      "marisol",
+      "jade",
       "character design",
       "6PqtBb2Aa-CpWLEGvt6ODIq4zG8PMmdNDjpL-mk6sd0",
       "video",
