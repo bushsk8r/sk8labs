@@ -28,7 +28,6 @@ function gameStates(game, ball) {
     ],
 
     round: [
-      createBtn("rules", [], "rules", game, "rules"),
       elementBtn("🔥", "fire", game, ball),
       createDiv([
         elementBtn("🪨", "rock", game, ball),
@@ -36,6 +35,7 @@ function gameStates(game, ball) {
         elementBtn("✂️", "scissors", game, ball),
       ]),
       elementBtn("🌊", "water", game, ball),
+      createBtn("rules", ["highlight"], "rules", game, "rules"),
       // createElem("button", "agent select", [], ""),
     ],
   };
