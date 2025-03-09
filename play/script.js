@@ -1,8 +1,10 @@
 import { createElem, createBtn, addToTag } from "./helper.js";
 import gameStates from "./states.js";
 import playRound from "./game.js";
-
+//game starter
 const foot = document.querySelector("footer");
+
+//game area
 const main = document.querySelector("main");
 
 //setup game area

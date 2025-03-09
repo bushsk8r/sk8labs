@@ -126,11 +126,12 @@
     font-size: xx-large;
     color: white;
     background-color: slategray;
-    margin: 2rem 2rem;
+    margin: 0rem 2rem;
   }
 
   h1 {
-    font-size: x-large;
+    font-size: xxx-large;
+    align-self: center;
   }
 
   button {
@@ -138,6 +139,21 @@
     border-radius: 5rem;
     padding: 1rem 5rem;
     margin: 1rem 1rem;
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  ul {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  a {
+    text-decoration: underline wavy red;
   }
 }
 
