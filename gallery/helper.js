@@ -34,18 +34,20 @@ function createMedia(type, alt, styles, source, name) {
   const media = createElement(type, "", styles, name);
   media.setAttribute("src", source);
   media.setAttribute("alt", alt);
+  media.setAttribute("controls", "controls");
 
   return media;
 }
 
 //make element container
-function createContainer(type, text, styles, comps) {
-  const elem = createElement(type, text, styles);
+function createContainer(type, text, styles, comps, name) {
+  const elem = createElement(type, text, styles, name);
   addToTag(elem, comps, false);
 
   return elem;
 }
 
+//button with elements inside
 function createButtonContainer(styles, comps, handle, cmd, name) {
   const btn = createBtn("", styles, handle, cmd, name);
   addToTag(btn, comps);
