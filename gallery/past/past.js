@@ -5,32 +5,35 @@ import {
   createMedia,
   createButtonContainer,
 } from "../helper.js";
+import displayArchive from "./archive.js";
 
 const archive = [
   {
-    title: "idea factory (2017)",
+    title: "idea factory",
+    year: 2017,
     craft: "animation",
     description: "birth of bushsk8r",
     tools: "paint 3d, blender, caustic",
   },
   {
-    title: "human in the loop (2020)",
+    title: "human in the loop",
     craft: "studio recording",
     description:
       "my first time in a professional modern recording studio, freestyle on drum and flute",
     tools: "recording studio",
   },
   {
-    title: "echo chamber (2021)",
+    title: "echo chamber",
     craft: "field recording",
     description: " skatepark 🤝 musical instrument",
     tools: "audio recorder",
   },
   {
-    title: "rock paper scissors (2024)",
-    craft: "interface design",
-    description: "text based game development",
-    tools: "html,css,js",
+    title: "playin with poly",
+    craft: "graphics design",
+    description:
+      "using straight lines and colour to recreate the essentials of a scene",
+    tools: "inkscape",
   },
 ];
 
@@ -81,15 +84,8 @@ function displayContainer() {
   );
 }
 
-//update artifact
-function artifact() {
-  return createContainer(
-    "section",
-    "",
-    ["artifactContainer"],
-    [createElement("h2", `"display artifact here"`, [])]
-  );
-}
+// initialize archive display
+const artifactDisplay = displayArchive();
 
 //update selected item
 function updateSelected(itemChosen) {
@@ -105,7 +101,21 @@ function updateSelected(itemChosen) {
   });
 
   //update main element to show selected item
-  addToTag(main, [title, displayContainer(), artifact()], true);
+  addToTag(
+    main,
+    [
+      title,
+      displayContainer(),
+      createContainer(
+        "section",
+        "",
+        ["artifactContainer"],
+        artifactDisplay(itemChosen),
+        "artifactSection"
+      ),
+    ],
+    true
+  );
 }
 
 //inital setup of main element
