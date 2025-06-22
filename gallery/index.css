@@ -103,6 +103,34 @@
 @layer base {
   :root {
     /*colors*/
+    --love: hsla(58, 100%, 60%, 1);
+    --inspo: orange;
+    --self: skyblue;
+    --ego: hsla(0, 100%, 40%, 1);
+    --home: hsla(142, 100%, 37%, 1);
+    --earth: hsla(37, 100%, 32%, 1);
+    --base: slategrey;
+    --bottom: 1px solid black;
+    --dark: black;
+
+    .love {
+      background-color: var(--love);
+    }
+    .self {
+      background-color: var(--self);
+    }
+    .ego {
+      background-color: var(--ego);
+    }
+    .earth {
+      background-color: var(--earth);
+    }
+    .inspo {
+      background-color: var(--inspo);
+    }
+    .home {
+      background-color: var(--home);
+    }
 
     /*base*/
     --c-cname-500: white;
@@ -169,15 +197,22 @@
     white-space: nowrap;
     width: 1px;
   }
+
   .hidden {
     display: none;
   }
+
   .container {
     margin-inline: 5rem;
   }
+
   .underline {
     text-decoration-line: underline;
     text-decoration-style: wavy;
+  }
+
+  .border {
+    border: var(--test-border);
   }
 }
 
@@ -189,6 +224,9 @@
     margin-block: 1rem;
     padding-bottom: 1rem;
     border-bottom: var(--test-border);
+    img {
+      height: 200px;
+    }
   }
   nav ul {
     display: flex;
@@ -201,6 +239,36 @@
         text-decoration: none;
       }
     }
+  }
+}
+
+@layer footer {
+  footer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 1rem;
+    button {
+      padding: 0.5rem;
+      border-radius: 10px;
+    }
+    .play {
+      height: 2rem;
+      width: 2rem;
+    }
+  }
+  .startContainer {
+    display: flex;
+    justify-content: center;
+    margin-block: 1rem;
+  }
+
+  .playArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -275,7 +343,6 @@
     gap: 1rem;
     padding-block: 3rem;
     justify-content: center;
-    text-align: center;
     /*
     margin-bottom: 0.5rem;*/
   }
@@ -299,8 +366,15 @@
 }
 
 @layer archive {
-}
+  .artifactSelectors {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
 
-.test {
-  border: var(--test-border);
+  .archiveItemBtn {
+    border: var(--test-border);
+    padding-inline: 0.5rem;
+  }
 }
