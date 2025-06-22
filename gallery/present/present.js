@@ -4,6 +4,7 @@ import {
   createContainer,
   createLink,
 } from "../helper.js";
+import { footer, header } from "../script.js";
 
 //data to be displayed
 const studies = [
@@ -27,7 +28,7 @@ const studies = [
 const main = document.querySelector("main");
 
 //page title element
-const title = createElement("h1", "Present curiosities", []);
+const title = createElement("h1", "Present Curiosities", []);
 
 //map data into item cards
 const displayCard = studies.map((study) => {
@@ -50,3 +51,9 @@ const displayCard = studies.map((study) => {
 
 //add page title and data cards to document main section
 addToTag(main, [title, ...displayCard]);
+
+const head = header(document.querySelector("header"));
+head("present");
+
+const foot = footer(document.querySelector("footer"));
+foot(false);
