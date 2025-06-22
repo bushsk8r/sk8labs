@@ -1,0 +1,209 @@
+@layer reset {
+  /* Box sizing rules */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /* Prevent font size inflation */
+  html {
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+  }
+
+  /* Remove default margin in favour of better control in authored CSS */
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  figure,
+  blockquote,
+  dl,
+  dd {
+    margin: 0;
+  }
+
+  /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+  ul[role="list"],
+  ol[role="list"] {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Set core body defaults */
+  body {
+    min-height: 100vh;
+    line-height: 1.5;
+  }
+
+  /* Set shorter line heights on headings and interactive elements */
+  h1,
+  h2,
+  h3,
+  h4,
+  button,
+  input,
+  label {
+    line-height: 1.1;
+  }
+
+  /* Balance text wrapping on headings */
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  /* balance text wrap for blocks of text*/
+  p,
+  li {
+    text-wrap: pretty;
+  }
+
+  /* A elements that don't have a class get default styles */
+  a:not([class]) {
+    text-decoration-skip-ink: auto;
+    color: currentColor;
+  }
+
+  /* Make images easier to work with */
+  img,
+  picture {
+    max-width: 100%;
+    display: block;
+  }
+
+  /* Inherit fonts for inputs and buttons */
+  input,
+  button,
+  textarea,
+  select {
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  /* Make sure textareas without a rows attribute are not tiny */
+  textarea:not([rows]) {
+    min-height: 10em;
+  }
+
+  /* Anything that has been anchored to should have extra scroll margin */
+  :target {
+    scroll-margin-block: 5ex;
+  }
+}
+
+@layer base {
+  :root {
+    --love: hsla(58, 100%, 60%, 1);
+    --inspo: orange;
+    --self: skyblue;
+    --ego: hsla(0, 100%, 40%, 1);
+    --home: hsla(142, 100%, 37%, 1);
+    --earth: hsla(37, 100%, 32%, 1);
+    --base: slategrey;
+    --bottom: 1px solid black;
+    --dark: black;
+
+    --underline: underline wavy var(--ego) 2px;
+    --regular: 1px black solid;
+
+    --boundaryBox: solid black 2px;
+  }
+
+  html {
+    font-family: Helvetica, sans-serif;
+    line-height: 1.6;
+  }
+
+  body {
+    font-size: xx-large;
+    color: white;
+    background-color: slategray;
+    margin: 0rem 2rem;
+  }
+
+  h1 {
+    font-size: xxx-large;
+    align-self: center;
+  }
+
+  button {
+    border: none;
+    border-radius: 5rem;
+    padding: 1rem 5rem;
+    margin: 1rem 1rem;
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  ul {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  a {
+    text-decoration: underline wavy red;
+  }
+}
+
+@layer game {
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+  }
+
+  .attention {
+    color: white;
+    background-color: var(--ego);
+    padding: 1rem 10rem;
+  }
+
+  .highlight {
+    color: black;
+    background-color: var(--love);
+    padding: 1rem 10rem;
+  }
+}
+
+@layer footer {
+  footer {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+  }
+  footer div {
+    height: 3rem;
+    width: 3rem;
+  }
+
+  .love {
+    background-color: var(--love);
+  }
+  .inspo {
+    background-color: var(--inspo);
+  }
+  .self {
+    background-color: var(--self);
+  }
+  .ego {
+    background-color: var(--ego);
+  }
+  .home {
+    background-color: var(--home);
+  }
+}
