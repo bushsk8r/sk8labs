@@ -4,6 +4,7 @@ import {
   createContainer,
   createLink,
 } from "../helper.js";
+import { footer, header } from "../script.js";
 
 //data to be displayed
 const things = [
@@ -84,3 +85,9 @@ const thingsContainer = createContainer(
 
 //add page title and items container to document main section
 addToTag(main, [title, thingsContainer]);
+
+const head = header(document.querySelector("header"));
+head("about");
+
+const foot = footer(document.querySelector("footer"));
+foot(false);
