@@ -5,6 +5,8 @@ import {
   createElement,
   createMedia,
 } from "../helper.js";
+import { footer, header } from "../script.js";
+
 const crate = {
   "idea factory": [
     {
@@ -47,7 +49,7 @@ const crate = {
     {
       title: "intro",
       description: "hello, from the human",
-      source: "WOXcBMl9wVA0a1NUeWvBKVUlhWhz410u3Kncn-j4cxc",
+      source: "B2nYw9URD4fYF_CSCLdMKWA5_CCjnRrDdC95cMogaUk",
       type: "audio",
     },
     {
@@ -254,15 +256,29 @@ function displayArchive() {
     displayArea.innerHTML = "";
     const artifactSelector = crate[item].map((crateItem) => {
       const title = createElement("h3", crateItem.title, []);
-      return createButtonContainer(["pastBtn"], [title], updateArtifact, {
-        section: displayArea,
-        name: crateItem.title,
-        mediaType: crateItem.type,
-        source: crateItem.source,
-      });
+      return createButtonContainer(
+        ["pastBtn", "archiveItemBtn"],
+        [title],
+        updateArtifact,
+        {
+          section: displayArea,
+          name: crateItem.title,
+          mediaType: crateItem.type,
+          source: crateItem.source,
+        }
+      );
     });
-    return [createContainer("div", "", [], artifactSelector), displayArea];
+    return [
+      createContainer("div", "", ["artifactSelectors"], artifactSelector),
+      displayArea,
+    ];
   }
   return display;
 }
 export default displayArchive;
+
+const head = header(document.querySelector("header"));
+head("past");
+
+const foot = footer(document.querySelector("footer"));
+foot(false);

@@ -20,7 +20,8 @@ const archive = [
     craft: "studio recording",
     description:
       "my first time in a professional modern recording studio, freestyle on drum and flute",
-    tools: "recording studio",
+    tools:
+      "recording studio on the unceded land of the Coast Salish, səl̓ilwətaɁɬ təməxʷ (Tsleil-Waututh), Skwxwú7mesh-ulh Temíx̱w (Squamish), S’ólh Téméxw (Stó:lō), Stz'uminus, and xʷməθkʷəy̓əm",
   },
   {
     title: "echo chamber",
@@ -43,7 +44,7 @@ let archiveChosen = archive.map((item) => {
 
 const main = document.querySelector("main");
 
-const title = createElement("h1", "archive", []);
+const title = createElement("h1", "Archive", []);
 
 let selected = false;
 
