@@ -6,6 +6,7 @@ import {
   createButtonContainer,
 } from "../helper.js";
 import displayArchive from "./archive.js";
+import { footer, header } from "../script.js";
 
 const archive = [
   {
@@ -104,20 +105,16 @@ function updateSelected(itemChosen) {
   //update main element to show selected item
   addToTag(
     main,
-    [
-      title,
-      displayContainer(),
-      createContainer(
-        "section",
-        "",
-        ["artifactContainer"],
-        artifactDisplay(itemChosen),
-        "artifactSection"
-      ),
-    ],
+    [title, displayContainer(), artifactDisplay(itemChosen)],
     true
   );
 }
 
 //inital setup of main element
 addToTag(main, [title, displayContainer()]);
+
+const head = header(document.querySelector("header"));
+head("past");
+
+const foot = footer(document.querySelector("footer"));
+foot(false);

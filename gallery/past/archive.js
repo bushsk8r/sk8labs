@@ -5,9 +5,14 @@ import {
   createElement,
   createMedia,
 } from "../helper.js";
-import { footer, header } from "../script.js";
 
 const crate = {
+  works: [
+    "idea factory",
+    "human in the loop",
+    "echo chamber",
+    "playin with poly",
+  ],
   "idea factory": [
     {
       title: "youth",
@@ -240,45 +245,72 @@ const crate = {
   ],
 };
 
-function updateArtifact({ section, name, mediaType, source }) {
+let selectedCrate, selectorArea;
+const displayArea = createElement("section", "test", ["artifactMedia"]);
+const selectors = updateSelectors();
+
+//update artifact display and selectors
+function updateArtifact({ name, mediaType, source }) {
+  selectedCrate = selectedCrate.map((item) => {
+    if (name === item.title) {
+      item.chosen = true;
+    } else {
+      item.chosen = false;
+    }
+    return item;
+  });
   const artifactMedia = createMedia(
     mediaType,
     "",
     [],
     `https://arweave.net/${source}`
   );
-  addToTag(section, [artifactMedia], true);
+  addToTag(displayArea, [artifactMedia], true);
+  addToTag(selectorArea, selectors(), true);
 }
 
-function displayArchive() {
-  const displayArea = createElement("section", "test", []);
-  function display(item) {
-    displayArea.innerHTML = "";
-    const artifactSelector = crate[item].map((crateItem) => {
+//update artifact selectors
+function updateSelectors() {
+  function displaySelectors() {
+    const artifactSelector = selectedCrate.map((crateItem) => {
       const title = createElement("h3", crateItem.title, []);
       return createButtonContainer(
-        ["pastBtn", "archiveItemBtn"],
+        [crateItem.chosen ? "selectedArchiveItem" : "archiveItemBtn"],
         [title],
         updateArtifact,
         {
-          section: displayArea,
           name: crateItem.title,
           mediaType: crateItem.type,
           source: crateItem.source,
         }
       );
     });
-    return [
-      createContainer("div", "", ["artifactSelectors"], artifactSelector),
-      displayArea,
-    ];
+    return artifactSelector;
+  }
+  return displaySelectors;
+}
+
+//initalise artifacts selector and display area
+function displayArchive() {
+  function display(crateItem) {
+    selectedCrate = crate[crateItem].map((item) => {
+      return { ...item, chosen: false };
+    });
+    selectorArea = createContainer(
+      "section",
+      "",
+      ["artifactSelectors"],
+      selectors()
+    );
+
+    displayArea.innerHTML = "";
+    return createContainer(
+      "section",
+      "",
+      ["artifactContainer"],
+      [selectorArea, displayArea]
+    );
   }
   return display;
 }
 export default displayArchive;
-
-const head = header(document.querySelector("header"));
-head("past");
-
-const foot = footer(document.querySelector("footer"));
-foot(false);
