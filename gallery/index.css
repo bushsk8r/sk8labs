@@ -151,7 +151,7 @@
   }
 
   body {
-    font-size: large;
+    font-size: x-large;
     color: white;
     background-color: slategray;
   }
@@ -376,5 +376,20 @@
   .archiveItemBtn {
     border: var(--test-border);
     padding-inline: 0.5rem;
+    background-color: inherit;
+    color: inherit;
+  }
+
+  .selectedArchiveItem {
+    background-color: inherit;
+    border: none;
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    color: inherit;
+  }
+
+  .artifactMedia {
+    display: flex;
+    justify-content: center;
   }
 }
