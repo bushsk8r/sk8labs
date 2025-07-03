@@ -6,6 +6,7 @@ import {
 } from "./helper.js";
 import { footer, header } from "./script.js";
 
+//
 const head = header(document.querySelector("header"));
 head("home");
 

@@ -21,6 +21,7 @@ function createBtn(text, styles, handle, cmd, name) {
 
   return btn;
 }
+
 // create link
 function createLink(text, linkTo, styles, name) {
   const link = createElement("a", text, styles, name);
@@ -30,11 +31,14 @@ function createLink(text, linkTo, styles, name) {
 }
 
 //create media
-function createMedia(type, alt, styles, source, name) {
+function createMedia(type, alt, styles, source, show, name) {
   const media = createElement(type, "", styles, name);
   media.setAttribute("src", source);
   media.setAttribute("alt", alt);
   media.setAttribute("controls", "controls");
+  if (show) {
+    media.setAttribute("encrypted-media");
+  }
 
   return media;
 }
@@ -80,4 +84,26 @@ export {
   createContainer,
   createButtonContainer,
   createLinkContainer,
+  displayBtn,
+  displayPlayer,
 };
+
+//app specific
+//jukebox
+function displayBtn(text, styles, juke, track, name) {
+  const btn = createElement("button", text, styles, name);
+  btn.addEventListener("click", () => {
+    juke.displayTrack(track);
+  });
+
+  return btn;
+}
+
+function displayPlayer(text, styles, juke, track) {
+  const btn = createElement("button", text, styles, name);
+  btn.addEventListener("click", () => {
+    juke.selectTrack(track);
+  });
+
+  return btn;
+}
