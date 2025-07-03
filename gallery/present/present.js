@@ -3,26 +3,36 @@ import {
   addToTag,
   createContainer,
   createLink,
+  createButtonContainer,
 } from "../helper.js";
 import { footer, header } from "../script.js";
+import startBlog from "./blog.js";
 
 //data to be displayed
-const studies = [
+const blog = [
   {
-    title: "minesweeper",
-    description: [
-      "mobile app development",
-      "game development with react native",
-    ],
+    title: "experiments",
+    description: "reporting live from the idea factory",
+    option: ["wind", "field"],
   },
   {
-    title: "hypermedia zine",
-    description: [
-      "editorial media",
-      "full stack web development using htmx and rust",
-    ],
+    title: "recordings",
+    description:
+      "curating soundscapes with birds then creating noise with woodwinds",
+  },
+  {
+    title: "playlist",
+    description: "an introverts version of a dj set",
   },
 ];
+
+let blogChosen = blog.map((item) => {
+  return { ...item, chosen: false };
+});
+
+//add header with nav
+const head = header(document.querySelector("header"));
+head("present");
 
 //document main section
 const main = document.querySelector("main");
@@ -31,29 +41,49 @@ const main = document.querySelector("main");
 const title = createElement("h1", "Present Curiosities", []);
 
 //map data into item cards
-const displayCard = studies.map((study) => {
-  //item title element
-  const studyTitle = createElement("h2", study.title, []);
+function selectors() {
+  const cards = blogChosen.map((item) => {
+    const card = {
+      title: createElement("h2", item.title, [
+        item.chosen ? "underline" : null,
+      ]),
+      description: createElement("p", item.description, []),
+    };
 
-  //map item details into elements array
-  const studyDetails = study.description.map((desc) => {
-    return createElement("li", `a study of ${desc}`, []);
+    return item.chosen
+      ? createContainer(
+          "section",
+          "",
+          ["presentThing", "presentSelected"],
+          [card.title, card.description]
+        )
+      : createButtonContainer(
+          ["presentThing", "presentBtn"],
+          [card.title],
+          updateSelected,
+          item.title
+        );
   });
+  return createContainer("section", "", ["blogSelector"], [...cards]);
+}
 
-  //container with title and item details
-  return createContainer(
-    "section",
-    "",
-    [],
-    [studyTitle, createContainer("ul", "", [], [...studyDetails])]
-  );
-});
+const blogDisplay = startBlog();
+
+function updateSelected(itemChosen) {
+  blogChosen = blogChosen.map((item) => {
+    if (item.title === itemChosen) {
+      item.chosen = true;
+    } else {
+      item.chosen = false;
+    }
+    return item;
+  });
+  addToTag(main, [title, selectors(), blogDisplay(itemChosen)], true);
+}
 
 //add page title and data cards to document main section
-addToTag(main, [title, ...displayCard]);
+addToTag(main, [title, selectors()]);
 
-const head = header(document.querySelector("header"));
-head("present");
-
+//add footer with palette
 const foot = footer(document.querySelector("footer"));
 foot(false);
