@@ -31,7 +31,7 @@ const crate = {
     {
       title: "fear",
       duration: "",
-      description: "the opposite side of the anger coin",
+      description: "the opposite side of this coin is anger",
       source: "E2Pesrxe_K5ebY4pXMuB9ezQwAgESQ0Nltp1tavVrW0",
       type: "video",
     },
@@ -59,49 +59,49 @@ const crate = {
     },
     {
       title: "recording 1",
-      description: "",
+      description: "finding the ground",
       source: "WOXcBMl9wVA0a1NUeWvBKVUlhWhz410u3Kncn-j4cxc",
       type: "audio",
     },
     {
       title: "recording 2",
-      description: "",
+      description: "on the ground running",
       source: "fwPsuZKkfyefZtMxkZ8FrfdQWJhcTFyk7Hp6hxIVBrE",
       type: "audio",
     },
     {
       title: "recording 3",
-      description: "",
+      description: "echooo",
       source: "Y5t2fYzTbDZOHe1WmdT3ET5mhq-wwWn41vAxnMkVt18",
       type: "audio",
     },
     {
       title: "recording 4",
-      description: "",
+      description: "reset",
       source: "HkpVan2xQrpcikz0GouDkO8lnoO3ofZyrRLqQaneSp4",
       type: "audio",
     },
     {
       title: "recording 5",
-      description: "",
+      description: "reverb unlocked",
       source: "LStr9j3icr9cka4mfHQHBbKe5-IBDAazCSf6zoNfN-U",
       type: "audio",
     },
     {
       title: "recording 6",
-      description: "",
+      description: "a breaking heart",
       source: "2IvMGSjScC1jYmV53H_nvHj8oGA007g8qE-zhOIcKKE",
       type: "audio",
     },
     {
       title: "recording 7",
-      description: "",
+      description: "hello from the loop",
       source: "NrxOATRqSTi52sT7GniSBRRTwJ7Jq8NoEsEaXQNmsu8",
       type: "audio",
     },
     {
       title: "recording 8",
-      description: "",
+      description: "the drums wanted to go home",
       source: "AcENTCeXhEvHkS6xqWpbeSGoOp3ypHMarHOLLV9TIsA",
       type: "audio",
     },
@@ -195,37 +195,37 @@ const crate = {
   "playin with poly": [
     {
       title: "poly punk",
-      description: "",
+      description: "the robots come in peace",
       source: "goE9lQYG-HwQPTi0nF8xZCku_TILhg_nwOvU1iROGvQ",
       type: "img",
     },
     {
       title: "crane",
-      description: "",
+      description: "2d > 3d > 2d",
       source: "SIti7uC5CQDDmLqK01V6NJc7l2n0qlFhAurEo_69T-k",
       type: "img",
     },
     {
       title: "rari",
-      description: "white ferrari",
+      description: "stormtrooper ferrari",
       source: "tNA3GmpeQ1k3tViU4yGx-hWim_SBpLFtNn-RXLMx5lY",
       type: "img",
     },
     {
       title: "issa dhow",
-      description: "",
+      description: "live from the motherland",
       source: "8Wi7rBrkBzCVa2jRe9x7GfxtvP7kv46vaVFvqk4RCAU",
       type: "img",
     },
     {
       title: "giraffe",
-      description: "",
+      description: "cheeky",
       source: "nxO1XJt0iNZYMOCW-4QR04CKTHANuAijEZwnIOvywRg",
       type: "img",
     },
     {
       title: "fingerprint",
-      description: "",
+      description: "self portrait",
       source: "kwkRlqk3LUeYBiBPDSkDaMzZRmGK2NeBPxIHaaWmUp0",
       type: "img",
     },
@@ -238,7 +238,7 @@ const crate = {
     },
     {
       title: "race car",
-      description: "",
+      description: "a tribute to Glickenhaus",
       source: "weZZOn2p6hFdG9yHvYCZqtl2ZJrCxImh07X11Gx0urU",
       type: "img",
     },
@@ -246,11 +246,11 @@ const crate = {
 };
 
 let selectedCrate, selectorArea;
-const displayArea = createElement("section", "test", ["artifactMedia"]);
+const displayArea = createElement("section", "test", ["artifactItemContainer"]);
 const selectors = updateSelectors();
 
 //update artifact display and selectors
-function updateArtifact({ name, mediaType, source }) {
+function updateArtifact({ name, mediaType, source, description }) {
   selectedCrate = selectedCrate.map((item) => {
     if (name === item.title) {
       item.chosen = true;
@@ -265,7 +265,8 @@ function updateArtifact({ name, mediaType, source }) {
     [],
     `https://arweave.net/${source}`
   );
-  addToTag(displayArea, [artifactMedia], true);
+  const artifactIntro = createElement("p", description, []);
+  addToTag(displayArea, [artifactIntro, artifactMedia], true);
   addToTag(selectorArea, selectors(), true);
 }
 
@@ -282,6 +283,7 @@ function updateSelectors() {
           name: crateItem.title,
           mediaType: crateItem.type,
           source: crateItem.source,
+          description: crateItem.description,
         }
       );
     });
