@@ -40,6 +40,10 @@ const things = [
   },
 ];
 
+//header with links
+const head = header(document.querySelector("header"));
+head("about");
+
 //document main section
 const main = document.querySelector("main");
 
@@ -86,8 +90,6 @@ const thingsContainer = createContainer(
 //add page title and items container to document main section
 addToTag(main, [title, thingsContainer]);
 
-const head = header(document.querySelector("header"));
-head("about");
-
+//footer without game
 const foot = footer(document.querySelector("footer"));
 foot(false);
