@@ -151,9 +151,9 @@
   }
 
   body {
-    font-size: x-large;
+    font-size: xx-large;
     color: white;
-    background-color: slategray;
+    background-color: var(--base);
   }
 
   h1,
@@ -287,7 +287,7 @@
 
   .introContainer {
     display: flex;
-    gap: 5rem;
+    gap: 2rem;
     justify-content: center;
     flex-direction: column;
     text-align: center;
@@ -317,10 +317,9 @@
     border: var(--test-border);
     border-radius: 0.5rem;
     padding: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
     gap: 0.5rem;
+    place-items: center;
   }
 
   .selected {
@@ -446,8 +445,29 @@
     gap: 0.5rem;
   }
 
+  .jukeSelector {
+    border: 3px solid var(--self);
+  }
+
+  .selectedJukeSelector {
+    border: 3px solid var(--ego);
+  }
+
   .playlist {
     width: 75%;
     text-align: center;
+  }
+}
+
+@layer jukebox {
+  .trackSelector {
+    background-color: inherit;
+    color: inherit;
+    border: 3px solid var(--love);
+    border-radius: 10px;
+  }
+
+  .selectedTrack {
+    border: 3px dashed var(--ego);
   }
 }
