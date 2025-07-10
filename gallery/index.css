@@ -151,7 +151,7 @@
   }
 
   body {
-    font-size: xx-large;
+    font-size: x-large;
     color: white;
     background-color: var(--base);
   }
@@ -177,6 +177,11 @@
   a:hover,
   a:focus-visible {
     color: yellow;
+  }
+
+  .back {
+    text-align: center;
+    display: block;
   }
 }
 
