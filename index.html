@@ -1,74 +1,20 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>sandbox</title>
+    <link rel="stylesheet" href="index.css" />
+    <script src="dock.js" type="module"></script>
+  </head>
 
-<head>
-    <title>
-        sk8 labs
-    </title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+  <body>
+    <header>
+      <h1>welcome to sk8 studio</h1>
+    </header>
 
-<body class="text-3xl text-white bg-slate-600 p-1">
-    <p>[these are prototypes...for now]</p>
-
-    <h1 class="text-6xl flex justify-center">
-        <marquee>🦌welcome to the deerverse🦌</marquee>
-    </h1>
-
-    <nav class="flex justify-around border-4 border-orange-600 rounded-lg">
-        <a class="p-1" href="archive/">▶️archive</a>
-        <a class="p-1" href="who.html">▶️characters</a>
-    </nav>
-
-    <h1 id="text"></h1>
-
-    <div class="flex justify-center">
-        <p class="pt-5">a creative sandbox</p>
-    </div>
-
-    <div>
-        <p>current projects:</p>
-        <ul class="list-disc list-inside">
-            <li class="p-3"> this website ⏯️
-                <button class="border-4 border-orange-600 p-1 rounded-lg" onclick="toggleDisplay('siteDesc')">open source code</button>
-                <section class="text-right" id="siteDesc">
-                    <p>made using html, css and javascript</p>
-                    <p>css with tailwind</p>
-                    <p>served through netlify</p>
-                    ⚙️<a class="bg-slate-400 p-1" href="https://github.com/bushsk8r/sk8labs">github repo</a>🛠️
-                </section>
-            </li>
-            <li class="p-3">the forest 🔀
-                <button class="border-4 border-orange-600 p-1 rounded-lg" onclick="toggleDisplay('forestDesc')">a sonic playground</button>
-                <section class="text-right" id="forestDesc">
-                    <p>a jukebox <b>:tldr</b></p>
-                    <p>an audio archive curated by "the tourist"</p>
-                    <p>updated each month with all recordings taken</p>
-                    🦌<a class="bg-lime-600 p-1" href="forest/">jump in</a>🌳
-                </section>
-            </li>
-            <li class="p-3">baked chronicles ⏩
-                <button class="border-4 border-orange-600 p-1 rounded-lg" onclick="toggleDisplay('bakedDesc')">a hypermedia zine</button>
-                <section class="text-right" id="bakedDesc">
-                    <p>documenting mastery of a craft <b>:tldr</b></p>
-                    <p><b>hypermedia</b>: media which includes non-linear branching from one location to another </p>
-                    <p><b>zine</b>: a small-circulation self-published work of original or appropriated texts and images,
-                        usually reproduced via a copy machine</p>
-                    <a class="bg-yellow-600 p-1" href="bakery/">volume 0 - 1</a>🥐
-                </section>
-            </li>
-            <li class="p-3">playin' with poly 🔁 
-                <button class="border-4 border-orange-600 p-1 rounded-lg" onclick="toggleDisplay('polyDesc')">soon come</button>
-                <section class="text-right" id="polyDesc">
-                    <p>visuals from the deerverse <b>:tldr</b></p>
-                    <p>playing with light and polygons</p>
-                    <p>experiments with photography and stencil graffiti</p>
-                </section>
-            </li>
-        </ul>
-    </div>
-
-    <script src="index.js"></script>
-</body>
-
+    <main>
+      <p>an open studio where playtime is never over</p>
+      <nav></nav>
+    </main>
+    <footer></footer>
+  </body>
 </html>
