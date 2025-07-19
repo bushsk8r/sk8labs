@@ -84,26 +84,26 @@ export {
   createContainer,
   createButtonContainer,
   createLinkContainer,
-  displayBtn,
-  displayPlayer,
+  addChosen,
+  setChosen,
 };
 
-//app specific
-//jukebox
-function displayBtn(text, styles, juke, track, name) {
-  const btn = createElement("button", text, styles, name);
-  btn.addEventListener("click", () => {
-    juke.displayTrack(track);
-  });
+//-------------utility
 
-  return btn;
+//add chosen option to selectors
+function addChosen(selectors) {
+  const chosenSelectors = selectors.map((s) => {
+    return { ...s, chosen: false };
+  });
+  return chosenSelectors;
 }
 
-function displayPlayer(text, styles, juke, track) {
-  const btn = createElement("button", text, styles, name);
-  btn.addEventListener("click", () => {
-    juke.selectTrack(track);
+//set chosen selectors
+function setChosen(selected, selectors) {
+  const chosenSelectors = selectors.map((s) => {
+    return s.title === selected
+      ? { ...s, chosen: true }
+      : { ...s, chosen: false };
   });
-
-  return btn;
+  return chosenSelectors;
 }

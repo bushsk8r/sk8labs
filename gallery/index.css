@@ -207,6 +207,10 @@
     display: none;
   }
 
+  .centerText {
+    text-align: center;
+  }
+
   .container {
     margin-inline: 5rem;
   }

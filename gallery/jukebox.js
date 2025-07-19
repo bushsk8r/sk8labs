@@ -4,6 +4,8 @@ import {
   createContainer,
   createElement,
   createMedia,
+  addChosen,
+  setChosen,
 } from "./helper.js";
 
 //display areas
@@ -17,14 +19,7 @@ let chosenTrackSelectors = "";
 //show selected track in media display area
 function selectTrack({ description, source, type, title }) {
   //update selected track selector style
-  chosenTrackSelectors = chosenTrackSelectors.map((track) => {
-    if (track.title === title) {
-      track.chosen = true;
-    } else {
-      track.chosen = false;
-    }
-    return track;
-  });
+  chosenTrackSelectors = setChosen(title, chosenTrackSelectors);
 
   //update selected track selector
   addToTag(trackSelectorArea, trackSelectors(), true);
@@ -46,9 +41,7 @@ function selectTrack({ description, source, type, title }) {
 //update selected selector styling -> return function to display selector button elements
 function updateTrackSelectors(tracks) {
   //add chosen option to selector
-  chosenTrackSelectors = tracks.map((track) => {
-    return { ...track, chosen: false };
-  });
+  chosenTrackSelectors = addChosen(tracks);
 
   //show track selectors and update styling if selected
   function displayTrackSelectors() {
