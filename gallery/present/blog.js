@@ -3,10 +3,45 @@ import {
   createBtn,
   createContainer,
   createElement,
-  createMedia,
+  addChosen,
+  setChosen,
 } from "../helper.js";
 import startJukeBox from "../jukebox.js";
 
+//----------display playlist----------
+
+//playlist data to display
+const curation = {
+  title: "cul de sac vibes",
+  description: 'a suburban "pirate" radio station',
+  links: {
+    tidal: "",
+    spotify: "",
+  },
+};
+
+//display function
+function displayCuration() {
+  audioLog.area.innerHTML = "";
+  resetJukeOptions();
+  const play = createElement("section", "", []);
+  play.innerHTML = `<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/4YEAlpkdjhLhknQZY0tWbo?utm_source=generator" width="100%" height="500" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;
+  const curationCard = createContainer(
+    "section",
+    "",
+    ["playlist"],
+    [
+      createElement("h3", curation.title, []),
+      createElement("p", curation.description, []),
+      play,
+    ]
+  );
+  return curationCard;
+}
+
+//----------display experiments----------
+
+//expermiment data to display
 const studies = [
   {
     title: "minesweeper",
@@ -24,69 +59,10 @@ const studies = [
   },
 ];
 
-const recordings = {
-  field: [
-    {
-      title: "field 1",
-      duration: "",
-      description: "field 1 desc",
-      source: "",
-      type: "audio",
-    },
-    {
-      title: "field 2",
-      duration: "",
-      description: "",
-      source: "",
-      type: "",
-    },
-    {
-      title: "field 3",
-      duration: "",
-      description: "",
-      source: "",
-      type: "",
-    },
-  ],
-  wind: [
-    {
-      title: "wind 1",
-      duration: "",
-      description: "",
-      source: "",
-      type: "",
-    },
-  ],
-};
-
-const curation = {
-  title: "cul de sac vibes",
-  description: 'a suburban "pirate" radio station',
-  links: {
-    tidal: "",
-    spotify: "",
-  },
-};
-
-function displayCuration() {
-  audioLog.area.innerHTML = "";
-  const play = createElement("section", "", []);
-  play.innerHTML = `<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/4YEAlpkdjhLhknQZY0tWbo?utm_source=generator" width="100%" height="500" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;
-  const curationCard = createContainer(
-    "section",
-    "",
-    ["playlist"],
-    [
-      createElement("h3", curation.title, []),
-      createElement("p", curation.description, []),
-      play,
-    ]
-  );
-  return curationCard;
-}
-
+//display function
 function displayStudies() {
   audioLog.area.innerHTML = "";
+  resetJukeOptions();
   const studyCard = studies.map((study) => {
     const descs = study.description.map((desc) => {
       return createElement("li", desc, []);
@@ -106,6 +82,44 @@ function displayStudies() {
   return studyCard;
 }
 
+//----------display recordings----------
+
+//recording data to display
+const recordings = {
+  field: [
+    {
+      title: "field 1",
+      duration: "",
+      description: "live from the motherland",
+      source: "yz9Qg9UnvzqrkULHCrAOrsU4YhO-tsApKAr4kp-SSxg",
+      type: "audio",
+    },
+    {
+      title: "field 2",
+      duration: "",
+      description: "",
+      source: "",
+      type: "audio",
+    },
+    {
+      title: "field 3",
+      duration: "",
+      description: "",
+      source: "",
+      type: "audio",
+    },
+  ],
+  wind: [
+    {
+      title: "wind 1",
+      duration: "",
+      description: "",
+      source: "",
+      type: "audio",
+    },
+  ],
+};
+
 const audioLog = {
   area: createElement("section", "", ["jukeContainer"]),
   play: createElement("section", "", ["jukeSelectors"]),
@@ -113,22 +127,54 @@ const audioLog = {
 };
 
 const juke = startJukeBox(audioLog.play, audioLog.display, recordings);
+const jukeSelect = updateJukeSelector();
+
+let jukeSelectOptions = [
+  {
+    title: "field",
+    chosen: false,
+  },
+  {
+    title: "wind",
+    chosen: false,
+  },
+];
+
+const logSelectors = createContainer(
+  "section",
+  "",
+  ["jukeSelectors"],
+  jukeSelect()
+);
+
+function resetJukeOptions() {
+  jukeSelectOptions = addChosen(jukeSelectOptions);
+  addToTag(logSelectors, jukeSelect(), true);
+}
 
 function displayJukebox(type) {
+  jukeSelectOptions = setChosen(type, jukeSelectOptions);
   juke(type);
+  addToTag(logSelectors, jukeSelect(), true);
   addToTag(audioLog.area, [audioLog.play, audioLog.display], true);
 }
 
+function updateJukeSelector() {
+  function displayJukeSelectors() {
+    const jukeSelectors = jukeSelectOptions.map((option) => {
+      return createBtn(
+        option.title,
+        [option.chosen ? "selectedJukeSelector" : "jukeSelector"],
+        displayJukebox,
+        option.title
+      );
+    });
+    return jukeSelectors;
+  }
+  return displayJukeSelectors;
+}
+
 function displayAudioLog() {
-  const logSelectors = createContainer(
-    "section",
-    "",
-    ["jukeSelectors"],
-    [
-      createBtn("field", [], displayJukebox, "field"),
-      createBtn("wind", [], displayJukebox, "wind"),
-    ]
-  );
   return createContainer(
     "section",
     "",
@@ -137,6 +183,7 @@ function displayAudioLog() {
   );
 }
 
+//initialize blog and update blog section to display
 function startBlog() {
   function updateBlogDisplay(blogSection) {
     if (blogSection === "experiments") {
@@ -158,7 +205,7 @@ function startBlog() {
         "section",
         "",
         ["blogDisplay"],
-        [displayAudioLog(true)]
+        [displayAudioLog()]
       );
     }
   }
