@@ -330,6 +330,33 @@
     background-color: var(--self);
     color: var(--dark);
   }
+
+  .siteDesc {
+    background-color: var(--love);
+    display: inline;
+    color: black;
+    padding: 0.5rem;
+  }
+
+  .mainNav {
+    padding-top: 1rem;
+  }
+
+  .vs {
+    display: grid;
+    place-items: center;
+  }
+
+  .vsSelector {
+    background: none;
+    border: none;
+    color: black;
+  }
+
+  .characters {
+    display: flex;
+    gap: 3rem;
+  }
 }
 
 @layer past {
