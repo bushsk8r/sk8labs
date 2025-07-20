@@ -12,16 +12,18 @@ const nav = document.querySelector("nav");
 
 const title = createElement("h2", "where to from here?", ["centerText"]);
 
+const main = document.querySelector("main");
+
 const where = [
   {
     title: "shelf",
     description: `a space to store your zines`,
-    access: "shelf",
+    access: "zine shelf",
   },
   {
-    title: "playpen",
+    title: "play",
     description: `a sandbox`,
-    access: "play",
+    access: "playpen",
   },
 ];
 
@@ -30,6 +32,14 @@ let whereChosen = addChosen(where);
 function showDetails(selected) {
   whereChosen = setChosen(selected, whereChosen);
   updateWhere(true);
+}
+
+function whereSelected(selectedWhere) {
+  addToTag(
+    main,
+    [createElement("p", `${selectedWhere} soon come`, ["centerText"])],
+    true
+  );
 }
 
 function displayWhere() {
@@ -41,7 +51,7 @@ function displayWhere() {
           ["who"],
           [
             createElement("p", `${w.title} - ${w.description}`, []),
-            createLink(`to the ${w.access}`, `${w.access}`, ["goTo"]),
+            createBtn(`to the ${w.access}`, ["goTo"], whereSelected, w.access),
           ]
         )
       : createContainer(
