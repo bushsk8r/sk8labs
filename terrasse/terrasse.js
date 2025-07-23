@@ -4,16 +4,18 @@ import {
   createBtn,
   createContainer,
   createElement,
-  createLink,
   setChosen,
 } from "../helper.js";
 import { footer } from "../script.js";
+
+//get elements from page where displaying will happen
 const nav = document.querySelector("nav");
-
-const title = createElement("h2", "where to from here?", ["centerText"]);
-
 const main = document.querySelector("main");
 
+//page title
+const title = createElement("h2", "where to from here?", ["centerText"]);
+
+//page selector details
 const where = [
   {
     title: "shelf",
@@ -27,21 +29,10 @@ const where = [
   },
 ];
 
+//selector state
 let whereChosen = addChosen(where);
 
-function showDetails(selected) {
-  whereChosen = setChosen(selected, whereChosen);
-  updateWhere(true);
-}
-
-function whereSelected(selectedWhere) {
-  addToTag(
-    main,
-    [createElement("p", `${selectedWhere} soon come`, ["centerText"])],
-    true
-  );
-}
-
+//display selectors
 function displayWhere() {
   const whereOptions = whereChosen.map((w) => {
     return w.chosen
@@ -64,11 +55,29 @@ function displayWhere() {
   return createContainer("ul", "", ["whoContainer"], [...whereOptions]);
 }
 
+//update selectors after state change
 function updateWhere(refresh) {
   addToTag(nav, [title, displayWhere()], refresh);
 }
 
-updateWhere(false);
+//show details for open selector and update selector state
+function showDetails(selected) {
+  whereChosen = setChosen(selected, whereChosen);
+  updateWhere(true);
+}
 
+//initialize selectors
+updateWhere();
+
+//display message based on selected selector
+function whereSelected(selectedWhere) {
+  addToTag(
+    main,
+    [createElement("p", `${selectedWhere} soon come`, ["centerText"])],
+    true
+  );
+}
+
+//display footer with rps
 const foot = footer(document.querySelector("footer"));
-foot(false);
+foot(true);
