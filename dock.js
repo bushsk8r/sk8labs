@@ -10,11 +10,14 @@ import {
 } from "./helper.js";
 import { footer } from "./script.js";
 
+//get elements from page where displaying will happen
 const nav = document.querySelector("nav");
 const vs = document.querySelector(".vs");
 
+//page title
 const title = createElement("h2", "who are you?", ["centerText"]);
 
+//page selectors details
 const who = [
   {
     title: "tourist",
@@ -28,18 +31,16 @@ const who = [
   },
 ];
 
+//selector state
+let whoChosen = addChosen(who);
+
+//selector explained options
 const verses = {
   tourist: ["crafter", "child"],
   purist: ["curator", "adult"],
 };
 
-let whoChosen = addChosen(who);
-
-function showDetails(selected) {
-  whoChosen = setChosen(selected, whoChosen);
-  updateWho(true);
-}
-
+//display selectors
 function displayWho() {
   const whoOptions = whoChosen.map((w) => {
     return w.chosen
@@ -61,20 +62,46 @@ function displayWho() {
   });
   return createContainer("ul", "", ["whoContainer"], [...whoOptions]);
 }
+
+//update selectors after state change
 function updateWho(refresh) {
   addToTag(nav, [title, displayWho()], refresh);
 }
 
-updateWho(false);
+//show details for open selector and update selector state
+function showDetails(selected) {
+  whoChosen = setChosen(selected, whoChosen);
+  updateWho(true);
+}
 
-const vsTitle = createButtonContainer(
-  ["vsSelector"],
-  [createElement("h2", "👉 tourist vs purist 👈", [])],
-  showCharacter
-);
+//initialize selectors
+updateWho();
 
-addToTag(vs, [vsTitle]);
+//vs section title based on open state
+function vsTitle(open) {
+  return createButtonContainer(
+    ["vsSelector"],
+    [
+      createElement(
+        "h2",
+        `${open ? "🫀" : "👉"} tourist vs purist ${open ? "🔥" : "👈"}`,
+        []
+      ),
+    ],
+    open ? resetVS : showCharacter,
+    open
+  );
+}
 
+//set vs section based of reset state
+function resetVS(full) {
+  addToTag(vs, [vsTitle(false)], full);
+}
+
+//initialize vs section
+resetVS();
+
+//display selector explained options
 function showCharacter() {
   const tourist = verses["tourist"].map((t) => {
     return createElement("li", t, []);
@@ -87,7 +114,7 @@ function showCharacter() {
   addToTag(
     vs,
     [
-      vsTitle,
+      vsTitle(true),
       createContainer(
         "section",
         "",
@@ -102,5 +129,6 @@ function showCharacter() {
   );
 }
 
+//display fotter with rps
 const foot = footer(document.querySelector("footer"));
 foot(true);
