@@ -183,6 +183,11 @@
     text-align: center;
     display: block;
   }
+
+  img,
+  video {
+    max-height: 50vh;
+  }
 }
 
 @layer layout {
@@ -351,6 +356,8 @@
     background: none;
     border: none;
     color: black;
+    display: flex;
+    gap: 1rem;
   }
 
   .characters {
@@ -453,6 +460,45 @@
     justify-content: center;
     text-align: center;
     padding-top: 1rem;
+  }
+}
+
+@layer fullArchive {
+  .yearSelectorContainer {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-bottom: 1rem;
+  }
+
+  .archiveArtifactContainer {
+    display: grid;
+    place-content: center;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .artifact {
+    border: var(--test-border);
+    border-radius: 10px;
+    text-align: center;
+    background: none;
+    color: var(--inspo);
+    box-shadow: 10px 10px 5px var(--self);
+  }
+
+  .artifactSelected {
+    border: 5px solid var(--self);
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    place-items: center;
+    padding: 1rem;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 }
 

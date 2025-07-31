@@ -59,6 +59,7 @@ function createButtonContainer(styles, comps, handle, cmd, name) {
   return btn;
 }
 
+//link with elements inside
 function createLinkContainer(styles, comps, text, linkTo, name) {
   const link = createLink(text, linkTo, styles, name);
   addToTag(link, comps, false);
