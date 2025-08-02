@@ -21,11 +21,13 @@ const where = [
     title: "shelf",
     description: `a space to store your zines`,
     access: "zine shelf",
+    message: "soon come",
   },
   {
     title: "play",
     description: `a sandbox`,
     access: "playpen",
+    message: "🔻click the boxes🔻",
   },
 ];
 
@@ -42,7 +44,7 @@ function displayWhere() {
           ["who"],
           [
             createElement("p", `${w.title} - ${w.description}`, []),
-            createBtn(`to the ${w.access}`, ["goTo"], whereSelected, w.access),
+            createBtn(`to the ${w.access}`, ["goTo"], whereSelected, w.message),
           ]
         )
       : createContainer(
@@ -70,10 +72,10 @@ function showDetails(selected) {
 updateWhere();
 
 //display message based on selected selector
-function whereSelected(selectedWhere) {
+function whereSelected(selectedMessage) {
   addToTag(
     main,
-    [createElement("p", `${selectedWhere} soon come`, ["centerText"])],
+    [createElement("p", `${selectedMessage}`, ["centerText"])],
     true
   );
 }
