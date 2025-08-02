@@ -296,14 +296,6 @@ const crate = {
       description: "open studio on the go",
       artifacts: "",
     },
-    {
-      title: "",
-      craft: "",
-      description: "",
-      source: "",
-      artifacts: "",
-      type: "",
-    },
   ],
 };
 export default crate;

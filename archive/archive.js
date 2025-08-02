@@ -11,42 +11,59 @@ import {
 
 import crate from "./crate.js";
 
+//get elements from page for display
 const nav = document.querySelector("nav");
+const main = document.querySelector("main");
 
+//selector state
 let yearChosen = addChosen(
   crate["range"].map((y) => {
     return { title: y };
   })
 );
 
+//container with year selectors
 function displayYearSelectors() {
-  const yearSelectors = yearChosen.map((y) => {
-    return createBtn(
-      y.title,
-      [y.chosen ? "border" : null],
-      updateArtifactSection,
-      y.title
-    );
-  });
+  const yearSelectors = yearChosen
+    .filter((y) => !y.chosen)
+    .map((y) => {
+      return createBtn(
+        y.title,
+        ["yearSelector"],
+        updateArtifactSection,
+        y.title
+      );
+    });
+
+  const selectedYear = yearChosen
+    .filter((y) => y.chosen)
+    .map((y) => {
+      return createElement("h2", y.title, []);
+    });
 
   return createContainer(
     "section",
     "",
     ["yearSelectorContainer"],
-    [...yearSelectors]
+    [
+      createContainer("section", "", ["yearSelectors"], [...yearSelectors]),
+      ...selectedYear,
+    ]
   );
 }
 
+//update nav section with year selectors
 function updateYearSelectors(refresh) {
   addToTag(nav, [displayYearSelectors()], refresh);
 }
 
+//initialize selectors
 updateYearSelectors();
 
-const main = document.querySelector("main");
-
+//selected artifacts
 let yearArtifacts;
 
+//container with selected artifacts
 function displayArtifacts(selected) {
   yearArtifacts = setChosen(selected, yearArtifacts);
   const showArtifacts = yearArtifacts.map((a) => {
@@ -85,6 +102,7 @@ function displayArtifacts(selected) {
   );
 }
 
+//update selector state and initialise artifacts for selected year
 function updateArtifactSection(year) {
   yearChosen = setChosen(year, yearChosen);
   updateYearSelectors(true);
@@ -92,6 +110,7 @@ function updateArtifactSection(year) {
   chosenArtifact();
 }
 
+//update main with selected artifact
 function chosenArtifact(chosen) {
   addToTag(main, [displayArtifacts(chosen)], true);
 }
