@@ -32,7 +32,7 @@ const crate = {
     {
       title: "elevate",
       craft: "playlist",
-      description: "temporary vacations",
+      description: "soundscapes from temporary vacations",
       artifacts: "4",
     },
     {
@@ -54,7 +54,7 @@ const crate = {
     {
       title: "soundcloud era",
       craft: "audio recording / instrumentation",
-      description: "contributions to blog era plus",
+      description: "contributions to blog era",
       source: "kwFFYuwlSXiLt-XF2_GOLqOUSatYnL9wDQrkVz6FmSI",
       artifacts: "325",
       type: "audio",
@@ -99,7 +99,7 @@ const crate = {
     {
       title: "jade",
       craft: "playlist/character design",
-      description: "",
+      description: "a tribute",
       source: "6PqtBb2Aa-CpWLEGvt6ODIq4zG8PMmdNDjpL-mk6sd0",
       artifacts: "6",
       type: "video",
@@ -123,7 +123,8 @@ const crate = {
     {
       title: "collected",
       craft: "animation",
-      description: "this was made without being listened to",
+      description:
+        "this was made no audio feedback, during a graduation ceremony, attempting to capture the a lifetime of institutional education",
       source: "EV4Ks4PYNbT_03vfYjsJGnClKqDFxSlXcS7nrsfObPI",
       artifacts: "1",
       type: "video",
@@ -137,10 +138,10 @@ const crate = {
     {
       title: "baked chronicles",
       craft: "playlist/zine",
-      description: "",
+      description: "recipe zine",
       source: "S2kjRTpqYE27CwsjhBFE3HbqjVVP0kJ5VOuEuIRz8pU",
       artifacts: "38",
-      type: "image",
+      type: "img",
     },
 
     {
@@ -190,7 +191,7 @@ const crate = {
     {
       title: "vibes",
       craft: "playlist",
-      description: "mood",
+      description: "mood board",
       artifacts: "6",
     },
     {
