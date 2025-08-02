@@ -142,7 +142,8 @@
     /*font size*/
 
     /*border styles (radius, line style, width)*/
-    --test-border: 3px dashed red;
+    --test-border: 3px dashed var(--ego);
+    --test-border-alt: 3px dashed var(--self);
   }
 
   html {
@@ -465,11 +466,32 @@
 
 @layer fullArchive {
   .yearSelectorContainer {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    display: grid;
+    place-content: center;
     padding-bottom: 1rem;
+    text-align: center;
+  }
+
+  .yearSelectors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .yearSelector {
+    background: none;
+    padding-block: 0.5rem;
+    padding-inline: 1rem;
+    box-shadow: 10px 10px 5px var(--self);
+  }
+
+  .yearSelector:hover {
+    box-shadow: 10px 10px 5px var(--ego);
+  }
+
+  .yearSelector:active {
+    border: var(--test-border-alt);
   }
 
   .archiveArtifactContainer {
@@ -486,6 +508,14 @@
     background: none;
     color: var(--inspo);
     box-shadow: 10px 10px 5px var(--self);
+  }
+
+  .artifact:hover {
+    box-shadow: 10px 10px 5px var(--ego);
+  }
+
+  .artifact:active {
+    border: var(--test-border-alt);
   }
 
   .artifactSelected {
