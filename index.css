@@ -277,6 +277,8 @@
     display: flex;
     justify-content: center;
     margin-block: 1rem;
+    border: none;
+    background-color: inherit;
   }
 
   .playArea {
@@ -327,6 +329,10 @@
     border: var(--test-border);
     text-align: center;
     padding: 0.5rem;
+  }
+
+  .whoSelected {
+    border: 3px solid var(--self);
   }
 
   .goTo {
@@ -605,5 +611,13 @@
 
   .selectedTrack {
     border: 3px dashed var(--ego);
+  }
+}
+
+@layer play {
+  .playNav {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 2rem;
   }
 }
