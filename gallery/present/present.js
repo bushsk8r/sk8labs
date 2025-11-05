@@ -21,7 +21,7 @@ const blog = [
       "curating soundscapes with birds then creating noise with woodwinds",
   },
   {
-    title: "playlist",
+    title: "playlist*",
     description: "an introverts version of a dj set",
   },
 ];
