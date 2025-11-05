@@ -193,7 +193,7 @@ function startBlog() {
         ["studiesContainer"],
         [...displayStudies()]
       );
-    } else if (blogSection === "playlist") {
+    } else if (blogSection === "playlist*") {
       return createContainer(
         "section",
         "",
