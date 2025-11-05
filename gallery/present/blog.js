@@ -12,8 +12,8 @@ import startJukeBox from "../jukebox.js";
 
 //playlist data to display
 const curation = {
-  title: "cul de sac vibes",
-  description: 'a suburban "pirate" radio station',
+  title: "low 9: 3 step 101",
+  description: 'low end theory - a study of the bottom end of the frequency spectrum',
   links: {
     tidal: "",
     spotify: "",
@@ -25,7 +25,7 @@ function displayCuration() {
   audioLog.area.innerHTML = "";
   resetJukeOptions();
   const play = createElement("section", "", []);
-  play.innerHTML = `<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/4YEAlpkdjhLhknQZY0tWbo?utm_source=generator" width="100%" height="500" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;
+  play.innerHTML = `<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1l6qQTsWOpOOMEr1XyVkxS??utm_source=generator" width="100%" height="500" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;
   const curationCard = createContainer(
     "section",
     "",
