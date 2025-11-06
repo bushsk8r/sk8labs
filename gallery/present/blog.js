@@ -12,7 +12,7 @@ import startJukeBox from "../jukebox.js";
 
 //playlist data to display
 const curation = {
-  title: "low 9: 3 step 101",
+  title: "low end theory 9: 3 step 101",
   description: 'low end theory - a study of the bottom end of the frequency spectrum',
   links: {
     tidal: "",
