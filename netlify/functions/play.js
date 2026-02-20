@@ -1,5 +1,3 @@
-import play from './play/game.js';
-
 //game board
 const agent = {
   element: "",
