@@ -81,7 +81,7 @@ function elementEmoji(element) {
 
 exports.handler = async (event, context) => {
   const elementParam = event.queryStringParameters?.element;
-  const playBall = play("rock", 0)
+  const playBall = play(elementParam, 0)
   return {
     statusCode: 200,
     body: JSON.stringify({message: `${elementParam}`})
