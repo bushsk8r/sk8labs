@@ -64,7 +64,7 @@ function winner(player, mode) {
 }
 
 //game loop
-export function play(element, mode) {
+export default function play(element, mode) {
   return winner(element, mode);
 }
 
