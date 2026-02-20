@@ -1,4 +1,4 @@
-import {play} from './play/game.js';
+import play from './play/game.js';
 
 exports.handler = async (event, context) => {
   const elementParam = event.queryStringParameters?.element;
