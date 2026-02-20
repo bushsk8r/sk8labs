@@ -84,6 +84,6 @@ exports.handler = async (event, context) => {
   const playBall = play(elementParam, 0)
   return {
     statusCode: 200,
-    body: JSON.stringify({message: `${elementParam}`})
+    body: JSON.stringify({message: `${playBall}`})
   };
 };
