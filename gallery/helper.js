@@ -26,6 +26,11 @@ function createBtn(text, styles, handle, cmd, name) {
 function createLink(text, linkTo, styles, name) {
   const link = createElement("a", text, styles, name);
   link.setAttribute("href", linkTo);
+  //links to another site open in a new tab
+  if (new URL(linkTo, location.href).origin !== location.origin) {
+    link.setAttribute("target", "_blank");
+    link.setAttribute("rel", "noopener noreferrer");
+  }
 
   return link;
 }
