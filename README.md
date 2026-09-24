@@ -105,6 +105,7 @@ These are the elements the atelier API's agents are named after: paper writes, r
 ## Conventions
 
 - **DOM from JS.** Pages ship a near-empty `<header>/<nav>/<main>/<footer>` and a module that fills them through `helper.js`. `addToTag(tag, children, clear)` is the one render call; `clear` wipes the tag first. Selector state is a copy of the data with a `chosen` flag (`addChosen`/`setChosen`), re-rendered whole on every click.
+- **External links open in a new tab.** `createLink` (in every `helper.js` copy) sets `target="_blank" rel="noopener noreferrer"` when the href's origin differs from the page's; hand-written anchors to other sites carry the two attributes themselves.
 - **Lowercase voice**, emoji as punctuation, no framework. `forest/` and `archive/loop/` are the older pages: Tailwind utility classes against the compiled `styles.css`.
 - **Three copies of the helpers.** `play/helper.js` is identical to the root one; `gallery/helper.js` and `gallery/script.js` have drifted. Edit the one the page imports.
 
