@@ -113,7 +113,7 @@ These are the elements the atelier API's agents are named after: paper writes, r
 
 ## Direction
 
-sk8labs is the public place where anyone interested in the studio arrives. It is the **planned home for collections**: today, collections are the maker's private curation board in the studio (`/collections`, never published, no gallery read). Making them visible here needs a publication path the API doesn't have yet — see Open Decisions in `architecture.md`.
+sk8labs is the public place where anyone interested in the studio arrives. It is the **planned home for collections**: a maker can already make a collection public in the studio, and the API serves it without auth at `GET /public/collections` and `/public/collections/:id` (the curation layer only — order, glosses, arrangement, external sources; member content only where it is already published). The pages that read it here are unbuilt; plan in `todo list.md`.
 
 ---
 
