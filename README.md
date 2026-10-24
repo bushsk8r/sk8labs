@@ -29,7 +29,7 @@ A static site: hand-written HTML, CSS and vanilla ES modules. **No `package.json
 npx serve .
 ```
 
-Any static server works. Opening `index.html` from disk doesn't: the pages load `type="module"` scripts, which browsers refuse over `file://`.
+Any static server works (`npx` itself wants Node; `.nvmrc` pins 24.22.1, as in the other three repos). Opening `index.html` from disk doesn't: the pages load `type="module"` scripts, which browsers refuse over `file://`.
 
 **Hosting: Netlify** (inferred — `netlify/functions/` sits at Netlify's default functions path, and there's no `netlify.toml`, so publish directory and function path are Netlify's defaults; presumably `main` auto-deploys). Most of the history is edits made through the GitHub web UI.
 
