@@ -2,7 +2,9 @@
 
 an open studio where playtime is never over — [sk8.studio](https://sk8.studio)
 
-The public front door of **sk8 studio**, and the fourth repo of the atelier project. Anyone curious about the studio lands here first. It holds the maker's own archive and experiments today and is where **collections** will become visible (see [Direction](#direction)).
+The public front door of **sk8 studio**, and the fourth repo of the atelier project. Anyone curious about the studio lands here first: a short home page with two doors, *tourist* (the gallery) and *purist* (collections, then an application to join). It still holds the maker's older archive and experiments, unlinked from the home page, and is where **collections** will become visible (see [Direction](#direction)).
+
+> **Branch state.** The new home page (below) is on branch `front-door`, not yet merged; `main` and `development` still serve the old "who are you?" page. Plan: `../sk8labs-front-door-plan.md`.
 
 | Host | Repo | What it is |
 |---|---|---|
@@ -41,8 +43,12 @@ Any static server works (`npx` itself wants Node; `.nvmrc` pins 24.22.1, as in t
 
 ```
 sk8labs/
-├── index.html · index.css · dock.js   # home: "who are you?", tourist vs purist, rps footer
-├── script.js                          # header()/footer() — footer mounts the gallery/footer rps game
+├── index.html                         # home: the front door (hand-written HTML)
+├── front-door.css · front-door.js     # its styles (brand-guide palette, @font-face) and the bushsk8r ride
+├── fonts/                             # self-hosted woff2 (Patrick Hand, Rubik Bubbles, Silkscreen) + OFL-*.txt
+├── img/                               # bushsk8r-logo.png, favicon-32.png, apple-touch-icon.png
+├── index.css                          # the old pages' styles — archive/, play/, terrasse/ (not the home page)
+├── script.js                          # header()/footer() — footer mounts the gallery/footer rps game (terrasse/)
 ├── helper.js                          # DOM builders (createElement, createBtn, createLink, createMedia,
 │                                      #   createContainer, createButtonContainer, createLinkContainer,
 │                                      #   addToTag) + addChosen/setChosen selector state
@@ -73,7 +79,7 @@ sk8labs/
 
 | Path | What's there |
 |---|---|
-| `/` | "welcome to sk8 studio". **who are you?** — *tourist* ("here for the zoomed out picture") links to `gallery/`, *purist* ("zoomed in") to `terrasse/`. A **tourist vs purist** toggle reveals crafter/child vs curator/adult. The footer's six palette swatches (love, self, ego, earth, inspo, home) start the rps game. An `archive` link sits below the footer |
+| `/` | The front door, in order: **hero** (logo, *sk8 studio*, *pick a door*) · **the ride** (a canvas: click to kick bushsk8r along; traces kept in `localStorage` `sk8-front-door-traces`, *wash the path clean* clears them) · **who are you?** — *tourist* → `https://gallery.sk8.studio` (new tab), with the line *the keyword at the gate is **welcome***; *purist* → `collections/` · **around the block** (bushsk8r *being built*, baked chronicles *soon*: plain cards, not links) · a one-line footer. The top bar has only *doors*; the two doors are the only way to the gallery and collections. Nothing links to the atelier or the API |
 | `/terrasse/` | "your terrasse — where to from here?": **shelf** ("a space to store your zines" → prints *soon come*) and **play** ("a sandbox" → prints *click the boxes*, pointing at the footer game). `shelf.js` and `play.js` are empty files |
 | `/gallery/` | "welcome to the gallery — aka the artifact archive, aka the prototype graveyard", marked `[this is a prototype]`. Nav: **about** (programmer / baking enthusiast / recorder of sounds, linking GitHub, the bakery and a `#` jukebox), **past works** (idea factory 2017, human in the loop 2020, echo chamber 2021, playin with poly 2021 — each opens its Arweave media), **currently** (experiments: minesweeper, hypermedia zine · recordings jukebox · a Spotify playlist embed) |
 | `/gallery/footer/` | The rps game as its own page, with a marquee header |
@@ -83,7 +89,7 @@ sk8labs/
 | `/forest/` | Seven may field/wind recordings with a track selector |
 | `/bakery/` | "the baked chronicles — a study of data sonification": an audio protocol for documenting recipes. Vol 0 (cookies, banana bread, cake, ube, retrospective) · vol 1 (the croissant, in progress) · vol 2 (the cronut, not started) |
 
-**Only `/`, `/gallery/`, `/terrasse/` and `/archive/` are linked from the home page.** `/forest/`, `/play/`, `/archive/loop/` and `/archive/recording/` are reachable by URL only; `/bakery/` is linked from gallery/about.
+**The home page links none of the older pages.** `/gallery/`, `/terrasse/`, `/archive/`, `/forest/`, `/play/`, `/archive/loop/` and `/archive/recording/` are reachable by URL only (what becomes of them is the plan's open question O4); `/bakery/` is linked from gallery/about. `/collections/` does not exist yet, so the purist door 404s until the plan's Phase 3.
 
 ### The rps game
 
@@ -104,7 +110,8 @@ These are the elements the atelier API's agents are named after: paper writes, r
 
 ## Conventions
 
-- **DOM from JS.** Pages ship a near-empty `<header>/<nav>/<main>/<footer>` and a module that fills them through `helper.js`. `addToTag(tag, children, clear)` is the one render call; `clear` wipes the tag first. Selector state is a copy of the data with a `chosen` flag (`addChosen`/`setChosen`), re-rendered whole on every click.
+- **New pages are hand-written HTML** (the home page; collections next): the page reads without JS and its copy is edited in place. JS only for the ride, API fetches and forms. Brand-guide palette and lettering (`D:\brand\`), not the studio's `DESIGN.md`. Fonts are self-hosted; the site calls no third party for them.
+- **DOM from JS** (the older pages). They ship a near-empty `<header>/<nav>/<main>/<footer>` and a module that fills them through `helper.js`. `addToTag(tag, children, clear)` is the one render call; `clear` wipes the tag first. Selector state is a copy of the data with a `chosen` flag (`addChosen`/`setChosen`), re-rendered whole on every click.
 - **External links open in a new tab.** `createLink` (in every `helper.js` copy) sets `target="_blank" rel="noopener noreferrer"` when the href's origin differs from the page's; hand-written anchors to other sites carry the two attributes themselves.
 - **Lowercase voice**, emoji as punctuation, no framework. `forest/` and `archive/loop/` are the older pages: Tailwind utility classes against the compiled `styles.css`.
 - **Three copies of the helpers.** `play/helper.js` is identical to the root one; `gallery/helper.js` and `gallery/script.js` have drifted. Edit the one the page imports.
@@ -113,7 +120,11 @@ These are the elements the atelier API's agents are named after: paper writes, r
 
 ## Direction
 
-sk8labs is the public place where anyone interested in the studio arrives. It is the **planned home for collections**: a maker can already make a collection public in the studio, and the API serves it without auth at `GET /public/collections` and `/public/collections/:id` (the curation layer only — order, glosses, arrangement, external sources; member content only where it is already published). The pages that read it here are unbuilt; plan in `todo list.md`.
+sk8labs is the public place where anyone interested in the studio arrives. The plan is `../sk8labs-front-door-plan.md` (it supersedes §3 of `todo list.md`): front door → *purist* → `/collections/` → **become a purist**, an application form.
+
+- **Collections** (Phase 3, unbuilt here): a maker can already make a collection public in the studio, and the API serves it without auth at `GET /public/collections` and `/public/collections/:id` (the curation layer only — order, glosses, arrangement, external sources; member content only where it is already published).
+- **The application form** (Phase 4, unbuilt here) posts to `POST https://api.sk8.studio/public/applications`, which is built; purists read applications in the studio at `/studio/applications`.
+- **The old pages** (Phase 5) stay at their paths until O4 is decided; any that go get a Netlify `_redirects` line, not a 404.
 
 ---
 
@@ -121,15 +132,15 @@ sk8labs is the public place where anyone interested in the studio arrives. It is
 
 | Where | Problem | Fix direction |
 |---|---|---|
-| home → tourist / purist | The two doors lead to this repo's 2024 prototypes (`gallery/`, `terrasse/`), not to `gallery.sk8.studio` and `atelier.sk8.studio` | Point them at the live clients, or decide what the local pages become |
+| home → purist | `collections/` doesn't exist yet → 404 | Build Phase 3 before merging `front-door` |
+| home → tourist | The door names the keyword `welcome`; true only while production `GALLERY_KEYWORD` is `welcome` | Set it in production; change both together |
 | `netlify/functions/play.js` | `?element=fire`, `water`, or a missing/unknown element → `result[player]` is `undefined` → the handler throws → 500 | Validate `element` (400), or wire up mode 1 |
 | `forest/index.html` | `<audio src="may_field_1.wav">` names a file that isn't in the repo (404 on load); `player.js` builds `http://arweave.net/…` URLs, mixed content on an https page | Start with an empty `src`; use `https://` |
-| `terrasse/` | Shelf is "soon come"; play prints a hint instead of linking `/play/`; `shelf.js`/`play.js` are empty | Build the shelf, or drop the files |
+| `terrasse/` | Shelf is "soon come"; play prints a hint instead of linking `/play/`; `shelf.js`/`play.js` are empty; nothing links here any more | Decide under O4 |
 | `bakery/vol_1/` | Five empty `<a>` issue links; vol 0's "the jukebox" section is an empty heading | Write the issues |
 | `gallery/present/` | Recordings with an empty `source` load `https://arweave.net/`; the page says "*updated Nov 5" | Hide sourceless tracks |
 | `gallery/about/` | The jukebox link is `#` | Link `/forest/` |
 | `gallery/footer/game.js` | Player two is constructed with the name `"p1"` | Cosmetic |
-| root `index.html` | No `<meta charset>` or viewport tag (emoji and mobile scaling depend on server headers); title is "sandbox"; no favicon | Add the head tags |
 | helpers | Three copies of `helper.js`, two of `script.js`, three rps implementations | Consolidate once the site's shape settles |
 
 ---
