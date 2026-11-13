@@ -1,24 +1,148 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
   <head>
-    <title>sandbox</title>
-    <link rel="stylesheet" href="index.css" />
-    <script src="dock.js" type="module"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>sk8 studio</title>
+    <meta
+      name="description"
+      content="sk8 studio: banana bread, streetwear art and a cosy pixel skating game, set in a hopeful made-up future. pull up a stool."
+    />
+    <link rel="icon" href="img/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/patrick-hand.woff2" />
+    <link rel="stylesheet" href="front-door.css" />
+    <script src="front-door.js" type="module"></script>
   </head>
 
   <body>
-    <header>
-      <h1>welcome to sk8 studio</h1>
+    <a class="skip" href="#main">skip to the doors</a>
+
+    <header class="top">
+      <a class="home" href="#top" aria-label="sk8 studio, top of page">
+        <img src="img/bushsk8r-logo.png" alt="" width="36" height="48" />
+        <span>sk8 studio</span>
+      </a>
+      <nav aria-label="on this page">
+        <a href="#doors">doors</a>
+      </nav>
     </header>
 
-    <main>
-      <p class="siteDesc">
-        an open studio exploring creativity in the age of abundant information
-      </p>
-      <nav class="mainNav"></nav>
-      <section class="vs"></section>
+    <main id="main">
+      <!-- hero -->
+      <section class="hero" id="top">
+        <div class="heroWords">
+          <h1>sk8 studio</h1>
+          <p class="lead">
+            banana bread, streetwear art and a cosy pixel skating game, set in
+            a hopeful made-up future.
+          </p>
+          <p class="lead soft">pull up a stool. the oven's on.</p>
+          <a class="btn" href="#doors">pick a door</a>
+        </div>
+        <img
+          class="heroLogo"
+          src="img/bushsk8r-logo.png"
+          width="900"
+          height="1200"
+          alt="the sk8 studio logo: bushsk8r, a hand-drawn stick figure with a puffy afro, waving from above a skateboard that could also be a baking bowl"
+        />
+      </section>
+
+      <!-- the toy -->
+      <section class="ride" aria-labelledby="rideTitle">
+        <h2 id="rideTitle" class="visually-hidden">take bushsk8r for a ride</h2>
+        <button class="rink" type="button" aria-describedby="rideHelp">
+          <canvas id="rink" width="128" height="40"></canvas>
+          <span class="visually-hidden">kick</span>
+        </button>
+        <div class="rideBar">
+          <p id="rideHelp" class="pixel">
+            tap, click or press space to kick. find a steady beat.
+            <span class="rideSoft">mashing makes you stumble.</span>
+          </p>
+          <p class="pixel" id="rideClock" aria-live="polite">sunrise</p>
+        </div>
+        <div class="rideBar">
+          <fieldset class="chips">
+            <legend class="pixel">board</legend>
+            <label><input type="radio" name="board" value="sk8" checked /><span>sk8board</span></label>
+            <label><input type="radio" name="board" value="banana" /><span>banana</span></label>
+            <label><input type="radio" name="board" value="loaf" /><span>loaf</span></label>
+          </fieldset>
+          <fieldset class="chips">
+            <legend class="pixel">hair</legend>
+            <label><input type="radio" name="hair" value="afro" checked /><span>afro</span></label>
+            <label><input type="radio" name="hair" value="none" /><span>not yet</span></label>
+          </fieldset>
+          <button class="textBtn pixel" type="button" id="wash">wash the path clean</button>
+        </div>
+        <p class="note">
+          time only moves when you do. ride in rhythm and the path keeps a
+          little of you: dandelions grow where you flowed, and they'll still be
+          here when you come back.
+        </p>
+      </section>
+
+      <!-- who are you -->
+      <section id="doors" aria-labelledby="doorsTitle">
+        <h2 id="doorsTitle">who are you?</h2>
+        <p class="lead">
+          two ways in. the tourist looks around. the purist reads deeper, and
+          can ask to join the makers.
+        </p>
+
+        <ul class="street big" role="list">
+          <li>
+            <a class="door clay" href="https://gallery.sk8.studio" target="_blank" rel="noopener noreferrer">
+              <span class="pixel tag open">open</span>
+              <span class="doorName">tourist</span>
+              <span class="doorSay">here for the zoomed out picture</span>
+              <span class="doorKey">the keyword at the gate is <b>welcome</b></span>
+              <span class="doorGo">to the gallery →</span>
+            </a>
+          </li>
+          <li>
+            <a class="door indigo" href="collections/">
+              <span class="pixel tag open">open</span>
+              <span class="doorName">purist</span>
+              <span class="doorSay">here for the zoomed in picture</span>
+              <span class="doorGo">to the collections →</span>
+            </a>
+          </li>
+        </ul>
+
+        <h3>around the block</h3>
+        <p>
+          sk8 studio lives online for now. these doors aren't open yet: both
+          are still being made.
+        </p>
+
+        <ul class="street" role="list">
+          <li>
+            <div class="door moss">
+              <span class="pixel tag building">being built</span>
+              <span class="doorName">bushsk8r</span>
+              <span class="doorSay">the game. lose your self in the forest with your board.</span>
+            </div>
+          </li>
+          <li>
+            <div class="door indigo">
+              <span class="pixel tag soon">soon</span>
+              <span class="doorName">baked chronicles</span>
+              <span class="doorSay">a story for your ears. the first thing you'll hear from this world.</span>
+            </div>
+          </li>
+        </ul>
+      </section>
+
     </main>
-    <footer></footer>
-    <a href="./archive/">archive</a>
+
+    <footer class="foot">
+      <p>
+        <strong>sk8 studio</strong> · an open studio where playtime is never
+        over.
+      </p>
+    </footer>
   </body>
 </html>
