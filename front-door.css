@@ -233,6 +233,18 @@ canvas {
   padding-block: 0.4rem;
 }
 
+.navDoor {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.navKey {
+  padding-right: 0;
+  font-size: 0.85rem;
+  white-space: normal;
+}
+
 .top nav a:hover {
   text-decoration: underline wavy 2px;
 }
@@ -245,7 +257,7 @@ main > section {
   padding: clamp(2.5rem, 8vw, 5rem) var(--edge);
 }
 
-main > section + section:not(.ride) {
+main > section + section:not(.ride):not(.nightBand) {
   border-top: 3px dashed var(--ink);
 }
 
@@ -678,6 +690,50 @@ div.door {
 
 /* the application form sits on the night band */
 
+main > section.nightBand {
+  max-width: none;
+  background: var(--dusk);
+  color: var(--cream);
+}
+
+.nightBand .inner {
+  max-width: var(--wide);
+  margin-inline: auto;
+}
+
+.nightBand .inner > * + * {
+  margin-top: 1rem;
+}
+
+.nightBand h2,
+.nightBand .eyebrow {
+  color: var(--gold);
+}
+
+.nightBand a:hover {
+  color: var(--gold);
+}
+
+.nightBand :focus-visible {
+  outline-color: var(--cream);
+}
+
+/* the honeypot: off-screen, out of the tab order, never announced */
+.trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.formStatus {
+  max-width: 34rem;
+  padding: 0.8rem 1rem;
+  border: 2px dashed var(--blush);
+  border-radius: var(--wobble);
+}
+
 .apply {
   display: grid;
   gap: 1.3rem;
@@ -799,4 +855,75 @@ div.door {
   .door {
     transition: none;
   }
+}
+
+/* ---------- the crate (collections) ---------- */
+
+.eyebrow {
+  color: var(--clay);
+}
+
+.boards {
+  display: grid;
+}
+
+.boardLink {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.boardRow {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.2rem 1rem;
+  padding: 1.1rem 1.3rem 1.2rem;
+}
+
+.boardLink:hover .boardTitle {
+  text-decoration: underline wavy 2px;
+  text-underline-offset: 0.2em;
+}
+
+.boardLink .boardMeta::after {
+  content: " · open →";
+}
+
+.boardSay,
+.boardMeta {
+  grid-column: 2;
+}
+
+.canvasName {
+  margin-top: 0.2rem;
+}
+
+.work {
+  margin-top: 0.6rem;
+}
+
+.work img,
+.work video {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid var(--ink);
+  border-radius: var(--wobble);
+}
+
+.work audio {
+  width: 100%;
+}
+
+.caption {
+  margin-top: 0.4rem;
+  font-size: 0.9em;
+}
+
+.why h4 {
+  margin-top: 0.8rem;
+  color: var(--gold);
+}
+
+.why > * + p {
+  margin-top: 0.5rem;
 }

@@ -121,6 +121,8 @@ The public read and the D8 checks must agree on what "visible" means, so both go
 
 ## 3. sk8labs — vanilla JS
 
+> **Moved 2026-11-13 into `../sk8labs-front-door-plan.md` (Phases 2–4, built there). Kept only as the original sketch; its *Front door* (purist to the atelier, collections as a third door) no longer applies.**
+
 ### Plumbing
 - [ ] `api.js`, one `fetch` wrapper:
   ```js
@@ -163,10 +165,10 @@ The public read and the D8 checks must agree on what "visible" means, so both go
 - [ ] New pages get `<meta charset>`, `viewport`, a real `<title>` and a favicon.
 
 ### Front door
-- [ ] Point home's **tourist** at `https://gallery.sk8.studio` and **purist** at `https://atelier.sk8.studio` in [dock.js](dock.js).
+- [ ] (Superseded 2026-11-13: tourist → `collections/`, purist → the gallery with `welcome` printed.) Point home's **tourist** at `https://gallery.sk8.studio` and **purist** at `https://atelier.sk8.studio` in [dock.js](dock.js).
 - [ ] Add **collections** to the home page as the third door, the one that needs no keyword or account.
 - [ ] Decide the fate of the local prototypes `gallery/` and `terrasse/`: retire them, or move them under `archive/` as 2024 works.
-- [ ] Don't mention the studio pass or either keyword anywhere on sk8.studio.
+- [ ] Don't mention the studio pass or the studio keyword anywhere on sk8.studio (the ordinary keyword `welcome` is printed at the purist door, plan D14).
 
 ---
 
