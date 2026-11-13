@@ -1,0 +1,3 @@
+{
+  "rewrites": [{ "source": "/collections/:id", "destination": "/collections/view.html" }]
+}
