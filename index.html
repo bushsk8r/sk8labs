@@ -6,8 +6,25 @@
     <title>sk8 studio</title>
     <meta
       name="description"
-      content="sk8 studio: banana bread, streetwear art and a cosy pixel skating game, set in a hopeful made-up future. pull up a stool."
+      content="sk8 studio: a space where you are free to play. take bushsk8r for a ride."
     />
+    <link rel="canonical" href="https://sk8.studio/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="sk8 studio" />
+    <meta property="og:title" content="sk8 studio" />
+    <meta
+      property="og:description"
+      content="sk8 studio: a space where you are free to play. take bushsk8r for a ride."
+    />
+    <meta property="og:url" content="https://sk8.studio/" />
+    <meta property="og:image" content="https://sk8.studio/img/og-bushsk8r.v1.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="bushsk8r, the sk8 studio mascot: a hand-drawn stick figure with a puffy afro, waving from above a skateboard that could also be a baking bowl"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="img/favicon-32.png" sizes="32x32" />
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/patrick-hand.woff2" />
@@ -23,45 +40,35 @@
         <img src="img/bushsk8r-logo.png" alt="" width="36" height="48" />
         <span>sk8 studio</span>
       </a>
-      <nav aria-label="on this page">
-        <a href="collections/">tourist</a>
-        <span class="navDoor">
-          <a href="https://gallery.sk8.studio" target="_blank" rel="noopener noreferrer" aria-describedby="purist-key">purist</a>
-          <span class="doorKey navKey" id="purist-key">the keyword at the gate is <strong>welcome</strong></span>
-        </span>
+      <nav aria-label="more">
+        <a href="play/">play</a>
       </nav>
     </header>
 
     <main id="main">
-      <!-- hero -->
-      <section class="hero" id="top">
-        <div class="heroWords">
+      <!-- the toy. hand copies of this section also live in collections/view.html and 404.html: change all three together. -->
+      <section class="ride stage" id="top" aria-labelledby="rideTitle">
+        <div class="stageTitle">
           <h1>sk8 studio</h1>
+          <p class="lead">this is a space where you are free to play.</p>
         </div>
-        <img
-          class="heroLogo"
-          src="img/bushsk8r-logo.png"
-          width="900"
-          height="1200"
-          alt="the sk8 studio logo: bushsk8r, a hand-drawn stick figure with a puffy afro, waving from above a skateboard that could also be a baking bowl"
-        />
-      </section>
-
-      <!-- the toy -->
-      <section class="ride" aria-labelledby="rideTitle">
         <h2 id="rideTitle" class="visually-hidden">take bushsk8r for a ride</h2>
         <button class="rink" type="button" aria-describedby="rideHelp">
-          <canvas id="rink" width="128" height="40"></canvas>
-          <span class="visually-hidden">kick</span>
+          <canvas id="rink" width="128" height="40" aria-hidden="true"></canvas>
+          <span class="visually-hidden">kick bushsk8r</span>
         </button>
         <div class="rideBar">
           <p id="rideHelp" class="pixel">
-            tap, click or press space to kick. find a steady beat.
-            <span class="rideSoft">mashing makes you stumble.</span>
+            click or press space to kick. keep a steady beat.
           </p>
-          <p class="pixel" id="rideClock" aria-live="polite">sunrise</p>
+          <p class="pixel">time · <span id="rideClock">sunrise</span></p>
         </div>
-        <div class="rideBar">
+        <!-- polite news for screen readers: the light changing, a dandelion, the wash -->
+        <p id="rideTime" class="visually-hidden" role="status" aria-live="polite"></p>
+        <p id="rideNews" class="visually-hidden" role="status" aria-live="polite"></p>
+        <details class="dressUp">
+          <summary class="pixel">dress up</summary>
+          <div class="rideBar">
           <fieldset class="chips">
             <legend class="pixel">board</legend>
             <label><input type="radio" name="board" value="sk8" checked /><span>sk8board</span></label>
@@ -74,21 +81,38 @@
             <label><input type="radio" name="hair" value="none" /><span>not yet</span></label>
           </fieldset>
           <button class="textBtn pixel" type="button" id="wash">wash the path clean</button>
-        </div>
+          </div>
+        </details>
         <p class="note">
-          time only moves when you do. ride in rhythm and the path keeps a
-          little of you: dandelions grow where you flowed, and they'll still be
-          here when you come back.
+          ride in rhythm and dandelions grow. <span id="rideKeep">they'll be here next time.</span>
+          <a class="doorJump pixel" href="#doors">pick a door ↓</a>
         </p>
       </section>
 
+      <!-- the two doors -->
+      <section class="doorway" id="doors" aria-labelledby="doorsTitle">
+        <h2 id="doorsTitle" class="visually-hidden">two ways in</h2>
+        <ul class="street big" role="list">
+          <li>
+            <a class="door clay" href="collections/">
+              <span class="doorName">tourist</span>
+              <span class="doorSay">look around, then ask to join.</span>
+              <span class="doorGo">open the crate →</span>
+            </a>
+          </li>
+          <li>
+            <a class="door indigo" href="https://gallery.sk8.studio" target="_blank" rel="noopener noreferrer" aria-describedby="purist-key">
+              <span class="doorName">purist</span>
+              <span class="doorKey" id="purist-key">say <strong>welcome</strong> at the gate. it's a handshake, not a lock.</span>
+              <span class="doorGo">open the gallery ↗<span class="visually-hidden"> (opens in a new tab)</span></span>
+            </a>
+          </li>
+        </ul>
+      </section>
     </main>
 
     <footer class="foot">
-      <p>
-        <strong>sk8 studio</strong> · an open studio where playtime is never
-        over.
-      </p>
+      <p>an open studio where playtime is never over.</p>
     </footer>
   </body>
 </html>

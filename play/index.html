@@ -1,26 +1,175 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="../index.css" />
-    <script async defer src="./script.js" type="module"></script>
-    <title>play</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>play — sk8 studio</title>
+    <meta
+      name="description"
+      content="two games from sk8 studio: ride the forest with bushsk8r, or throw rock, paper, scissors, fire and water."
+    />
+    <link rel="canonical" href="https://sk8.studio/play/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="sk8 studio" />
+    <meta property="og:title" content="play — sk8 studio" />
+    <meta
+      property="og:description"
+      content="two games from sk8 studio: ride the forest with bushsk8r, or throw rock, paper, scissors, fire and water."
+    />
+    <meta property="og:url" content="https://sk8.studio/play/" />
+    <meta property="og:image" content="https://sk8.studio/img/og-bushsk8r.v1.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="bushsk8r, the sk8 studio mascot: a hand-drawn stick figure with a puffy afro, waving from above a skateboard that could also be a baking bowl"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="../img/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="../img/apple-touch-icon.png" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="../fonts/patrick-hand.woff2" />
+    <link rel="stylesheet" href="../front-door.css" />
+    <link rel="stylesheet" href="play.css" />
+    <script src="doors.js" type="module"></script>
+    <script src="forest.js" type="module"></script>
+    <script src="elements.js" type="module"></script>
   </head>
+
   <body>
-    <nav>
-      <ul class="playNav">
-        <li><a href="../index.html">to the studio</a></li>
-        <li>
-          <a
-            href="https://github.com/justinmsaga/rock-paper-scissors"
-            target="_blank"
-            rel="noopener noreferrer"
-            >source code</a
-          >
-        </li>
-      </ul>
-    </nav>
-    <header><h1>experiments in game design</h1></header>
-    <footer></footer>
+    <a class="skip" href="#main">skip to the games</a>
+
+    <header class="top">
+      <a class="home" href="../" aria-label="sk8 studio, back to the front door">
+        <img src="../img/bushsk8r-logo.png" alt="" width="36" height="48" />
+        <span>sk8 studio</span>
+      </a>
+      <nav aria-label="on this page">
+        <a href="#doors">the two doors</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero solo">
+        <div class="heroWords">
+          <h1>play</h1>
+          <p class="lead">two games. pick a door.</p>
+        </div>
+      </section>
+
+      <!-- the two doors. with scripts on, one game shows at a time (doors.js follows the #hash);
+           with scripts off both sections are simply further down the page -->
+      <section class="doorway" id="doors" aria-labelledby="doorsTitle">
+        <h2 id="doorsTitle" class="visually-hidden" tabindex="-1">two games</h2>
+        <ul class="street big" role="list">
+          <li>
+            <a class="door moss" href="#forest">
+              <span class="doorName">bushsk8r</span>
+              <span class="doorSay">ride the forest. keep a beat and the land remembers you.</span>
+              <span class="doorGo">take the board →</span>
+            </a>
+          </li>
+          <li>
+            <a class="door ember" href="#elements">
+              <span class="doorName">rock paper scissors</span>
+              <span class="doorSay">and fire, and water. against the agent, or a friend.</span>
+              <span class="doorGo">throw a hand →</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- bushsk8r: the forest. its own save, apart from the front door's ride -->
+      <section class="game" id="forest" aria-labelledby="forestTitle">
+        <p class="backRow"><a class="doorJump pixel" href="#doors">← the two doors</a></p>
+        <h2 id="forestTitle" tabindex="-1">bushsk8r</h2>
+        <p class="lead">lose your self in the forest with your board.</p>
+
+        <button class="rink" type="button" aria-describedby="rideHelp">
+          <canvas id="forestRink" width="128" height="40" aria-hidden="true"></canvas>
+          <span class="rinkWord pixel" id="rideWord" aria-hidden="true"></span>
+          <span class="visually-hidden">kick bushsk8r</span>
+        </button>
+        <div class="rideBar">
+          <p id="rideHelp">click or press space to kick. keep a steady beat.</p>
+          <p class="pixel" id="rideClockLine">time · <span id="rideClock">sunrise</span></p>
+        </div>
+        <!-- polite news for screen readers: the light, the animals, the days and the lives -->
+        <p id="rideTime" class="visually-hidden" role="status" aria-live="polite"></p>
+        <p id="rideNews" class="visually-hidden" role="status" aria-live="polite"></p>
+
+        <fieldset class="chips pickBoard">
+          <legend class="pixel">pick your board</legend>
+          <label><input type="radio" name="board" value="sk8" checked /><span>sk8board</span></label>
+          <label><input type="radio" name="board" value="banana" /><span>banana</span></label>
+          <label><input type="radio" name="board" value="loaf" /><span>loaf</span></label>
+        </fieldset>
+
+        <details class="dressUp">
+          <summary class="pixel">more</summary>
+          <div class="rideBar">
+            <fieldset class="chips">
+              <legend class="pixel">hair</legend>
+              <label><input type="radio" name="hair" value="afro" checked /><span>afro</span></label>
+              <label><input type="radio" name="hair" value="none" /><span>not yet</span></label>
+            </fieldset>
+            <button class="textBtn pixel" type="button" id="wordsBack">say the words again</button>
+            <button class="textBtn pixel" type="button" id="newForest">start a new forest</button>
+          </div>
+        </details>
+
+        <p class="note">
+          day turns to night and back. ride in flow and a deer follows by day, a coyote by night.
+          it never ends. what falls from the afro grows.
+          <span id="rideKeep">this forest is yours, kept on this device.</span>
+        </p>
+      </section>
+
+      <!-- rock paper scissors, fire and water -->
+      <section class="game" id="elements" aria-labelledby="elementsTitle">
+        <p class="backRow"><a class="doorJump pixel" href="#doors">← the two doors</a></p>
+        <h2 id="elementsTitle" tabindex="-1">rock paper scissors</h2>
+        <p class="lead">and fire, and water. five elements, one throw each.</p>
+
+        <fieldset class="chips" id="rpsMode">
+          <legend class="pixel">players</legend>
+          <label><input type="radio" name="players" value="one" checked /><span>one, against the agent</span></label>
+          <label><input type="radio" name="players" value="two" /><span>two, taking turns</span></label>
+        </fieldset>
+
+        <p class="turn" id="rpsTurn">your throw</p>
+        <div class="picks" role="group" aria-labelledby="rpsTurn">
+          <button class="pick" type="button" data-element="fire"><span aria-hidden="true">🔥</span> fire</button>
+          <button class="pick" type="button" data-element="rock"><span aria-hidden="true">🪨</span> rock</button>
+          <button class="pick" type="button" data-element="paper"><span aria-hidden="true">🧻</span> paper</button>
+          <button class="pick" type="button" data-element="scissors"><span aria-hidden="true">✂️</span> scissors</button>
+          <button class="pick" type="button" data-element="water"><span aria-hidden="true">🌊</span> water</button>
+        </div>
+
+        <div class="verdict" role="status" aria-live="polite">
+          <p class="pixel" id="rpsThrows"></p>
+          <p id="rpsResult"></p>
+        </div>
+
+        <div class="rideBar">
+          <p class="pixel" id="rpsScore">you 0 · agent 0 · draws 0</p>
+          <button class="textBtn pixel" type="button" id="rpsWipe">wipe the score</button>
+        </div>
+
+        <details class="dressUp rules">
+          <summary class="pixel">the rules</summary>
+          <ul>
+            <li>🌊 water puts out 🔥 fire.</li>
+            <li>🔥 fire beats 🪨 rock, 🧻 paper and ✂️ scissors.</li>
+            <li>🪨 rock, 🧻 paper and ✂️ scissors each beat 🌊 water.</li>
+            <li>🪨 rock breaks ✂️ scissors, ✂️ scissors cut 🧻 paper, 🧻 paper covers 🪨 rock.</li>
+            <li>the same throw twice is a draw.</li>
+          </ul>
+        </details>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p>an open studio where playtime is never over.</p>
+    </footer>
   </body>
 </html>

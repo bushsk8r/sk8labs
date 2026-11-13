@@ -3,11 +3,30 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--meta-->
     <title>a board — the crate — sk8 studio</title>
     <meta
       name="description"
       content="one board from the crate: things that were gathered, thought about and put in order, with a note on why."
     />
+    <link rel="canonical" href="https://sk8.studio/collections/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="sk8 studio" />
+    <meta property="og:title" content="a board — the crate" />
+    <meta
+      property="og:description"
+      content="one board from the crate: things that were gathered, thought about and put in order, with a note on why."
+    />
+    <meta property="og:url" content="https://sk8.studio/collections/" />
+    <meta property="og:image" content="https://sk8.studio/img/og-bushsk8r.v1.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="bushsk8r, the sk8 studio mascot: a hand-drawn stick figure with a puffy afro, waving from above a skateboard that could also be a baking bowl"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <!--/meta-->
     <link rel="icon" href="/img/favicon-32.png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/patrick-hand.woff2" />
@@ -16,7 +35,7 @@
   </head>
 
   <body>
-    <a class="skip" href="#main">skip to the board</a>
+    <a class="skip" id="skip" href="#main">skip to the board</a>
 
     <header class="top">
       <a class="home" href="/" aria-label="sk8 studio, back to the front door">
@@ -34,6 +53,7 @@
           <p class="pixel eyebrow"><a href="/collections/">← the crate</a></p>
           <h1 id="boardTitle">a board</h1>
           <p class="lead" id="boardDescription" hidden></p>
+          <p class="lead" id="notHereInvite" hidden>the path is still open, though.</p>
           <p class="pixel" id="boardMeta" hidden></p>
         </div>
       </section>
@@ -43,15 +63,51 @@
         <div id="why" class="why" hidden></div>
         <ol id="items" class="items" role="list" hidden></ol>
         <p class="note" id="legend" hidden>
-          dashed things are still being worked on in the studio. you can see
-          that they exist and why they're on the board, but not what's inside
-          yet.
+          dashed things are still in the studio: you see why they're here, not what they are yet.
+        </p>
+      </section>
+
+      <!-- the ride, shown only when the board is not public. hand copies of this section also live in index.html and 404.html: change all three together. -->
+      <section class="ride" id="rideSection" hidden aria-labelledby="rideTitle">
+        <h2 id="rideTitle" class="visually-hidden">take bushsk8r for a ride</h2>
+        <button class="rink" type="button" aria-describedby="rideHelp">
+          <canvas id="rink" width="128" height="40" aria-hidden="true"></canvas>
+          <span class="visually-hidden">kick bushsk8r</span>
+        </button>
+        <div class="rideBar">
+          <p id="rideHelp" class="pixel">
+            click or press space to kick. keep a steady beat.
+          </p>
+          <p class="pixel">time · <span id="rideClock">sunrise</span></p>
+        </div>
+        <!-- polite news for screen readers: the light changing, a dandelion, the wash -->
+        <p id="rideTime" class="visually-hidden" role="status" aria-live="polite"></p>
+        <p id="rideNews" class="visually-hidden" role="status" aria-live="polite"></p>
+        <details class="dressUp">
+          <summary class="pixel">dress up</summary>
+          <div class="rideBar">
+          <fieldset class="chips">
+            <legend class="pixel">board</legend>
+            <label><input type="radio" name="board" value="sk8" checked /><span>sk8board</span></label>
+            <label><input type="radio" name="board" value="banana" /><span>banana</span></label>
+            <label><input type="radio" name="board" value="loaf" /><span>loaf</span></label>
+          </fieldset>
+          <fieldset class="chips">
+            <legend class="pixel">hair</legend>
+            <label><input type="radio" name="hair" value="afro" checked /><span>afro</span></label>
+            <label><input type="radio" name="hair" value="none" /><span>not yet</span></label>
+          </fieldset>
+          <button class="textBtn pixel" type="button" id="wash">wash the path clean</button>
+          </div>
+        </details>
+        <p class="note">
+          ride in rhythm and dandelions grow. <span id="rideKeep">they'll be here next time.</span>
         </p>
       </section>
     </main>
 
     <footer class="foot">
-      <p><strong>sk8 studio</strong> · an open studio where playtime is never over.</p>
+      <p>an open studio where playtime is never over.</p>
     </footer>
   </body>
 </html>

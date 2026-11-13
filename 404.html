@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>not here — sk8 studio</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/img/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/patrick-hand.woff2" />
+    <link rel="stylesheet" href="/front-door.css" />
+    <script src="/front-door.js" type="module"></script>
+  </head>
+
+  <body>
+    <a class="skip" href="#rideTitle">skip to the ride</a>
+
+    <header class="top">
+      <a class="home" href="/" aria-label="sk8 studio, back to the front door">
+        <img src="/img/bushsk8r-logo.png" alt="" width="36" height="48" />
+        <span>sk8 studio</span>
+      </a>
+      <nav aria-label="on this page">
+        <a href="/">back to the front door</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero solo">
+        <div class="heroWords">
+          <h1>wrong turn?</h1>
+          <p class="lead">same. nothing lives here, but the path is open.</p>
+        </div>
+      </section>
+
+      <!-- the toy. hand copies of this section also live in index.html and collections/view.html: change all three together. -->
+      <section class="ride" aria-labelledby="rideTitle">
+        <h2 id="rideTitle" class="visually-hidden">take bushsk8r for a ride</h2>
+        <button class="rink" type="button" aria-describedby="rideHelp">
+          <canvas id="rink" width="128" height="40" aria-hidden="true"></canvas>
+          <span class="visually-hidden">kick bushsk8r</span>
+        </button>
+        <div class="rideBar">
+          <p id="rideHelp" class="pixel">
+            click or press space to kick. keep a steady beat.
+          </p>
+          <p class="pixel">time · <span id="rideClock">sunrise</span></p>
+        </div>
+        <!-- polite news for screen readers: the light changing, a dandelion, the wash -->
+        <p id="rideTime" class="visually-hidden" role="status" aria-live="polite"></p>
+        <p id="rideNews" class="visually-hidden" role="status" aria-live="polite"></p>
+        <details class="dressUp">
+          <summary class="pixel">dress up</summary>
+          <div class="rideBar">
+          <fieldset class="chips">
+            <legend class="pixel">board</legend>
+            <label><input type="radio" name="board" value="sk8" checked /><span>sk8board</span></label>
+            <label><input type="radio" name="board" value="banana" /><span>banana</span></label>
+            <label><input type="radio" name="board" value="loaf" /><span>loaf</span></label>
+          </fieldset>
+          <fieldset class="chips">
+            <legend class="pixel">hair</legend>
+            <label><input type="radio" name="hair" value="afro" checked /><span>afro</span></label>
+            <label><input type="radio" name="hair" value="none" /><span>not yet</span></label>
+          </fieldset>
+          <button class="textBtn pixel" type="button" id="wash">wash the path clean</button>
+          </div>
+        </details>
+        <p class="note">
+          ride in rhythm and dandelions grow. <span id="rideKeep">they'll be here next time.</span>
+        </p>
+      </section>
+
+      <section class="backLink">
+        <p><a href="/">back to the front door</a></p>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p>an open studio where playtime is never over.</p>
+    </footer>
+  </body>
+</html>

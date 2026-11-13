@@ -2,7 +2,7 @@
 
 an open studio where playtime is never over — [sk8.studio](https://sk8.studio)
 
-The public front door of **sk8 studio**, and the fourth repo of the atelier project. Anyone curious about the studio lands here first: a short home page with two doors, *tourist* (the crate: collections, then an application to join) and *purist* (the gallery, keyword `welcome`). It still holds the maker's older archive and experiments, unlinked from the home page.
+The public front door of **sk8 studio**, and the fourth repo of the atelier project. Anyone curious about the studio lands here first: a short home page with two doors, *tourist* (the crate: collections, then an application to join) and *purist* (the gallery, keyword `welcome`), and a top-bar link to **play** (two games). It still holds the maker's older archive and experiments, unlinked from the home page.
 
 > **State.** The cut-down home page, the crate (`collections/`) and the application form are built on branch `development` but **uncommitted and not deployed**. Plan: `../sk8labs-front-door-plan.md` (deploy order §6).
 
@@ -63,7 +63,8 @@ sk8labs/
 │   ├── footer/                        # rock-paper-scissors-fire-water (class-based); also a standalone page
 │   ├── jukebox.js                     # track selector + Arweave media player
 │   └── helper.js · script.js          # forked copies of the root files
-├── play/                              # standalone rps game ("experiments in game design")
+├── play/                              # the play page: index.html + play.css, doors.js (the #hash picks a game),
+│                                      #   forest.js (bushsk8r, the forest), elements.js (rps with a score)
 ├── archive/                           # the crate: works by year
 │   ├── crate.js                       # 2013–2025 data (title, craft, description, source, artifacts, type)
 │   ├── loop/                          # "human in the loop" player (2020)
@@ -88,19 +89,30 @@ sk8labs/
 | `/terrasse/` | "your terrasse — where to from here?": **shelf** ("a space to store your zines" → prints *soon come*) and **play** ("a sandbox" → prints *click the boxes*, pointing at the footer game). `shelf.js` and `play.js` are empty files |
 | `/gallery/` | "welcome to the gallery — aka the artifact archive, aka the prototype graveyard", marked `[this is a prototype]`. Nav: **about** (programmer / baking enthusiast / recorder of sounds, linking GitHub, the bakery and a `#` jukebox), **past works** (idea factory 2017, human in the loop 2020, echo chamber 2021, playin with poly 2021 — each opens its Arweave media), **currently** (experiments: minesweeper, hypermedia zine · recordings jukebox · a Spotify playlist embed) |
 | `/gallery/footer/` | The rps game as its own page, with a marquee header |
-| `/play/` | "experiments in game design": one/two player, rules, five elements, a random agent. Links to the [rock-paper-scissors source](https://github.com/justinmsaga/rock-paper-scissors) |
+| `/play/` | **Two games behind two doors** (front-door look; `doors.js` shows one section per `#forest` / `#elements`, and with scripts off both are simply on the page). **bushsk8r**: the home ride grown toward `../bushsk8r game design document.md`, see below. **rock paper scissors**: five elements, one player against the weighted agent or two taking turns, a score per mode in `localStorage` `sk8-play-elements-score` |
 | `/archive/` | Year selector over `crate.js` (2013–2025); a year lists its works (craft), and a chosen work plays its Arweave media or reads "private collection" when there's no `source` |
 | `/archive/loop/` · `/archive/recording/` | The "human in the loop" tracks — a vanilla player and a React build of the same material ([audio_player source](https://github.com/justinmsaga/audio_player)) |
 | `/forest/` | Seven may field/wind recordings with a track selector |
 | `/bakery/` | "the baked chronicles — a study of data sonification": an audio protocol for documenting recipes. Vol 0 (cookies, banana bread, cake, ube, retrospective) · vol 1 (the croissant, in progress) · vol 2 (the cronut, not started) |
 
-**The home page links none of the older pages.** `/gallery/`, `/terrasse/`, `/archive/`, `/forest/`, `/play/`, `/archive/loop/` and `/archive/recording/` are reachable by URL only, kept at their paths (plan O4); root `index.css`/`script.js`/`helper.js` stay because they import them. `/bakery/` is linked from gallery/about.
+**The home page links none of the older pages** (its top bar links `/play/`, which is a new page). `/gallery/`, `/terrasse/`, `/archive/`, `/forest/`, `/archive/loop/` and `/archive/recording/` are reachable by URL only, kept at their paths (plan O4); root `index.css`/`script.js`/`helper.js` stay because they import them. `/bakery/` is linked from gallery/about.
 
 ### The rps game
 
-Five elements: 🌊 > 🔥, 🔥 > [🪨🧻✂️], [🪨🧻✂️] > 🌊, and 🪨 > ✂️ > 🧻 > 🪨. The agent is weighted — fire 33%, rock/paper/scissors 11% each, water 34%. It exists three times: `gallery/footer/` (class-based, emoji elements; the one every footer mounts), `play/play.js` (a state-machine rewrite), and `netlify/functions/play.js` (server-side, three-element mode only).
+Five elements: 🌊 > 🔥, 🔥 > [🪨🧻✂️], [🪨🧻✂️] > 🌊, and 🪨 > ✂️ > 🧻 > 🪨. The agent is weighted — fire 33%, rock/paper/scissors 11% each, water 34%. It exists three times: `gallery/footer/` (class-based, emoji elements; the one every old footer mounts), `play/elements.js` (the play page: hand-written markup, a rules table with the reason for each win, the score), and `netlify/functions/play.js` (server-side, three-element mode only).
 
 These are the elements the atelier API's agents are named after: paper writes, rock reads, water updates, fire deletes, scissors replaces.
+
+### bushsk8r, the forest (`play/forest.js`)
+
+The home ride plus a few things from the updated game design document. **Its own save** (`localStorage` `sk8-play-forest`), apart from the front door's; `front-door.js` is untouched, and the sprite frames + `drawSprite` are a **hand copy** of it (change both).
+
+- **Endless.** 900px ridden is a day, and night runs straight into the next sunrise. Nothing ends: no board wear and no lives (the document's life loop is **left out on purpose**).
+- **Two marks.** Dandelions (riding marks) lose their head on day two and go on day three. Bush (a bit of the afro fallen in flow, from the second day on) stays; at 30 the oldest makes room.
+- **Hair.** Always the afro (or none, by chip). The document's afro → locks is **left out on purpose**.
+- **Animals.** Flow brings company (`company()`): a deer follows just behind the board by day, a coyote by night. It drops back when the flow goes or the light changes hands. Nothing is hostile; the document's bear and its end of the day are **left out on purpose**.
+- **Words fall away.** *kick / push / coast* over the canvas for three circuits (384px each), one fewer each lap; the help line leaves the page after two circuits and the clock readout after four (both stay for screen readers). *say the words again* restarts the count.
+- **Board.** The rider picks it (sk8board, banana, loaf) from chips under the canvas; hair (*afro* / *not yet*), *say the words again* and *start a new forest* sit under *more*. **Not built:** board wear and lives, the bear and hostile encounters, hair locking, lean/carving and terrain zones, sound, stencils on the bridge, marked sections getting easier.
 
 ### Netlify functions
 
@@ -119,7 +131,7 @@ These are the elements the atelier API's agents are named after: paper writes, r
 - **DOM from JS** (the older pages). They ship a near-empty `<header>/<nav>/<main>/<footer>` and a module that fills them through `helper.js`. `addToTag(tag, children, clear)` is the one render call; `clear` wipes the tag first. Selector state is a copy of the data with a `chosen` flag (`addChosen`/`setChosen`), re-rendered whole on every click.
 - **External links open in a new tab.** `createLink` (in every `helper.js` copy) sets `target="_blank" rel="noopener noreferrer"` when the href's origin differs from the page's; hand-written anchors to other sites carry the two attributes themselves.
 - **Lowercase voice**, emoji as punctuation, no framework. `forest/` and `archive/loop/` are the older pages: Tailwind utility classes against the compiled `styles.css`.
-- **Three copies of the helpers.** `play/helper.js` is identical to the root one; `gallery/helper.js` and `gallery/script.js` have drifted. Edit the one the page imports.
+- **Two copies of the helpers.** `gallery/helper.js` and `gallery/script.js` have drifted from the root ones. Edit the one the page imports.
 
 ---
 
@@ -142,8 +154,13 @@ The plan is `../sk8labs-front-door-plan.md` (it supersedes §3 of `todo list.md`
 | `gallery/present/` | Recordings with an empty `source` load `https://arweave.net/`; the page says "*updated Nov 5" | Hide sourceless tracks |
 | `gallery/about/` | The jukebox link is `#` | Link `/forest/` |
 | `gallery/footer/game.js` | Player two is constructed with the name `"p1"` | Cosmetic |
-| helpers | Three copies of `helper.js`, two of `script.js`, three rps implementations | Consolidate once the site's shape settles |
+| helpers | Two copies of `helper.js` and of `script.js`, three rps implementations, two copies of the bushsk8r sprite (`front-door.js`, `play/forest.js`) | Consolidate once the site's shape settles |
+| `/play/` | Not seen on a real phone | Play it |
 
 ---
 
 all creations: [CC0 vibes](https://creativecommons.org/public-domain/cc0/) — please feel free to add/remix/make fun of these.
+
+## Link previews
+
+Shared `/collections/<id>` links get their own card through `netlify/edge-functions/collection-meta.js` (plan: `../sk8labs-link-previews-plan.md`). It rewrites the `<!--meta-->` block in `collections/view.html`; keep those markers. The `.ride` markup is hand-copied in `index.html`, `collections/view.html` and `404.html`; change all three together. `npx serve` skips edge functions; use `npx netlify dev`.

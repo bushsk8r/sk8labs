@@ -4,6 +4,7 @@ import { getJSON, el, curatorName, things, plainDate } from "../api.js";
 const status = document.getElementById("status");
 const list = document.getElementById("boards");
 const legend = document.getElementById("legend");
+const order = document.getElementById("order");
 
 function say(text, retry) {
   status.hidden = false;
@@ -62,10 +63,15 @@ async function load() {
   }
   const boards = Array.isArray(data?.collections) ? data.collections : [];
   if (!boards.length) {
-    say("the crate is empty for now. boards appear here when a purist makes one public.");
+    say("no boards yet.");
+    // no need to wait for the first board to ask to join
+    const go = el("a", null, "you can still ask to join ↓");
+    go.href = "#apply";
+    status.append(" ", go);
     return;
   }
   status.hidden = true;
+  order.hidden = false;
   list.replaceChildren(...boards.map(board));
   list.hidden = false;
   legend.hidden = false;

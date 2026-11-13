@@ -1,0 +1,140 @@
+/* the play page. tokens, the top bar, doors, the rink and chips come from ../front-door.css */
+
+main > section.game {
+  padding-top: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.backRow {
+  margin-bottom: 1rem;
+}
+
+.backRow .doorJump {
+  margin-left: 0;
+}
+
+.game h2 {
+  margin-bottom: 0.4rem;
+}
+
+.game h2:focus {
+  outline: 0; /* focused by doors.js so a screen reader lands on the game; not a control */
+}
+
+.game .rink,
+.game #rpsMode {
+  margin-top: 1.2rem;
+}
+
+/* ---------- the forest ---------- */
+
+.game .rink {
+  position: relative;
+}
+
+/* the first days' pixel words: kick, push, coast. they fall away as the circuits add up */
+.rinkWord {
+  position: absolute;
+  top: 8%;
+  right: 4%;
+  font-size: clamp(0.875rem, 2.4vw, 1.5rem);
+  color: var(--ink);
+  pointer-events: none;
+}
+
+.rinkWord.night {
+  color: var(--cream);
+}
+
+.pickBoard {
+  margin-top: 1rem;
+}
+
+.dressUp .rideBar {
+  justify-content: flex-start;
+}
+
+/* ---------- rock paper scissors ---------- */
+
+.turn {
+  margin-top: 1.5rem;
+  font-size: 1.3em;
+  line-height: 1.15;
+}
+
+.picks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.6rem;
+}
+
+.pick {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 52px;
+  padding: 0.35rem 1.1rem 0.45rem;
+  background: var(--cream);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: var(--wobble);
+  font: inherit;
+  font-size: 1.1em;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 0.15s ease-out;
+}
+
+.pick:nth-child(even) {
+  border-radius: var(--wobble-2);
+}
+
+.pick:hover {
+  transform: rotate(-2deg);
+}
+
+.pick:active {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.pick > span {
+  font-size: 1.3em;
+  line-height: 1;
+}
+
+.verdict {
+  min-height: 5.5rem; /* the result lands without pushing the score about */
+  margin-top: 1.2rem;
+}
+
+.verdict p {
+  max-width: none;
+}
+
+#rpsResult {
+  display: inline-block;
+  margin-top: 0.3rem;
+  font-size: 1.3em;
+  line-height: 1.2;
+}
+
+/* a win is a patch: gold, a little askew */
+#rpsResult.won {
+  padding: 0.2rem 0.9rem 0.3rem;
+  background: var(--gold);
+  border: 2px solid var(--ink);
+  border-radius: var(--wobble);
+  transform: rotate(-1.5deg);
+}
+
+.rules ul {
+  margin-top: 0.4rem;
+  padding-left: 1.2rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pick {
+    transition: none;
+  }
+}
