@@ -141,7 +141,7 @@ canvas {
 
 .pixel {
   font-family: var(--pixel);
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   line-height: 1.4;
   letter-spacing: 0.02em;
 }
@@ -229,20 +229,11 @@ canvas {
 }
 
 .top nav a {
-  text-decoration: none;
-  padding-block: 0.4rem;
-}
-
-.navDoor {
   display: inline-flex;
-  align-items: baseline;
-  gap: 0.5rem;
-}
-
-.navKey {
-  padding-right: 0;
-  font-size: 0.85rem;
-  white-space: normal;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 0.2rem;
+  text-decoration: none;
 }
 
 .top nav a:hover {
@@ -257,7 +248,7 @@ main > section {
   padding: clamp(2.5rem, 8vw, 5rem) var(--edge);
 }
 
-main > section + section:not(.ride):not(.nightBand) {
+main > section + section:not(.ride):not(.nightBand):not(.doorway) {
   border-top: 3px dashed var(--ink);
 }
 
@@ -305,6 +296,94 @@ main > section + section:not(.ride):not(.nightBand) {
   padding-top: 0 !important;
 }
 
+/* home: the game is the hero. the title is a sticker on the rink's top edge */
+.ride.stage {
+  padding-top: clamp(1.5rem, 4vw, 2.5rem) !important;
+}
+
+.stageTitle {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  max-width: calc(100% - 1.5rem);
+  /* the sticker overlaps the rink's top edge, but never reaches the sprite: its hair starts
+     40% of the way down the canvas (SX/H in front-door.js), and the canvas is 5/16 as tall as
+     the rink is wide. on a 320px screen that leaves room for only ~20px, so the overlap
+     shrinks there (1.4rem everywhere wider) */
+  margin: 0 0 calc(-1 * min(1.4rem, 0.125 * (100vw - 2 * var(--edge)) - 16px))
+    clamp(0.6rem, 2vw, 1.5rem);
+  padding: 0.5rem 1.1rem 0.7rem;
+  background: var(--cream);
+  border: var(--line);
+  border-radius: var(--wobble);
+  transform: rotate(-1.5deg);
+}
+
+.stageTitle h1 {
+  font-size: clamp(2.6rem, 8vw, 5.5rem);
+}
+
+.stageTitle .lead {
+  margin-top: 0.3rem;
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.8rem);
+}
+
+.dressUp {
+  margin-top: 0.6rem;
+}
+
+/* the way down to the doors, as a thumb-sized chip beside the note rather than a small link */
+.doorJump {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-left: 0.4rem;
+  padding: 0.35rem 0.9rem;
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: var(--wobble);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.doorJump:hover {
+  color: var(--gold);
+}
+
+main > section.backLink {
+  padding-top: 2rem;
+}
+
+.dressUp summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.dressUp[open] summary {
+  text-decoration: none;
+}
+
+/* the doors sit between the hero and the ride: no dashed rule above them */
+main > section.doorway {
+  border-top: 0;
+  padding-top: clamp(2rem, 6vw, 3.5rem);
+  padding-bottom: 0;
+}
+
+.doorway .street.big {
+  margin-top: 0;
+}
+
+#rideHelp {
+  font-family: var(--hand);
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+
 .rink {
   display: block;
   width: 100%;
@@ -320,8 +399,8 @@ main > section + section:not(.ride):not(.nightBand) {
 .rink canvas {
   width: 100%;
   height: auto;
+  image-rendering: crisp-edges; /* the fallback; pixelated, where known, wins */
   image-rendering: pixelated;
-  image-rendering: crisp-edges;
 }
 
 .rideBar {
@@ -504,6 +583,13 @@ div.door {
 .doorKey {
   line-height: 1.3;
   padding-right: 1.2rem;
+}
+
+.doorKey strong {
+  font-family: var(--bubble);
+  font-weight: 400;
+  font-size: 1.3em;
+  color: var(--clay);
 }
 
 .doorGo {
@@ -767,6 +853,23 @@ main > section.nightBand {
   resize: vertical;
 }
 
+/* the browser's grey placeholder is 3.6:1 on cream; this is ~5.3:1 */
+.apply ::placeholder {
+  color: color-mix(in srgb, var(--ink) 70%, var(--cream));
+  opacity: 1;
+}
+
+.sendRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1.2rem;
+}
+
+.sendRow .btn.light {
+  margin-top: 0 !important;
+}
+
 .apply input:focus-visible,
 .apply textarea:focus-visible {
   outline: 3px solid var(--gold);
@@ -842,6 +945,21 @@ main > section.nightBand {
   }
 
   .rideSoft {
+    display: none;
+  }
+
+  .top {
+    gap: 0.5rem;
+  }
+
+  .top nav {
+    gap: 0.7rem;
+  }
+}
+
+/* three links don't fit beside the wordmark on a phone; the page is the boards */
+@media (max-width: 480px) {
+  .top nav .navWide {
     display: none;
   }
 }

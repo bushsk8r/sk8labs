@@ -147,3 +147,7 @@ The plan is `../sk8labs-front-door-plan.md` (it supersedes §3 of `todo list.md`
 ---
 
 all creations: [CC0 vibes](https://creativecommons.org/public-domain/cc0/) — please feel free to add/remix/make fun of these.
+
+## Link previews
+
+Shared `/collections/<id>` links get their own card through `netlify/edge-functions/collection-meta.js` (plan: `../sk8labs-link-previews-plan.md`). It rewrites the `<!--meta-->` block in `collections/view.html`; keep those markers. The `.ride` markup is hand-copied in `index.html`, `collections/view.html` and `404.html`; change all three together. `npx serve` skips edge functions; use `npx netlify dev`.

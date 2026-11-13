@@ -36,10 +36,28 @@ function say(text, retry) {
   }
 }
 
+// a board that isn't public: one line, then the ride from the home page.
+// the ride's markup is already in view.html (hidden); front-door.js reads its
+// elements when it loads, so it is imported only now, and only once.
+let rideLoaded = false;
 function notFound() {
-  document.title = "not found — the crate — sk8 studio";
+  document.title = "not here — the crate — sk8 studio";
   $("boardTitle").textContent = "not here";
-  say("this collection isn't public. it may be private again, or never was.");
+  const desc = $("boardDescription");
+  desc.textContent =
+    "this board isn't out right now.";
+  desc.hidden = false;
+  $("notHereInvite").hidden = false;
+  $("boardMeta").hidden = true;
+  for (const id of ["body", "why", "items", "legend"]) $(id).hidden = true;
+  const skip = $("skip");
+  skip.textContent = "skip to the ride";
+  skip.setAttribute("href", "#rideSection");
+  $("rideSection").hidden = false;
+  if (!rideLoaded) {
+    rideLoaded = true;
+    import("/front-door.js");
+  }
 }
 
 // the media of a visible artifact: text, image, audio or video

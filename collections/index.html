@@ -8,6 +8,23 @@
       name="description"
       content="a slower way into sk8 studio: the things that were gathered, thought about and put in order to make this world."
     />
+    <link rel="canonical" href="https://sk8.studio/collections/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="sk8 studio" />
+    <meta property="og:title" content="the crate — sk8 studio" />
+    <meta
+      property="og:description"
+      content="a slower way into sk8 studio: the things that were gathered, thought about and put in order to make this world."
+    />
+    <meta property="og:url" content="https://sk8.studio/collections/" />
+    <meta property="og:image" content="https://sk8.studio/img/og-bushsk8r.v1.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="bushsk8r, the sk8 studio mascot: a hand-drawn stick figure with a puffy afro, waving from above a skateboard that could also be a baking bowl"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="../img/favicon-32.png" sizes="32x32" />
     <link rel="apple-touch-icon" href="../img/apple-touch-icon.png" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="../fonts/patrick-hand.woff2" />
@@ -25,52 +42,40 @@
         <span>sk8 studio</span>
       </a>
       <nav aria-label="on this page">
-        <a href="#shelf">the crate</a>
+        <a class="navWide" href="#shelf">the boards</a>
         <a href="#apply">become a purist</a>
+        <a href="https://gallery.sk8.studio" target="_blank" rel="noopener noreferrer">purist ↗<span class="visually-hidden"> (the gallery, opens in a new tab)</span></a>
       </nav>
     </header>
 
     <main id="main">
       <section class="hero solo">
         <div class="heroWords">
-          <p class="pixel eyebrow">the purist's door</p>
           <h1>the crate</h1>
           <p class="lead">
-            a slower way in. each board in the crate is a pile of things that
-            were gathered, thought about and put in order, with a note on why.
-          </p>
-          <p>
-            nothing here is finished work. it's the thinking behind the world,
-            laid out so you can follow it. read as many boards as you like.
+            small piles of things we found: links, notes, pieces of work.
+            each board says why they belong together.
           </p>
         </div>
       </section>
 
       <section id="shelf" aria-labelledby="shelfTitle">
         <h2 id="shelfTitle">the boards</h2>
-        <p class="lead">newest first.</p>
+        <p class="lead" id="order" hidden>newest first.</p>
 
         <p id="status" role="status">opening the crate…</p>
         <ol id="boards" class="boards" role="list" hidden></ol>
         <p class="note" id="legend" hidden>
-          each board opens on its own page. some of what's on a board is still
-          being worked on in the studio, and shows only that it exists.
+          some things on a board are still in the studio: you'll see only their
+          name.
         </p>
       </section>
 
       <section id="apply" class="nightBand" aria-labelledby="applyTitle">
         <div class="inner">
-          <p class="pixel eyebrow">the last stop</p>
           <h2 id="applyTitle">become a purist</h2>
-          <p class="lead">
-            a purist makes things here. if these boards made you want to start
-            one of your own, tell us a little about you.
-          </p>
-          <p>
-            your answers are read by the makers already in the studio, not by
-            one person, and one of us writes back by email. a reply can take a
-            while. no wrong answers, and nothing fancy needed.
-          </p>
+          <p class="lead">purists make things here. want in? tell us a little about you.</p>
+          <p>a maker will write back by email. it can take a while.</p>
 
           <form class="apply" id="applyForm" novalidate>
             <div class="field">
@@ -81,19 +86,19 @@
             <div class="field">
               <label for="apEmail">where can we write back?</label>
               <input id="apEmail" name="email" type="email" autocomplete="email" maxlength="254" required aria-describedby="apEmailHint apEmailErr" />
-              <p class="hint" id="apEmailHint">an email address. we only use it to answer you.</p>
+              <p class="hint" id="apEmailHint">only used to reply.</p>
               <p class="fieldError" id="apEmailErr" hidden>that doesn't look like an email address yet.</p>
             </div>
             <div class="field">
               <label for="apMake">what do you make?</label>
               <input id="apMake" name="make" type="text" maxlength="200" required aria-describedby="apMakeHint apMakeErr" />
-              <p class="hint" id="apMakeHint">bread, drawings, sounds, games, patches. anything counts.</p>
+              <p class="hint" id="apMakeHint">bread, drawings, sounds, games. anything counts.</p>
               <p class="fieldError" id="apMakeErr" hidden>one thing you make is enough.</p>
             </div>
             <div class="field">
               <label for="apLink">a link to something you made <span class="optional">(if you have one)</span></label>
               <input id="apLink" name="link" type="url" placeholder="https://" maxlength="2000" aria-describedby="apLinkHint apLinkErr" />
-              <p class="hint" id="apLinkHint">a full address starting with https://</p>
+              <p class="hint" id="apLinkHint">starts with https://</p>
               <p class="fieldError" id="apLinkErr" hidden>that needs to be a full https:// address.</p>
             </div>
 
@@ -103,7 +108,10 @@
               <input id="apTrap" name="company" type="text" tabindex="-1" autocomplete="off" />
             </div>
 
-            <button class="btn light" type="submit" id="applySend">send it in</button>
+            <div class="sendRow">
+              <button class="btn light" type="submit" id="applySend">send it in</button>
+              <p class="hint">no wrong answers, and nothing fancy needed.</p>
+            </div>
             <p class="formStatus" id="applyStatus" role="status" hidden></p>
             <p class="formDone" id="applyDone" role="status" hidden></p>
           </form>
@@ -112,7 +120,7 @@
     </main>
 
     <footer class="foot">
-      <p><strong>sk8 studio</strong> · an open studio where playtime is never over.</p>
+      <p>an open studio where playtime is never over.</p>
     </footer>
   </body>
 </html>

@@ -95,9 +95,9 @@ form.addEventListener("submit", async (event) => {
         first ??= input;
       }
       if (first) first.focus();
-      else say("something about that wasn't quite right, and your answers are still here. have a look and try again.");
+      else say("something wasn't quite right. your answers are still here: check them and try again.");
     } else if (err.status === 429) {
-      say("that's a lot of applications from this connection. your answers are still here: try again a little later.");
+      say("too many tries from here. your answers are still here: try again later.");
     } else {
       say("it didn't send. your answers are still here: try again in a moment.");
     }
@@ -106,10 +106,16 @@ form.addEventListener("submit", async (event) => {
 
   // sent: say what happens next, and don't leave the fields to be re-sent.
   const name = form.elements.name.value.trim();
-  for (const el of form.querySelectorAll(".field, button, .trap")) el.hidden = true;
+  for (const el of form.querySelectorAll(".field, .sendRow, .trap")) el.hidden = true;
   setSending(false);
   say("");
-  done.textContent = `thanks, ${name}. your note is in. someone from the studio will read it and write back by email. we can't say how soon.`;
+  const ride = document.createElement("a");
+  ride.href = "../";
+  ride.textContent = "go for a ride while you wait →";
+  done.replaceChildren(
+    `thanks, ${name}. it's in. a maker will write back by email. `,
+    ride,
+  );
   done.hidden = false;
   done.setAttribute("tabindex", "-1");
   done.focus();
