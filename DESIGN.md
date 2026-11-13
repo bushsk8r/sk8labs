@@ -122,7 +122,7 @@ components:
 
 # Design System: sk8 studio front door
 
-Scope: the front door only (the home page with its ride, the crate under `collections/`, the application form, the 404). The older pages (`archive/`, `gallery/`, `terrasse/`, `play/`, `forest/`, and the root `index.css`, `script.js`, `helper.js`) keep a legacy look and are out of scope. The studio and gallery design system in the repository root does not cover this site; the brand guide wins over the repo's old look.
+Scope: the front door only (the home page with its ride, the crate under `collections/`, the application form, the play page under `play/`, the 404). The older pages (`archive/`, `gallery/`, `terrasse/`, `forest/`, and the root `index.css`, `script.js`, `helper.js`) keep a legacy look and are out of scope. The studio and gallery design system in the repository root does not cover this site; the brand guide wins over the repo's old look.
 
 ## Overview
 
@@ -246,7 +246,7 @@ Hand-cut and tactile: thick walnut-ink lines, wobbly cut-paper corners, stickers
 - **Honeypot:** a field off-screen, out of tab order and hidden from assistive tech.
 
 ### Navigation
-Sticky top bar: cream, 3px ink underline, logo (30x40) and "sk8 studio" in bubble type in clay on the left, links on the right in 1.05rem Patrick Hand. No nav on the home page; the crate has "the boards", "become a purist" and an external "purist" link. Hover is a 2px wavy underline. A skip link slides in from the top.
+Sticky top bar: cream, 3px ink underline, logo (30x40) and "sk8 studio" in bubble type in clay on the left, links on the right in 1.05rem Patrick Hand. The home page has one link, "play"; the crate has "the boards", "become a purist" and an external "purist" link. Hover is a 2px wavy underline. A skip link slides in from the top.
 
 ### The Ride (signature component)
 A tiny skate game on a 128 x 40 canvas, scaled to the column width with `image-rendering: pixelated` (crisp-edges as the fallback) inside a button with a 3px ink line and the rink wobble. It is a copy of the same markup on the home page, the crate's non-public board and the 404; change all three together.
