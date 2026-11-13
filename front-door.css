@@ -1,0 +1,802 @@
+@font-face {
+  font-family: "Patrick Hand";
+  src: url("fonts/patrick-hand.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rubik Bubbles";
+  src: url("fonts/rubik-bubbles.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Silkscreen";
+  src: url("fonts/silkscreen.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* sk8 studio — front door. tokens come straight from the brand guide. */
+
+:root {
+  /* colours: every one is a natural dye */
+  --cream: #ede4d0; /* hemp cream — backgrounds */
+  --ink: #2a221d; /* walnut ink — lines, text (never pure black) */
+  --clay: #a4472f; /* madder clay — headlines */
+  --ember: #c46a2c; /* onion ember — shapes only, not small text */
+  --gold: #d8a93f; /* dandelion gold — patches, level-up moments */
+  --blush: #dda7a0; /* avocado blush — soft fills */
+  --moss: #6f7843; /* yarrow moss — shapes only, not small text */
+  --dusk: #2f4a6b; /* indigo dusk — night, baked chronicles */
+
+  /* lettering: placeholders until the handwriting font exists */
+  --hand: "Patrick Hand", "Comic Sans MS", cursive;
+  --bubble: "Rubik Bubbles", "Patrick Hand", cursive;
+  --pixel: "Silkscreen", ui-monospace, monospace;
+
+  --line: 3px solid var(--ink);
+  --wobble: 255px 18px 225px 18px / 18px 225px 18px 255px;
+  --wobble-2: 18px 225px 18px 255px / 255px 18px 225px 18px;
+  --edge: clamp(16px, 5vw, 48px);
+  --wide: 1080px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--hand);
+  font-size: clamp(1.2rem, 1.05rem + 0.5vw, 1.4rem);
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+figure,
+blockquote {
+  margin: 0;
+}
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+  padding: 0;
+}
+
+h1,
+h2 {
+  font-family: var(--bubble);
+  font-weight: 400;
+  color: var(--clay);
+  line-height: 1;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(3.4rem, 13vw, 8rem);
+}
+
+h2 {
+  font-size: clamp(2.4rem, 7vw, 4rem);
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.5em;
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 0.4rem;
+}
+
+p,
+li {
+  text-wrap: pretty;
+  max-width: 62ch;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--clay);
+}
+
+:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+img,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+.pixel {
+  font-family: var(--pixel);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.lead {
+  font-size: 1.25em;
+  line-height: 1.35;
+}
+
+.soft {
+  color: var(--clay);
+}
+
+.note {
+  font-size: 0.9em;
+  margin-top: 1rem;
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.skip {
+  position: absolute;
+  left: var(--edge);
+  top: -4rem;
+  background: var(--ink);
+  color: var(--cream);
+  padding: 0.6rem 1rem;
+  z-index: 10;
+}
+
+.skip:focus {
+  top: 0.5rem;
+}
+
+.skip:hover,
+.skip:focus {
+  color: var(--cream);
+}
+
+/* ---------- top bar ---------- */
+
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem var(--edge);
+  background: var(--cream);
+  border-bottom: var(--line);
+}
+
+.home {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--bubble);
+  font-size: 1.5rem;
+  color: var(--clay);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.home img {
+  width: 30px;
+  height: 40px;
+}
+
+.top nav {
+  display: flex;
+  gap: 1.1rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  font-size: 1.05rem;
+}
+
+.top nav a {
+  text-decoration: none;
+  padding-block: 0.4rem;
+}
+
+.top nav a:hover {
+  text-decoration: underline wavy 2px;
+}
+
+/* ---------- sections ---------- */
+
+main > section {
+  max-width: var(--wide);
+  margin-inline: auto;
+  padding: clamp(2.5rem, 8vw, 5rem) var(--edge);
+}
+
+main > section + section:not(.ride) {
+  border-top: 3px dashed var(--ink);
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1.5rem !important;
+}
+
+.heroWords > * + * {
+  margin-top: 1rem;
+}
+
+.heroLogo {
+  width: min(100%, 340px);
+  height: auto;
+  justify-self: center;
+  transform: rotate(3deg);
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 1.4rem !important;
+  padding: 0.5rem 1.4rem 0.6rem;
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 1.2em;
+  text-decoration: none;
+  border-radius: var(--wobble);
+  transition: transform 0.15s ease-out;
+}
+
+.btn:hover {
+  color: var(--gold);
+  transform: rotate(-2deg);
+}
+
+/* ---------- the ride ---------- */
+
+.ride {
+  padding-top: 0 !important;
+}
+
+.rink {
+  display: block;
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: var(--line);
+  border-radius: 14px 22px 12px 26px / 24px 12px 22px 14px;
+  overflow: hidden;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.rink canvas {
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.rideBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem 1.5rem;
+  margin-top: 0.8rem;
+}
+
+.rideBar p {
+  max-width: none;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.chips legend {
+  float: left;
+  margin-right: 0.5rem;
+  padding: 0;
+}
+
+.chips label {
+  cursor: pointer;
+}
+
+.chips input {
+  position: absolute;
+  opacity: 0;
+}
+
+.chips span {
+  display: inline-block;
+  min-height: 44px;
+  padding: 0.35rem 0.9rem;
+  border: 2px solid var(--ink);
+  border-radius: var(--wobble);
+}
+
+.chips input:checked + span {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.chips input:focus-visible + span {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.textBtn {
+  background: none;
+  border: 0;
+  padding: 0.8rem 0;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  cursor: pointer;
+}
+
+/* ---------- doors ---------- */
+
+.street {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 1.5rem 1.25rem;
+  align-items: stretch;
+  margin-top: 1.5rem;
+  /* the pavement */
+  padding-bottom: 0;
+  border-bottom: var(--line);
+}
+
+.street.big {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 3rem;
+}
+
+.street li {
+  display: flex;
+  max-width: none;
+}
+
+.door {
+  --accent: var(--clay);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 100%;
+  min-height: 17rem;
+  padding: 6.2rem 1.1rem 1.2rem;
+  border: var(--line);
+  border-bottom: 0;
+  /* an arched doorway */
+  border-radius: 48% 52% 0 0 / 5.5rem 5.2rem 0 0;
+  background: var(--cream);
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform 0.18s ease-out;
+  transform-origin: bottom left;
+}
+
+/* the window over the door */
+.door::before {
+  content: "";
+  position: absolute;
+  top: 0.9rem;
+  left: 50%;
+  width: 58%;
+  height: 3.6rem;
+  translate: -50% 0;
+  background: var(--accent);
+  border: var(--line);
+  border-radius: 50% 50% 6px 6px / 100% 100% 6px 6px;
+}
+
+/* the knob */
+a.door::after {
+  content: "";
+  position: absolute;
+  right: 0.9rem;
+  top: 62%;
+  width: 0.8rem;
+  height: 0.8rem;
+  background: var(--ink);
+  border-radius: 50%;
+}
+
+a.door:hover {
+  color: var(--ink);
+  transform: skewY(-2deg);
+}
+
+div.door {
+  border-style: dashed;
+}
+
+.big .door {
+  min-height: 21rem;
+  padding-top: 7.5rem;
+}
+
+.big .door::before {
+  height: 4.6rem;
+}
+
+.door.clay { --accent: var(--clay); }
+.door.indigo { --accent: var(--dusk); }
+.door.moss { --accent: var(--moss); }
+.door.gold { --accent: var(--gold); }
+.door.ember { --accent: var(--ember); }
+.door.ink { --accent: var(--ink); }
+.door.blush { --accent: var(--blush); }
+
+.doorName {
+  font-size: 1.6em;
+  line-height: 1.05;
+}
+
+.big .doorName {
+  font-family: var(--bubble);
+  font-size: clamp(2rem, 6vw, 3rem);
+  color: var(--clay);
+}
+
+.doorSay {
+  line-height: 1.3;
+  padding-right: 1.2rem;
+}
+
+.doorKey {
+  line-height: 1.3;
+  padding-right: 1.2rem;
+}
+
+.doorGo {
+  margin-top: auto;
+  padding-top: 0.8rem;
+  text-decoration: underline wavy 2px;
+  text-underline-offset: 0.25em;
+}
+
+.tag {
+  align-self: flex-start;
+  padding: 0.3rem 0.75rem 0.35rem;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.tag.open {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.tag.building {
+  background: var(--gold);
+}
+
+#doors h3 {
+  margin-top: 1rem;
+}
+
+/* ---------- footer ---------- */
+
+.foot {
+  padding: 2.5rem var(--edge) 3rem;
+  border-top: var(--line);
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.foot > * {
+  max-width: var(--wide);
+  margin-inline: auto;
+}
+
+.foot a:hover {
+  color: var(--gold);
+}
+
+.foot :focus-visible {
+  outline-color: var(--cream);
+}
+
+.foot strong {
+  font-family: var(--bubble);
+  font-weight: 400;
+  font-size: 1.3em;
+  color: var(--gold);
+}
+
+/* ---------- collections page ---------- */
+
+.hero.solo {
+  grid-template-columns: 1fr;
+}
+
+.hero.solo h1 {
+  font-size: clamp(2.8rem, 10vw, 6rem);
+}
+
+.board {
+  margin-top: 1.5rem;
+  border: var(--line);
+  border-radius: 14px 22px 12px 26px / 24px 12px 22px 14px;
+}
+
+.board summary {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.2rem 1rem;
+  padding: 1.1rem 1.3rem 1.2rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.board summary::-webkit-details-marker {
+  display: none;
+}
+
+.boardNo {
+  grid-row: span 3;
+  display: grid;
+  place-items: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  background: var(--gold);
+  border: var(--line);
+  border-radius: 50%;
+  font-size: 1.1rem;
+}
+
+.boardTitle {
+  font-size: 1.6em;
+  line-height: 1.3;
+  color: var(--clay);
+}
+
+.board summary:hover .boardTitle {
+  text-decoration: underline wavy 2px;
+  text-underline-offset: 0.2em;
+}
+
+.boardMeta::after {
+  content: " · open ↓";
+}
+
+.board[open] .boardMeta::after {
+  content: " · close ↑";
+}
+
+.why {
+  margin: 0.5rem 1.3rem 0;
+  padding: 1rem 1.2rem 1.2rem;
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: var(--wobble);
+}
+
+.why h3 {
+  font-size: 1.15em;
+  color: var(--gold);
+}
+
+.items {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 1.5rem 1.3rem 1.6rem !important;
+  counter-reset: item;
+}
+
+.items li {
+  counter-increment: item;
+  position: relative;
+  max-width: none;
+  padding: 0.9rem 1.1rem 1rem 3.4rem;
+  border: 2px solid var(--ink);
+  border-radius: var(--wobble-2);
+}
+
+.items li::before {
+  content: counter(item);
+  position: absolute;
+  left: 1.1rem;
+  top: 0.9rem;
+  font-family: var(--pixel);
+  font-size: 1rem;
+  color: var(--clay);
+}
+
+.items li.unseen {
+  border-style: dashed;
+}
+
+.kind {
+  display: block;
+}
+
+.itemTitle {
+  display: inline-block;
+  font-size: 1.3em;
+  line-height: 1.3;
+}
+
+.gloss {
+  color: var(--clay);
+}
+
+.noteText {
+  margin-top: 0.6rem;
+  padding: 0.7rem 1rem 0.8rem;
+  background: var(--blush);
+  border-radius: var(--wobble);
+}
+
+/* the application form sits on the night band */
+
+.apply {
+  display: grid;
+  gap: 1.3rem;
+  max-width: 34rem;
+  margin-top: 2rem !important;
+}
+
+.field {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.field label {
+  font-size: 1.15em;
+  line-height: 1.3;
+}
+
+.apply input,
+.apply textarea {
+  width: 100%;
+  min-height: 52px;
+  padding: 0.7rem 1rem;
+  font: inherit;
+  color: var(--ink);
+  background: var(--cream);
+  border: 3px solid var(--cream);
+  border-radius: 10px 14px 9px 15px / 14px 9px 15px 10px;
+}
+
+.apply textarea {
+  resize: vertical;
+}
+
+.apply input:focus-visible,
+.apply textarea:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.apply [aria-invalid="true"] {
+  border-color: var(--blush);
+  border-style: dashed;
+}
+
+.hint,
+.optional {
+  font-size: 0.85em;
+}
+
+.fieldError {
+  font-size: 0.9em;
+  color: var(--cream);
+  text-decoration: underline wavy 2px var(--blush);
+  text-underline-offset: 0.25em;
+}
+
+.fieldError::before {
+  content: "↑ ";
+}
+
+.btn.light {
+  justify-self: start;
+  margin-top: 0.4rem !important;
+  background: var(--gold);
+  color: var(--ink);
+  border: 0;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn.light:hover {
+  color: var(--ink);
+  background: var(--cream);
+}
+
+.formDone {
+  padding: 0.8rem 1rem;
+  border: 2px dashed var(--gold);
+  border-radius: var(--wobble);
+}
+
+/* ---------- small screens ---------- */
+
+@media (max-width: 700px) {
+  .home {
+    font-size: 1.2rem;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .heroLogo {
+    width: 200px;
+    grid-row: 1;
+    justify-self: start;
+    margin-bottom: -1rem;
+  }
+
+  .street.big {
+    grid-template-columns: 1fr;
+  }
+
+  .big .door {
+    min-height: 17rem;
+  }
+
+  .rideSoft {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .btn,
+  .door {
+    transition: none;
+  }
+}
