@@ -125,8 +125,8 @@ function item(entry) {
     titleNode = href
       ? externalLink(href, src.title, "itemTitle")
       : el("span", "itemTitle", src.title);
-    if (entry.visible && src.content) body = markdownBody(src.contentHtml, src.content, "noteText");
-    else if (entry.visible && src.artifact) body = [artifactBody(src.artifact)].filter(Boolean);
+    // an external source shows title, link and medium only; its text never goes public
+    if (entry.visible && src.artifact) body = [artifactBody(src.artifact)].filter(Boolean);
   }
 
   // an external source is always "visible" by the API's rule; only things
