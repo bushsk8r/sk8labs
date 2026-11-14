@@ -1,3 +1,13 @@
 {
-  "rewrites": [{ "source": "/collections/:id", "destination": "/collections/view.html" }]
+  "rewrites": [{ "source": "/collections/:id", "destination": "/collections/view.html" }],
+  "headers": [
+    {
+      "source": "**",
+      "headers": [
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://arweave.net https://*.arweave.net; media-src 'self' https://arweave.net https://*.arweave.net; font-src 'self'; connect-src 'self' http://localhost:3001 https://api.sk8.studio https://msaga.cloud; frame-src https://open.spotify.com; object-src 'none'; base-uri 'self'; form-action 'self'" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
 }
