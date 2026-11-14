@@ -1,9 +1,10 @@
 // one board: the arrangement (why these, in this order), then each item.
-// every string from the API goes in through textContent; urls only if https.
+// every string from the API goes in through textContent, except the html the
+// API renders from markdown (markdownBody); urls only if https.
 import {
   getJSON,
   el,
-  paragraphs,
+  markdownBody,
   httpsUrl,
   externalLink,
   curatorName,
@@ -66,7 +67,7 @@ function artifactBody(artifact) {
   const content = artifact?.content ?? {};
   switch (artifact?.artifactType) {
     case "text":
-      box.append(...paragraphs(content.text, "noteText"));
+      box.append(...markdownBody(content.html, content.text, "noteText"));
       break;
     case "image": {
       const src = httpsUrl(content.url);
@@ -111,7 +112,7 @@ function item(entry) {
     const note = entry.note;
     kindParts.push("note", note.type);
     titleNode = el("span", "itemTitle", note.title);
-    if (entry.visible && note.content) body = paragraphs(note.content.text, "noteText");
+    if (entry.visible && note.content) body = markdownBody(note.content.html, note.content.text, "noteText");
   } else if (entry.kind === "artifact") {
     const art = entry.artifact;
     kindParts.push("work", art.artifactType ?? "work");
@@ -124,7 +125,7 @@ function item(entry) {
     titleNode = href
       ? externalLink(href, src.title, "itemTitle")
       : el("span", "itemTitle", src.title);
-    if (entry.visible && src.content) body = paragraphs(src.content, "noteText");
+    if (entry.visible && src.content) body = markdownBody(src.contentHtml, src.content, "noteText");
     else if (entry.visible && src.artifact) body = [artifactBody(src.artifact)].filter(Boolean);
   }
 
@@ -150,11 +151,11 @@ function why(arrangement) {
     return;
   }
   box.append(el("h3", null, arrangement.title || "why these, in this order"));
-  if (arrangement.text) box.append(...paragraphs(arrangement.text));
+  if (arrangement.text) box.append(...markdownBody(arrangement.textHtml, arrangement.text, "arrangementText"));
   for (const key of ACTS) {
     const text = arrangement.acts?.[key];
     if (!text) continue;
-    box.append(el("h4", "pixel actName", key), ...paragraphs(text));
+    box.append(el("h4", "pixel actName", key), ...markdownBody(arrangement.actsHtml?.[key], text, "arrangementText"));
   }
   box.hidden = false;
 }
