@@ -48,12 +48,25 @@ export async function postJSON(path, data) {
 }
 
 // small DOM helpers: text always goes through textContent, never innerHTML,
-// because every string from the API is somebody else's input.
+// because every string from the API is somebody else's input — the one
+// exception is markdownBody, the API's own rendering.
 export function el(tag, className, text) {
   const node = document.createElement(tag);
   if (className) node.className = className;
   if (text !== undefined && text !== null) node.textContent = text;
   return node;
+}
+
+// markdown the API has already rendered (html: false there, so raw HTML in the
+// source arrives escaped) is the one thing set as innerHTML; with no html, as
+// from an older API, the plain text falls back to paragraphs.
+export function markdownBody(html, text, className) {
+  if (typeof html === "string" && html) {
+    const div = el("div", `${className} markdown`);
+    div.innerHTML = html;
+    return [div];
+  }
+  return paragraphs(text, className);
 }
 
 // paragraphs from plain text: blank lines split, single newlines stay.
