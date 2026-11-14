@@ -2,13 +2,13 @@
 
 an open studio where playtime is never over — [sk8.studio](https://sk8.studio)
 
-The public front door of **sk8 studio**, and the fourth repo of the atelier project. Anyone curious about the studio lands here first: a short home page with two doors, *tourist* (the crate: collections, then an application to join) and *purist* (the gallery, keyword `welcome`), and a top-bar link to **play** (two games). It still holds the maker's older archive and experiments, unlinked from the home page.
+The cover of **sk8 studio**, and the fourth repo of the atelier project. Anyone curious about the studio lands here first: a short home page with two bookmarks, *tourist* (the crate: collections, then an application to join) and *purist* (the gallery, keyword `welcome`), and a top-bar link to **play** (two games). It still holds the maker's older archive and experiments, unlinked from the home page.
 
 > **State.** The cut-down home page, the crate (`collections/`) and the application form are built on branch `development` but **uncommitted and not deployed**. Plan: `../sk8labs-front-door-plan.md` (deploy order §6).
 
 | Host | Repo | What it is |
 |---|---|---|
-| `sk8.studio` | **`sk8labs`** (this repo) | Public base site — the front door, archive, experiments |
+| `sk8.studio` | **`sk8labs`** (this repo) | Public base site — the cover, archive, experiments |
 | `gallery.sk8.studio` | `gallery_client` | Tourist UI — published zines, newsletters, blogs, behind a keyword |
 | `atelier.sk8.studio` | `studio_client` | Purist UI — the protected studio |
 | `api.sk8.studio` | `atelier` (`atelier_archive`) | JSON API — the only thing touching the database |
@@ -43,8 +43,8 @@ Any static server works (`npx` itself wants Node; `.nvmrc` pins 24.22.1, as in t
 
 ```
 sk8labs/
-├── index.html                         # home: the front door (hand-written HTML)
-├── front-door.css · front-door.js     # its styles (brand-guide palette, @font-face) and the bushsk8r ride
+├── index.html                         # home: the cover (hand-written HTML)
+├── cover.css · cover.js     # its styles (brand-guide palette, @font-face) and the bushsk8r ride
 ├── fonts/                             # self-hosted woff2 (Patrick Hand, Rubik Bubbles, Silkscreen) + OFL-*.txt
 ├── img/                               # bushsk8r-logo.png, favicon-32.png, apple-touch-icon.png
 ├── api.js                             # fetch wrapper for the public API (base URL by hostname), postJSON
@@ -63,7 +63,7 @@ sk8labs/
 │   ├── footer/                        # rock-paper-scissors-fire-water (class-based); also a standalone page
 │   ├── jukebox.js                     # track selector + Arweave media player
 │   └── helper.js · script.js          # forked copies of the root files
-├── play/                              # the play page: index.html + play.css, doors.js (the #hash picks a game),
+├── play/                              # the play page: index.html + play.css, bookmarks.js (the #hash picks a game),
 │                                      #   forest.js (bushsk8r, the forest), elements.js (rps with a score)
 ├── archive/                           # the crate: works by year
 │   ├── crate.js                       # 2013–2025 data (title, craft, description, source, artifacts, type)
@@ -84,12 +84,12 @@ sk8labs/
 
 | Path | What's there |
 |---|---|
-| `/` | The front door: a top bar with the two doors — *tourist* → `collections/`, *purist* → `https://gallery.sk8.studio` (new tab; `.navDoor`/`.navKey` print "the keyword at the gate is **welcome**", `aria-describedby="purist-key"`) — then the **hero** (logo, *sk8 studio*) and **the ride** (a canvas: click to kick bushsk8r along; traces kept in `localStorage` `sk8-front-door-traces`, *wash the path clean* clears them). The doors are the only way to the gallery and the crate; nothing links to the atelier or the API. (Plan D14: the keyword `welcome` is printed at the purist door.) |
+| `/` | The cover: two bookmarks — *tourist* → `collections/`, *purist* → `https://gallery.sk8.studio` (new tab; `.bookmarkKey` prints "the keyword is **welcome**", `aria-describedby="purist-key"`) — under the **hero** (logo, *sk8 studio*) and **the ride** (a canvas: click to kick bushsk8r along; traces kept in `localStorage` `sk8-cover-traces`, *wash the path clean* clears them). The bookmarks are the only way to the gallery and the crate; nothing links to the atelier or the API. (Plan D14: the keyword `welcome` is printed at the purist bookmark.) |
 | `/collections/` · `/collections/<id>` | **The crate.** Every public collection, newest first (`GET /public/collections`), then one board per page (`/public/collections/:id`): arrangement above the items; notes, artifacts and external sources as the API shows them, anything withheld a dashed placeholder; a private or unknown id reads *this collection isn't public*. API strings only through `textContent`. The list page ends in **become a purist** — name, email, what you make, optional https link, hidden honeypot `company` — posting to `POST /public/applications`; a failure keeps the answers and says why |
 | `/terrasse/` | "your terrasse — where to from here?": **shelf** ("a space to store your zines" → prints *soon come*) and **play** ("a sandbox" → prints *click the boxes*, pointing at the footer game). `shelf.js` and `play.js` are empty files |
 | `/gallery/` | "welcome to the gallery — aka the artifact archive, aka the prototype graveyard", marked `[this is a prototype]`. Nav: **about** (programmer / baking enthusiast / recorder of sounds, linking GitHub, the bakery and a `#` jukebox), **past works** (idea factory 2017, human in the loop 2020, echo chamber 2021, playin with poly 2021 — each opens its Arweave media), **currently** (experiments: minesweeper, hypermedia zine · recordings jukebox · a Spotify playlist embed) |
 | `/gallery/footer/` | The rps game as its own page, with a marquee header |
-| `/play/` | **Two games behind two doors** (front-door look; `doors.js` shows one section per `#forest` / `#elements`, and with scripts off both are simply on the page). **bushsk8r**: the home ride grown toward `../bushsk8r game design document.md`, see below. **rock paper scissors**: five elements, one player against the weighted agent or two taking turns, a score per mode in `localStorage` `sk8-play-elements-score` |
+| `/play/` | **Two games behind two bookmarks** (cover look; `bookmarks.js` shows one section per `#forest` / `#elements`, and with scripts off both are simply on the page). **bushsk8r**: the home ride grown toward `../bushsk8r game design document.md`, see below. **rock paper scissors**: five elements, one player against the weighted agent or two taking turns, a score per mode in `localStorage` `sk8-play-elements-score` |
 | `/archive/` | Year selector over `crate.js` (2013–2025); a year lists its works (craft), and a chosen work plays its Arweave media or reads "private collection" when there's no `source` |
 | `/archive/loop/` · `/archive/recording/` | The "human in the loop" tracks — a vanilla player and a React build of the same material ([audio_player source](https://github.com/justinmsaga/audio_player)) |
 | `/forest/` | Seven may field/wind recordings with a track selector |
@@ -105,7 +105,7 @@ These are the elements the atelier API's agents are named after: paper writes, r
 
 ### bushsk8r, the forest (`play/forest.js`)
 
-The home ride plus a few things from the updated game design document. **Its own save** (`localStorage` `sk8-play-forest`), apart from the front door's; `front-door.js` is untouched, and the sprite frames + `drawSprite` are a **hand copy** of it (change both).
+The home ride plus a few things from the updated game design document. **Its own save** (`localStorage` `sk8-play-forest`), apart from the cover's; `cover.js` is untouched, and the sprite frames + `drawSprite` are a **hand copy** of it (change both).
 
 - **Endless.** 900px ridden is a day, and night runs straight into the next sunrise. Nothing ends: no board wear and no lives (the document's life loop is **left out on purpose**).
 - **Two marks.** Dandelions (riding marks) lose their head on day two and go on day three. Bush (a bit of the afro fallen in flow, from the second day on) stays; at 30 the oldest makes room.
@@ -137,7 +137,7 @@ The home ride plus a few things from the updated game design document. **Its own
 
 ## Direction
 
-The plan is `../sk8labs-front-door-plan.md` (it supersedes §3 of `todo list.md`): front door -> *tourist* -> the crate -> **become a purist**. Built; what remains is deploy (plan §6): commit, production `CORS_ORIGIN` listing `https://sk8.studio`, Netlify picking up `_redirects`, production `GALLERY_KEYWORD`, and real public collections made in the studio. Purists read applications in the studio at `/studio/applications`. Old pages stay (O4).
+The plan is `../sk8labs-front-door-plan.md` (it supersedes §3 of `todo list.md`): cover -> *tourist* -> the crate -> **become a purist**. Built; what remains is deploy (plan §6): commit, production `CORS_ORIGIN` listing `https://sk8.studio`, Netlify picking up `_redirects`, production `GALLERY_KEYWORD`, and real public collections made in the studio. Purists read applications in the studio at `/studio/applications`. Old pages stay (O4).
 
 ---
 
@@ -146,7 +146,7 @@ The plan is `../sk8labs-front-door-plan.md` (it supersedes §3 of `todo list.md`
 | Where | Problem | Fix direction |
 |---|---|---|
 | the crate | Empty until a purist makes a collection public; not yet seen on a real phone, with a visible image/audio/video artifact, or deployed | Content in the studio; plan §6 |
-| home → purist | The door prints the keyword `welcome` (D14), true only if production `GALLERY_KEYWORD` is `welcome` | Set it in production; change copy and env together |
+| home → purist | The bookmark prints the keyword `welcome` (D14), true only if production `GALLERY_KEYWORD` is `welcome` | Set it in production; change copy and env together |
 | `netlify/functions/play.js` | `?element=fire`, `water`, or a missing/unknown element → `result[player]` is `undefined` → the handler throws → 500 | Validate `element` (400), or wire up mode 1 |
 | `forest/index.html` | `<audio src="may_field_1.wav">` names a file that isn't in the repo (404 on load); `player.js` builds `http://arweave.net/…` URLs, mixed content on an https page | Start with an empty `src`; use `https://` |
 | `terrasse/` | Shelf is "soon come"; play prints a hint instead of linking `/play/`; `shelf.js`/`play.js` are empty; nothing links here any more | Decide under O4 |
@@ -154,7 +154,7 @@ The plan is `../sk8labs-front-door-plan.md` (it supersedes §3 of `todo list.md`
 | `gallery/present/` | Recordings with an empty `source` load `https://arweave.net/`; the page says "*updated Nov 5" | Hide sourceless tracks |
 | `gallery/about/` | The jukebox link is `#` | Link `/forest/` |
 | `gallery/footer/game.js` | Player two is constructed with the name `"p1"` | Cosmetic |
-| helpers | Two copies of `helper.js` and of `script.js`, three rps implementations, two copies of the bushsk8r sprite (`front-door.js`, `play/forest.js`) | Consolidate once the site's shape settles |
+| helpers | Two copies of `helper.js` and of `script.js`, three rps implementations, two copies of the bushsk8r sprite (`cover.js`, `play/forest.js`) | Consolidate once the site's shape settles |
 | `/play/` | Not seen on a real phone | Play it |
 
 ---

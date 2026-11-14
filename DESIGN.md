@@ -1,6 +1,6 @@
 ---
-name: sk8 studio front door
-description: a maker's notebook door into sk8 studio, drawn in natural dyes with a pixel skate ride on the front page.
+name: sk8 studio cover
+description: a maker's sketchbook cover for sk8 studio, drawn in natural dyes with a pixel skate ride on the front page.
 colors:
   hemp-cream: "#ede4d0"
   walnut-ink: "#2a221d"
@@ -76,10 +76,10 @@ components:
     textColor: "{colors.madder-clay}"
     rounded: "{rounded.wobble}"
     padding: "0.5rem 1.1rem 0.7rem"
-  door:
+  bookmark:
     backgroundColor: "{colors.hemp-cream}"
     textColor: "{colors.walnut-ink}"
-    padding: "6.2rem 1.1rem 1.2rem"
+    padding: "4.3rem 1.1rem 3.8rem"
   chip-selected:
     backgroundColor: "{colors.walnut-ink}"
     textColor: "{colors.hemp-cream}"
@@ -120,17 +120,17 @@ components:
     padding: "2.5rem 48px 3rem"
 ---
 
-# Design System: sk8 studio front door
+# Design System: sk8 studio cover
 
-Scope: the front door only (the home page with its ride, the crate under `collections/`, the application form, the play page under `play/`, the 404). The older pages (`archive/`, `gallery/`, `terrasse/`, `forest/`, and the root `index.css`, `script.js`, `helper.js`) keep a legacy look and are out of scope. The studio and gallery design system in the repository root does not cover this site; the brand guide wins over the repo's old look.
+Scope: the cover only (the home page with its ride, the crate under `collections/`, the application form, the play page under `play/`, the 404). The older pages (`archive/`, `gallery/`, `terrasse/`, `forest/`, and the root `index.css`, `script.js`, `helper.js`) keep a legacy look and are out of scope. The studio and gallery design system in the repository root does not cover this site; the brand guide wins over the repo's old look.
 
 ## Overview
 
 **Creative North Star: "The Dyer's Sketchbook"**
 
-A maker's notebook, not an app. Every colour is a natural dye, every frame is drawn with a thick walnut-ink line, and nothing is quite straight: corners are wobbly cut paper, the title is a sticker stuck on askew, and the doors lean when you touch them. The front page is a toy first. A 16-pixel skater called bushsk8r rides a small canvas, and the page's job is to let a visitor play before it asks anything of them.
+A maker's notebook, not an app. Every colour is a natural dye, every frame is drawn with a thick walnut-ink line, and nothing is quite straight: corners are wobbly cut paper, the title is a sticker stuck on askew, and the bookmarks lean when you touch them. The front page is a toy first. A 16-pixel skater called bushsk8r rides a small canvas, and the page's job is to let a visitor play before it asks anything of them.
 
-The system is flat and warm. Depth comes from line weight, overlap and dashed versus solid strokes, never from shadow. Type is hand lettering: a bubbly display face for titles, a handwritten body, and a pixel face for furniture and labels. The fonts are self-hosted placeholders until the handwriting font exists, so the pairing is provisional while the roles are not. Copy is lowercase and plain, in the voice of a note left on a studio door.
+The system is flat and warm. Depth comes from line weight, overlap and dashed versus solid strokes, never from shadow. Type is hand lettering: a bubbly display face for titles, a handwritten body, and a pixel face for furniture and labels. The fonts are self-hosted placeholders until the handwriting font exists, so the pairing is provisional while the roles are not. Copy is lowercase and plain, in the voice of a note tucked into a sketchbook.
 
 The one place the notebook goes dark is the night band, where the application form sits on indigo dusk. Everything else lives on hemp cream.
 
@@ -147,19 +147,19 @@ The one place the notebook goes dark is the night band, where the application fo
 A palette of eight natural dyes on warm hemp paper, with walnut ink for every line and word.
 
 ### Primary
-- **Madder Clay** (#a4472f): headlines, the wordmark, links on hover, board titles, glosses, door and key accents. The one voice that speaks in colour on cream.
+- **Madder Clay** (#a4472f): headlines, the wordmark, links on hover, board titles, glosses, bookmark and key accents. The one voice that speaks in colour on cream.
 
 ### Secondary
 - **Dandelion Gold** (#d8a93f): patches and level-up moments: the board number disc, the "building" tag, the light button, the ride's flowing trail and dandelions, and heading accents on dark grounds (night band, why-note, footer).
-- **Indigo Dusk** (#2f4a6b): night. The application band and the ride's night sky; also the indigo door's window.
+- **Indigo Dusk** (#2f4a6b): night. The application band and the ride's night sky; also the indigo bookmark's band.
 
 ### Tertiary
-- **Onion Ember** (#c46a2c): shapes only: wheels, the dusk sky, one door window. Never small text.
-- **Yarrow Moss** (#6f7843): shapes only: trees, grass, shoes, dandelion stems, one door window. Never small text.
+- **Onion Ember** (#c46a2c): shapes only: wheels, the dusk sky, one bookmark band. Never small text.
+- **Yarrow Moss** (#6f7843): shapes only: trees, grass, shoes, dandelion stems, one bookmark band. Never small text.
 - **Avocado Blush** (#dda7a0): soft fills: the sunrise sky, the note text patch, invalid-field and status dashes on night.
 
 ### Neutral
-- **Hemp Cream** (#ede4d0): the page, stickers, doors, fields, midday sky, text on ink and dusk.
+- **Hemp Cream** (#ede4d0): the page, stickers, bookmarks, fields, midday sky, text on ink and dusk.
 - **Walnut Ink** (#2a221d): all body text, every line, the footer, the primary button, the why-note, the ride's line colour by day.
 
 The dyes are listed in tonal ramps in the sidecar; the frontmatter is normative for values.
@@ -184,9 +184,9 @@ The dyes are listed in tonal ramps in the sidecar; the frontmatter is normative 
 ### Hierarchy
 - **Display** (400, clamp(3.4rem, 13vw, 8rem), 1): the page h1 in madder clay; inside the title sticker it is clamp(2.6rem, 8vw, 5.5rem), and on the crate pages clamp(2.8rem, 10vw, 6rem).
 - **Headline** (400, clamp(2.4rem, 7vw, 4rem), 1): section h2 in madder clay, gold on the night band. Balanced wrapping.
-- **Title** (400, 1.5em, 1.15): h3 and door names (1.6em); big door names go back to bubble at clamp(2rem, 6vw, 3rem). Board titles are 1.6em in clay.
+- **Title** (400, 1.5em, 1.15): h3 and bookmark names (1.6em); big bookmark names go back to bubble at clamp(2rem, 6vw, 3rem). Board titles are 1.6em in clay.
 - **Body** (400, clamp(1.2rem, 1.05rem + 0.5vw, 1.4rem), 1.5): everything else; lead paragraphs are 1.25em at 1.35. Paragraphs max 62ch with pretty wrapping.
-- **Label** (400, 0.875rem, 0.02em, lowercase): Silkscreen on ride readouts, dress-up legends, board numbers (1rem), item counters, eyebrows and the door-jump chip. The ride's help line returns to Patrick Hand at 1rem.
+- **Label** (400, 0.875rem, 0.02em, lowercase): Silkscreen on ride readouts, dress-up legends, board numbers (1rem), item counters, eyebrows and the bookmark-jump chip. The ride's help line returns to Patrick Hand at 1rem.
 
 ### Named Rules
 **The Lowercase Voice Rule.** Copy is lowercase, short and plain: "this is a space where you are free to play." Labels are never uppercased.
@@ -195,22 +195,22 @@ The dyes are listed in tonal ramps in the sidecar; the frontmatter is normative 
 
 ## Layout
 
-A single centred column, max 1080px (`--wide`), with a fluid side gutter of clamp(16px, 5vw, 48px) (`--edge`). Sections pad clamp(2.5rem, 8vw, 5rem) vertically and are separated by a 3px dashed ink rule, except around the ride, the doors and the night band. The night band runs full width with its content held to the same 1080px.
+A single centred column, max 1080px (`--wide`), with a fluid side gutter of clamp(16px, 5vw, 48px) (`--edge`). Sections pad clamp(2.5rem, 8vw, 5rem) vertically and are separated by a 3px dashed ink rule, except around the ride, the bookmarks and the night band. The night band runs full width with its content held to the same 1080px.
 
-The home page is the ride first (title sticker overlapping the rink's top edge), then two doors side by side as a "street" with a 3px pavement line under them, then the footer. The doors are a two-column grid, a single column from 700px down; smaller streets auto-fill at 210px. The hero is a 1.3fr / 1fr grid that stacks below 700px. The top bar is sticky, 3px ink underline, with nav links at least 44px tall; below 480px the wide nav link is dropped. Route any new sticky offset through the 5rem scroll padding already set.
+The home page is the ride first (title sticker overlapping the rink's top edge), then two bookmarks side by side, then the footer. The bookmarks are a two-column grid, a single column from 700px down; smaller rows auto-fill at 210px. The hero is a 1.3fr / 1fr grid that stacks below 700px. The top bar is sticky, 3px ink underline, with nav links at least 44px tall; below 480px the wide nav link is dropped. Route any new sticky offset through the 5rem scroll padding already set.
 
-Touch targets are at least 44px (chips, nav links, summary, door-jump chip, fields 52px). Spacing is rem-based and tight: 0.4, 0.6, 1, 1.5rem gaps do most of the work.
+Touch targets are at least 44px (chips, nav links, summary, bookmark-jump chip, fields 52px). Spacing is rem-based and tight: 0.4, 0.6, 1, 1.5rem gaps do most of the work.
 
 ## Elevation & Depth
 
-Flat, no shadows, no gradients. Depth is drawn: a 3px ink line, an overlap (the title sticker sits across the rink's top edge), and the contrast of solid versus dashed borders (a dashed door or dashed item means "still in the studio, not open yet"). State is conveyed by movement, not lift: buttons rotate -2deg on hover, a door skews -2deg from its bottom-left corner. Menus and popovers do not exist here.
+Flat, no shadows, no gradients. Depth is drawn: a 3px ink line, an overlap (the title sticker sits across the rink's top edge), and the contrast of solid versus dashed borders (a broken-line bookmark or dashed item means "still in the studio, not open yet"). State is conveyed by movement, not lift: buttons rotate -2deg on hover, a bookmark skews -2deg from its top-left corner. Menus and popovers do not exist here.
 
 ### Named Rules
 **The Drawn-Not-Lit Rule.** Separation comes from ink lines, overlap and dash patterns. Do not add box-shadow, blur or glow.
 
 ## Shapes
 
-Hand-cut paper. The signature corner is the wobble: opposing long and short elliptical radii (255px 18px 225px 18px / 18px 225px 18px 255px) with a mirrored second form (`wobble-2`) so neighbours do not match. The rink and boards use a gentler four-value wobble (14px 22px 12px 26px / 24px 12px 22px 14px) and form fields a small one (10px 14px 9px 15px / 14px 9px 15px 10px). Tags are full pills, board numbers are circles, and doors are arches (48% 52% 0 0 / 5.5rem 5.2rem 0 0) with a half-round window above and a round knob. Lines are 3px solid ink for containers, 2px for chips, items and media, 3px dashed for section dividers and unseen things. Focus is a 3px ink outline offset 4px (cream on the footer and night band, gold on form fields).
+Hand-cut paper. The signature corner is the wobble: opposing long and short elliptical radii (255px 18px 225px 18px / 18px 225px 18px 255px) with a mirrored second form (`wobble-2`) so neighbours do not match. The rink and boards use a gentler four-value wobble (14px 22px 12px 26px / 24px 12px 22px 14px) and form fields a small one (10px 14px 9px 15px / 14px 9px 15px 10px). Tags are full pills, board numbers are circles, and bookmarks are ribbons: straight sides, a dyed band across the top and a swallowtail notch cut into the foot. Lines are 3px solid ink for containers, 2px for chips, items and media, 3px dashed for section dividers and unseen things. Focus is a 3px ink outline offset 4px (cream on the footer and night band, gold on form fields).
 
 ### Named Rules
 **The Never-Square Rule.** Containers, buttons and chips carry a wobble, pill, circle or arch. Nothing hand-drawn has a plain 90-degree corner.
@@ -232,7 +232,7 @@ Hand-cut and tactile: thick walnut-ink lines, wobbly cut-paper corners, stickers
 - **Tags:** pills with a 2px ink border; "open" is ink on cream, "building" is gold.
 
 ### Cards / Containers
-- **Doors:** arched, cream, 3px ink line with no bottom border (they stand on the pavement line), a coloured window (clay, indigo, moss, gold, ember, ink or blush), a knob. A real link door is solid and a not-yet-open one is dashed. The home page uses two big doors (tourist in clay, purist in indigo).
+- **Bookmarks:** ribbons, cream, a 3px ink line all round, a dyed band across the top (clay, indigo, moss, gold, ember, ink or blush) and a swallowtail notch at the foot. The band is a hard-stop fill, never a blend. A real link bookmark is solid and a not-yet-open one has a broken line. The home page uses two big bookmarks (tourist in clay, purist in indigo).
 - **Boards (the crate):** 3px ink line with the rink-style wobble, a gold numbered disc, a clay title in 1.6em, a pixel meta line, and an "open" cue appended in CSS.
 - **Why-note:** ink fill, cream text, gold headings, wobble corners; it states why a board's items belong together.
 - **Items:** 2px ink line, mirrored wobble, a pixel counter on the left; unseen items are dashed. A note's text sits on an avocado-blush patch.

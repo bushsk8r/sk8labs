@@ -1,4 +1,4 @@
-/* the play page. tokens, the top bar, doors, the rink and chips come from ../front-door.css */
+/* the play page. tokens, the top bar, bookmarks, the rink and chips come from ../cover.css */
 
 main > section.game {
   padding-top: clamp(1.5rem, 4vw, 2.5rem);
@@ -8,7 +8,7 @@ main > section.game {
   margin-bottom: 1rem;
 }
 
-.backRow .doorJump {
+.backRow .bookmarkJump {
   margin-left: 0;
 }
 
@@ -17,7 +17,7 @@ main > section.game {
 }
 
 .game h2:focus {
-  outline: 0; /* focused by doors.js so a screen reader lands on the game; not a control */
+  outline: 0; /* focused by bookmarks.js so a screen reader lands on the game; not a control */
 }
 
 .game .rink,

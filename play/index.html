@@ -28,9 +28,9 @@
     <link rel="icon" href="../img/favicon-32.png" sizes="32x32" />
     <link rel="apple-touch-icon" href="../img/apple-touch-icon.png" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="../fonts/patrick-hand.woff2" />
-    <link rel="stylesheet" href="../front-door.css" />
+    <link rel="stylesheet" href="../cover.css" />
     <link rel="stylesheet" href="play.css" />
-    <script src="doors.js" type="module"></script>
+    <script src="bookmarks.js" type="module"></script>
     <script src="forest.js" type="module"></script>
     <script src="elements.js" type="module"></script>
   </head>
@@ -39,12 +39,12 @@
     <a class="skip" href="#main">skip to the games</a>
 
     <header class="top">
-      <a class="home" href="../" aria-label="sk8 studio, back to the front door">
+      <a class="home" href="../" aria-label="sk8 studio, back to the cover">
         <img src="../img/bushsk8r-logo.png" alt="" width="36" height="48" />
         <span>sk8 studio</span>
       </a>
       <nav aria-label="on this page">
-        <a href="#doors">the two doors</a>
+        <a href="#bookmarks">the two bookmarks</a>
       </nav>
     </header>
 
@@ -52,35 +52,35 @@
       <section class="hero solo">
         <div class="heroWords">
           <h1>play</h1>
-          <p class="lead">two games. pick a door.</p>
+          <p class="lead">two games. pick a bookmark.</p>
         </div>
       </section>
 
-      <!-- the two doors. with scripts on, one game shows at a time (doors.js follows the #hash);
+      <!-- the two bookmarks. with scripts on, one game shows at a time (bookmarks.js follows the #hash);
            with scripts off both sections are simply further down the page -->
-      <section class="doorway" id="doors" aria-labelledby="doorsTitle">
-        <h2 id="doorsTitle" class="visually-hidden" tabindex="-1">two games</h2>
-        <ul class="street big" role="list">
+      <section class="bookmarks" id="bookmarks" aria-labelledby="bookmarksTitle">
+        <h2 id="bookmarksTitle" class="visually-hidden" tabindex="-1">two games</h2>
+        <ul class="ribbons big" role="list">
           <li>
-            <a class="door moss" href="#forest">
-              <span class="doorName">bushsk8r</span>
-              <span class="doorSay">ride the forest. keep a beat and the land remembers you.</span>
-              <span class="doorGo">take the board →</span>
+            <a class="bookmark moss" href="#forest">
+              <span class="bookmarkName">bushsk8r</span>
+              <span class="bookmarkSay">ride the forest. keep a beat and the land remembers you.</span>
+              <span class="bookmarkGo">take the board →</span>
             </a>
           </li>
           <li>
-            <a class="door ember" href="#elements">
-              <span class="doorName">rock paper scissors</span>
-              <span class="doorSay">and fire, and water. against the agent, or a friend.</span>
-              <span class="doorGo">throw a hand →</span>
+            <a class="bookmark ember" href="#elements">
+              <span class="bookmarkName">rock paper scissors</span>
+              <span class="bookmarkSay">and fire, and water. against the agent, or a friend.</span>
+              <span class="bookmarkGo">throw a hand →</span>
             </a>
           </li>
         </ul>
       </section>
 
-      <!-- bushsk8r: the forest. its own save, apart from the front door's ride -->
+      <!-- bushsk8r: the forest. its own save, apart from the cover's ride -->
       <section class="game" id="forest" aria-labelledby="forestTitle">
-        <p class="backRow"><a class="doorJump pixel" href="#doors">← the two doors</a></p>
+        <p class="backRow"><a class="bookmarkJump pixel" href="#bookmarks">← the two bookmarks</a></p>
         <h2 id="forestTitle" tabindex="-1">bushsk8r</h2>
         <p class="lead">lose your self in the forest with your board.</p>
 
@@ -126,7 +126,7 @@
 
       <!-- rock paper scissors, fire and water -->
       <section class="game" id="elements" aria-labelledby="elementsTitle">
-        <p class="backRow"><a class="doorJump pixel" href="#doors">← the two doors</a></p>
+        <p class="backRow"><a class="bookmarkJump pixel" href="#bookmarks">← the two bookmarks</a></p>
         <h2 id="elementsTitle" tabindex="-1">rock paper scissors</h2>
         <p class="lead">and fire, and water. five elements, one throw each.</p>
 

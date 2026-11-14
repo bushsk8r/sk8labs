@@ -37,7 +37,7 @@ function say(text, retry) {
 }
 
 // a board that isn't public: one line, then the ride from the home page.
-// the ride's markup is already in view.html (hidden); front-door.js reads its
+// the ride's markup is already in view.html (hidden); cover.js reads its
 // elements when it loads, so it is imported only now, and only once.
 let rideLoaded = false;
 function notFound() {
@@ -56,7 +56,7 @@ function notFound() {
   $("rideSection").hidden = false;
   if (!rideLoaded) {
     rideLoaded = true;
-    import("/front-door.js");
+    import("/cover.js");
   }
 }
 
