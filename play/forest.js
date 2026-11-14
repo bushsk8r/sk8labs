@@ -1,4 +1,4 @@
-// bushsk8r, the forest: the front door's ride grown toward the game design document
+// bushsk8r, the forest: the cover's ride grown toward the game design document
 // (../../bushsk8r game design document.md). It keeps the ride's four ideas
 //   kick cadence · trace deposit · daylight shift · grip -> release
 // and adds, from the updated document:
@@ -11,8 +11,8 @@
 //   words fall away — kick, push, coast on the first circuits, fewer each lap, then none
 // No scores, no levels: nothing here counts up for the player.
 //
-// Its own forest: the save is apart from the front door's (front-door.js is not touched).
-// The sprite frames and drawSprite are a hand copy of front-door.js's — change both.
+// Its own forest: the save is apart from the cover's (cover.js is not touched).
+// The sprite frames and drawSprite are a hand copy of cover.js's — change both.
 
 const css = getComputedStyle(document.documentElement);
 const dye = (name) => css.getPropertyValue(name).trim();
@@ -233,7 +233,7 @@ const GROUND = H - 6; // the path line
 const SX = 22; // where bushsk8r stands
 const LAP = 384; // world length in pixels; the circuit loops
 const DAY = 900; // pixels ridden per day
-const STORE = "sk8-play-forest"; // one forest per rider, apart from the front door's
+const STORE = "sk8-play-forest"; // one forest per rider, apart from the cover's
 const CREEK = [208, 240]; // world x range the creek crosses under the path
 const TREES = [60, 96, 150, 300, 340];
 const PERCHES = [96, 300]; // the trees the birds sit in
@@ -243,7 +243,7 @@ const MAX_TRACES = Math.floor((LAP - (CREEK[1] - CREEK[0] + 4)) / 6);
 const MAX_BUSHES = 30;
 const FADE_DAYS = 3; // a riding mark loses its head on day two and is gone on day three
 
-// how the ride reads your taps (see front-door.js)
+// how the ride reads your taps (see cover.js)
 const FEEL = {
   mouse: { mash: 0.24, tolerance: 0.28, floor: 0.07 },
   touch: { mash: 0.18, tolerance: 0.35, floor: 0.1 },

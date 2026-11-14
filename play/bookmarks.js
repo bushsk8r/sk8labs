@@ -1,19 +1,19 @@
-// the play page's two doors: the #hash picks which game shows.
-// without this script every section is simply on the page, and the doors are jump links.
+// the play page's two bookmarks: the #hash picks which game shows.
+// without this script every section is simply on the page, and the bookmarks are jump links.
 
-const doors = document.getElementById("doors");
+const bookmarks = document.getElementById("bookmarks");
 const games = [...document.querySelectorAll("main > section.game")];
 
 function show(move) {
   const id = location.hash.slice(1);
   const open = games.find((g) => g.id === id) || null;
 
-  doors.hidden = Boolean(open);
+  bookmarks.hidden = Boolean(open);
   for (const g of games) g.hidden = g !== open;
 
   if (!move) return;
-  // land on the game (or back on the doors), for eyes and for screen readers
-  const where = open || doors;
+  // land on the game (or back on the bookmarks), for eyes and for screen readers
+  const where = open || bookmarks;
   where.scrollIntoView({ block: "start" });
   where.querySelector("h2")?.focus({ preventScroll: true });
 }

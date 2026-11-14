@@ -1,4 +1,4 @@
-// sk8 studio front door: a tiny bushsk8r ride.
+// sk8 studio, the cover: a tiny bushsk8r ride.
 // It borrows four ideas from the game design document:
 //   kick cadence      — kicks in a steady beat build flow; mashing stumbles
 //   trace deposit     — riding in flow leaves dandelions that are still there next lap (and next visit)
@@ -179,8 +179,8 @@ const GROUND = H - 6; // the path line
 const SX = 22; // where bushsk8r stands
 const LAP = 384; // world length in pixels; the circuit loops
 const DAY = 900; // pixels ridden per day
-const STORE = "sk8-front-door-traces";
-const PREFS = "sk8-front-door-prefs"; // board, hair and how far you have ridden (the time of day)
+const STORE = "sk8-cover-traces";
+const PREFS = "sk8-cover-prefs"; // board, hair and how far you have ridden (the time of day)
 const CREEK = [208, 240]; // world x range the creek crosses under the path
 // dandelions stand at least 6px apart and keep off the bridge, so only this many fit on a lap
 const MAX_TRACES = Math.floor((LAP - (CREEK[1] - CREEK[0] + 4)) / 6);
@@ -200,8 +200,8 @@ let touch = matchMedia("(pointer: coarse)").matches;
 
 const storageWorks = () => {
   try {
-    localStorage.setItem("sk8-front-door-probe", "1");
-    localStorage.removeItem("sk8-front-door-probe");
+    localStorage.setItem("sk8-cover-probe", "1");
+    localStorage.removeItem("sk8-cover-probe");
     return true;
   } catch {
     return false;
