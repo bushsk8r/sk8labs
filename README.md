@@ -111,8 +111,8 @@ The home ride plus a few things from the updated game design document. **Its own
 - **Two marks.** Dandelions (riding marks) lose their head on day two and go on day three. Bush (a bit of the afro fallen in flow, from the second day on) stays; at 30 the oldest makes room.
 - **Hair.** Always the afro (or none, by chip). The document's afro → locks is **left out on purpose**.
 - **Animals.** Flow brings company (`company()`): a deer follows just behind the board by day, a coyote by night. It drops back when the flow goes or the light changes hands. Nothing is hostile; the document's bear and its end of the day are **left out on purpose**.
-- **Words fall away.** *kick / push / coast* over the canvas for three circuits (384px each), one fewer each lap; the help line leaves the page after two circuits and the clock readout after four (both stay for screen readers). *say the words again* restarts the count.
-- **Board.** The rider picks it (sk8board, banana, loaf) from chips under the canvas; hair (*afro* / *not yet*), *say the words again* and *start a new forest* sit under *more*. **Not built:** board wear and lives, the bear and hostile encounters, hair locking, lean/carving and terrain zones, sound, stencils on the bridge, marked sections getting easier.
+- **No words on the page.** The canvas shows no *kick / push / coast* words, and the help line (*click or press space to kick. keep a steady beat.*, *tap* on touch) is always visually hidden, kept for screen readers and the rink button's `aria-describedby`. The clock readout leaves after four circuits (it stays for screen readers). The only visible copy is the lead under the title: *sk8 through the day, find a flow to find friends*. The game design document's *words fall away* arc is not built.
+- **Board.** The rider picks it (sk8board, banana, loaf) from chips under the canvas; hair (*afro* / *not yet*) and *start a new forest* sit under *more*. **Not built:** board wear and lives, the bear and hostile encounters, hair locking, lean/carving and terrain zones, sound, stencils on the bridge, marked sections getting easier.
 
 ### Netlify functions
 

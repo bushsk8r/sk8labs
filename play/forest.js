@@ -8,7 +8,7 @@
 //                     the afro fallen in flow) stays for good
 //   animals         — flow brings company: a deer follows by day, a coyote by night.
 //                     (the document's bear, and the day ending at it, are left out on purpose)
-//   words fall away — kick, push, coast on the first circuits, fewer each lap, then none
+//   no words        — nothing written over the canvas; the help line is for screen readers only
 // No scores, no levels: nothing here counts up for the player.
 //
 // Its own forest: the save is apart from the cover's (cover.js is not touched).
@@ -519,19 +519,14 @@ const shown = { word: null, hint: null, hintSeen: null, clockSeen: null, night: 
 function sync(name, night) {
   const lap = circuits();
 
-  // on the canvas: kick, push, coast. three words on the first circuit, two, one, none
-  let w = "";
-  if (state.v < 1) w = lap < 3 ? "kick" : "";
-  else if (state.flow >= 0.6) w = lap < 2 ? "coast" : "";
-  else w = lap < 1 ? "push" : "";
+  // no words on the canvas: the ride speaks for itself
+  const w = "";
   if (w !== shown.word) word.textContent = shown.word = w;
   if (night !== shown.night) word.classList.toggle("night", (shown.night = night));
 
   // under the canvas. every line is still there for a screen reader after it leaves the page
   const text = HELP();
-  const seen = lap < 2;
   if (text !== shown.hint) hint.textContent = shown.hint = text;
-  if (seen !== shown.hintSeen) hint.classList.toggle("visually-hidden", !(shown.hintSeen = seen));
 
   // light is the clock: after a few circuits the sky says it alone
   const clockSeen = lap < 4;
@@ -733,13 +728,6 @@ for (const input of chips) {
     if (!state.running) draw(performance.now());
   });
 }
-
-document.getElementById("wordsBack").addEventListener("click", () => {
-  state.wordsFrom = Math.floor(state.total / LAP);
-  save();
-  if (!state.running) draw(performance.now());
-  say(newsSlot, "the words are back, for a few circuits.");
-});
 
 // a new forest, asked twice: everything grown here goes with it
 const newForest = document.getElementById("newForest");
