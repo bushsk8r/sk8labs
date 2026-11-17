@@ -73,7 +73,7 @@ const STAGES = [
   { at: 0, name: "compost", line: "compost. scraps of paper along the path." },
   { at: 300, name: "analyse", line: "analyse. the scraps are pinned up and marked." },
   { at: 550, name: "edit", line: "edit. pages on the line are being cut down." },
-  { at: 770, name: "produce", line: "produce. the studio is just ahead." },
+  { at: 770, name: "open source", line: "open source. the studio is just ahead." },
 ];
 const LIGHT = [{ p: 0, n: "sunrise" }, { p: 0.22, n: "midday" }, { p: 0.58, n: "dusk" }, { p: 0.78, n: "night" }];
 const SKY = [[0, C.blush], [0.22, C.cream], [0.55, C.cream], [0.74, C.ember], [0.88, C.dusk], [1, C.dusk]];

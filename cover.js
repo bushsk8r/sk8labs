@@ -172,7 +172,6 @@ const clock = document.getElementById("rideClock");
 const saySlot = document.getElementById("rideTime"); // polite: "it is now dusk"
 const newsSlot = document.getElementById("rideNews"); // polite: dandelions, the wash
 const hint = document.getElementById("rideHelp");
-const keep = document.getElementById("rideKeep");
 const W = canvas.width;
 const H = canvas.height;
 const GROUND = H - 6; // the path line
@@ -286,8 +285,6 @@ for (const input of document.querySelectorAll(".chips input")) {
   input.checked = state[input.name] === input.value;
 }
 
-// be honest about the promise when nothing can be kept
-if (!STORED && keep) keep.textContent = "they'll stay while this page is open.";
 
 // screen readers get the news in words, politely; the canvas itself is hidden from them.
 // (a live region ignores a repeat of the same text, so clear it first)
