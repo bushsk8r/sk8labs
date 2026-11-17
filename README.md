@@ -44,7 +44,7 @@ Any static server works (`npx` itself wants Node; `.nvmrc` pins 24.22.1, as in t
 ```
 sk8labs/
 ├── index.html                         # home: the cover (hand-written HTML)
-├── cover.css · cover.js     # its styles (brand-guide palette, @font-face) and the bushsk8r ride
+├── cover.css · cover.js     # its styles (brand-guide palette, @font-face; also the crate and the application form) and the bushsk8r ride
 ├── fonts/                             # self-hosted woff2 (Patrick Hand, Rubik Bubbles, Silkscreen) + OFL-*.txt
 ├── img/                               # bushsk8r-logo.png, favicon-32.png, apple-touch-icon.png
 ├── api.js                             # fetch wrapper for the public API (base URL by hostname), postJSON
