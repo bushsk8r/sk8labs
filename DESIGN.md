@@ -114,10 +114,9 @@ components:
   night-band:
     backgroundColor: "{colors.indigo-dusk}"
     textColor: "{colors.hemp-cream}"
-  footer:
+  nav-bar-phone:
     backgroundColor: "{colors.walnut-ink}"
     textColor: "{colors.hemp-cream}"
-    padding: "2.5rem 48px 3rem"
 ---
 
 # Design System: sk8 studio cover
@@ -150,7 +149,7 @@ A palette of eight natural dyes on warm hemp paper, with walnut ink for every li
 - **Madder Clay** (#a4472f): headlines, the wordmark, links on hover, board titles, glosses, bookmark and key accents. The one voice that speaks in colour on cream.
 
 ### Secondary
-- **Dandelion Gold** (#d8a93f): patches and level-up moments: the board number disc, the "building" tag, the light button, the ride's flowing trail and dandelions, and heading accents on dark grounds (night band, why-note, footer).
+- **Dandelion Gold** (#d8a93f): patches and level-up moments: the board number disc, the "building" tag, the light button, the ride's flowing trail and dandelions, and heading accents on dark grounds (night band, why-note).
 - **Indigo Dusk** (#2f4a6b): night. The application band and the ride's night sky; also the indigo bookmark's band.
 
 ### Tertiary
@@ -160,7 +159,7 @@ A palette of eight natural dyes on warm hemp paper, with walnut ink for every li
 
 ### Neutral
 - **Hemp Cream** (#ede4d0): the page, stickers, bookmarks, fields, midday sky, text on ink and dusk.
-- **Walnut Ink** (#2a221d): all body text, every line, the footer, the primary button, the why-note, the ride's line colour by day.
+- **Walnut Ink** (#2a221d): all body text, every line, the phone nav bar, the primary button, the why-note, the ride's line colour by day.
 
 The dyes are listed in tonal ramps in the sidecar; the frontmatter is normative for values.
 
@@ -197,7 +196,7 @@ The dyes are listed in tonal ramps in the sidecar; the frontmatter is normative 
 
 A single centred column, max 1080px (`--wide`), with a fluid side gutter of clamp(16px, 5vw, 48px) (`--edge`). Sections pad clamp(2.5rem, 8vw, 5rem) vertically and are separated by a 3px dashed ink rule, except around the ride, the bookmarks and the night band. The night band runs full width with its content held to the same 1080px.
 
-The home page is the ride first (title sticker overlapping the rink's top edge), then two bookmarks side by side, then the footer. The bookmarks are a two-column grid, a single column from 700px down; smaller rows auto-fill at 210px. The hero is a 1.3fr / 1fr grid that stacks below 700px. The top bar is sticky, 3px ink underline, with nav links at least 44px tall; below 480px the wide nav link is dropped. Route any new sticky offset through the 5rem scroll padding already set.
+The home page is the ride first (title sticker overlapping the rink's top edge), then two bookmarks side by side. There is no footer. The bookmarks are a two-column grid, a single column from 700px down; smaller rows auto-fill at 210px. The hero is a 1.3fr / 1fr grid that stacks below 700px. The top bar is sticky, 3px ink underline, with nav links at least 44px tall; below 700px the nav becomes a bar fixed to the screen bottom. Route any new sticky offset through the 5rem scroll padding already set.
 
 Touch targets are at least 44px (chips, nav links, summary, bookmark-jump chip, fields 52px). Spacing is rem-based and tight: 0.4, 0.6, 1, 1.5rem gaps do most of the work.
 
@@ -210,7 +209,7 @@ Flat, no shadows, no gradients. Depth is drawn: a 3px ink line, an overlap (the 
 
 ## Shapes
 
-Hand-cut paper. The signature corner is the wobble: opposing long and short elliptical radii (255px 18px 225px 18px / 18px 225px 18px 255px) with a mirrored second form (`wobble-2`) so neighbours do not match. The rink and boards use a gentler four-value wobble (14px 22px 12px 26px / 24px 12px 22px 14px) and form fields a small one (10px 14px 9px 15px / 14px 9px 15px 10px). Tags are full pills, board numbers are circles, and bookmarks are ribbons: straight sides, a dyed band across the top and a swallowtail notch cut into the foot. Lines are 3px solid ink for containers, 2px for chips, items and media, 3px dashed for section dividers and unseen things. Focus is a 3px ink outline offset 4px (cream on the footer and night band, gold on form fields).
+Hand-cut paper. The signature corner is the wobble: opposing long and short elliptical radii (255px 18px 225px 18px / 18px 225px 18px 255px) with a mirrored second form (`wobble-2`) so neighbours do not match. The rink and boards use a gentler four-value wobble (14px 22px 12px 26px / 24px 12px 22px 14px) and form fields a small one (10px 14px 9px 15px / 14px 9px 15px 10px). Tags are full pills, board numbers are circles, and bookmarks are ribbons: straight sides, a dyed band across the top and a swallowtail notch cut into the foot. Lines are 3px solid ink for containers, 2px for chips, items and media, 3px dashed for section dividers and unseen things. Focus is a 3px ink outline offset 4px (cream on the phone nav bar and night band, gold on form fields).
 
 ### Named Rules
 **The Never-Square Rule.** Containers, buttons and chips carry a wobble, pill, circle or arch. Nothing hand-drawn has a plain 90-degree corner.
