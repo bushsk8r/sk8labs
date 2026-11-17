@@ -1,10 +1,11 @@
-// Link previews for one board: /collections/<id>.
+// Link previews for one board: /collections/<title-slug> (or an old /<uuid>).
 // Preview fetchers never run view.js, so this rewrites the <!--meta--> block
 // of view.html with the board's own title and description.
 // Plan: sk8labs-link-previews-plan.md (root). It can never break the page:
 // any failure returns view.html as it is.
 
-const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+import { findBoard } from "../../collections/slugs.js";
+
 const SITE = "https://sk8.studio";
 const IMAGE = `${SITE}/img/og-bushsk8r.v1.png`;
 const IMAGE_ALT =
@@ -36,11 +37,11 @@ function httpsOnly(url) {
   }
 }
 
-function metaBlock(id, collection, arrangement) {
+function metaBlock(slug, collection, arrangement) {
   const title = summary(collection.title) || "a board";
   const description =
     summary(collection.description) || summary(arrangement?.text) || GENERIC;
-  const url = `${SITE}/collections/${id}`;
+  const url = `${SITE}/collections/${slug}`;
   const image = httpsOnly(IMAGE);
   const e = escapeHtml;
   return [
@@ -66,16 +67,24 @@ function metaBlock(id, collection, arrangement) {
   ].join("\n    ");
 }
 
-async function fetchBoard(id) {
+async function fetchBoard(segment) {
   const base = (Netlify.env.get("ATELIER_API_URL") || "https://api.sk8.studio").replace(/\/+$/, "");
-  try {
-    const res = await fetch(`${base}/public/collections/${id}`, {
+  const get = (path) =>
+    fetch(`${base}${path}`, {
       headers: { accept: "application/json" },
       signal: AbortSignal.timeout(2000),
     });
+  try {
+    // the API reads by id only: find the slug (or uuid) in the list first
+    const listRes = await get("/public/collections");
+    if (!listRes.ok) return { status: listRes.status };
+    const { collections } = await listRes.json();
+    const found = findBoard(Array.isArray(collections) ? collections : [], segment);
+    if (!found) return { status: 404 };
+    const res = await get(`/public/collections/${found.board.id}`);
     if (res.status === 404) return { status: 404 };
     if (!res.ok) return { status: res.status };
-    return { status: 200, data: await res.json() };
+    return { status: 200, data: await res.json(), slug: found.slug };
   } catch {
     return { status: 0 };
   }
@@ -90,10 +99,12 @@ function withStatus(page, html, status) {
 }
 
 export default async (request, context) => {
-  const id = new URL(request.url).pathname.split("/")[2] ?? "";
-  const valid = UUID.test(id);
+  let segment = new URL(request.url).pathname.split("/")[2] ?? "";
+  try {
+    segment = decodeURIComponent(segment);
+  } catch {}
   const [board, page] = await Promise.all([
-    valid ? fetchBoard(id) : Promise.resolve({ status: 404 }),
+    segment ? fetchBoard(segment) : Promise.resolve({ status: 404 }),
     context.next(),
   ]);
 
@@ -106,7 +117,7 @@ export default async (request, context) => {
   headers.delete("content-length");
   if (!META_BLOCK.test(html)) return new Response(html, { status: 200, headers });
   const out = html.replace(META_BLOCK, () =>
-    metaBlock(id.toLowerCase(), board.data.collection, board.data.arrangement),
+    metaBlock(board.slug, board.data.collection, board.data.arrangement),
   );
   // only a board's own tags are cached (5 min, O2); every fallback stays live
   headers.set("cache-control", "public, s-maxage=300");

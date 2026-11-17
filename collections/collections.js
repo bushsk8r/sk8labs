@@ -1,5 +1,6 @@
 // the crate: every public collection, newest first (no curation, O3).
 import { getJSON, el, curatorName, things, plainDate } from "../api.js";
+import { assignSlugs } from "./slugs.js";
 
 const status = document.getElementById("status");
 const list = document.getElementById("boards");
@@ -20,11 +21,11 @@ function say(text, retry) {
 
 const total = (c) => (c?.sources ?? 0) + (c?.notes ?? 0) + (c?.artifacts ?? 0);
 
-function board(entry, index) {
+function board(entry, index, slug) {
   const li = el("li");
   const a = el("a", "board boardLink");
   // pretty path: Netlify's _redirects and serve.json both answer it with view.html
-  a.href = `/collections/${encodeURIComponent(entry.id)}`;
+  a.href = `/collections/${slug}`;
 
   const row = el("span", "boardRow");
   row.append(
@@ -72,7 +73,8 @@ async function load() {
   }
   status.hidden = true;
   order.hidden = false;
-  list.replaceChildren(...boards.map(board));
+  const slugs = assignSlugs(boards);
+  list.replaceChildren(...boards.map((entry, i) => board(entry, i, slugs[i])));
   list.hidden = false;
   legend.hidden = false;
 }

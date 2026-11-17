@@ -189,7 +189,7 @@ The dyes are listed in tonal ramps in the sidecar; the frontmatter is normative 
 - **Label** (400, 0.875rem, 0.02em, lowercase): Silkscreen on ride readouts, dress-up legends, board numbers (1rem), item counters, eyebrows and the bookmark-jump chip. The ride's help line returns to Patrick Hand at 1rem.
 
 ### Named Rules
-**The Lowercase Voice Rule.** Copy is lowercase, short and plain: "this is a space where you are free to play." Labels are never uppercased.
+**The Lowercase Voice Rule.** Copy is lowercase, short and plain: "a space where you are free to play." Labels are never uppercased.
 
 **The Pixel Furniture Rule.** Silkscreen carries instruments and labels only (clock, counts, legends, numbers), never paragraphs.
 
@@ -228,7 +228,7 @@ Hand-cut and tactile: thick walnut-ink lines, wobbly cut-paper corners, stickers
 
 ### Chips
 - **Style:** 2px ink border, wobble corners, min 44px tall, radio-driven.
-- **State:** selected is ink fill with cream text; a focus ring shows on the hidden radio's chip. Used for board and hair choices in "dress up".
+- **State:** selected is ink fill with cream text; a focus ring shows on the hidden radio's chip. Used for board and hair choices in "gear up".
 - **Tags:** pills with a 2px ink border; "open" is ink on cream, "building" is gold.
 
 ### Cards / Containers
@@ -246,7 +246,7 @@ Hand-cut and tactile: thick walnut-ink lines, wobbly cut-paper corners, stickers
 - **Honeypot:** a field off-screen, out of tab order and hidden from assistive tech.
 
 ### Navigation
-Sticky top bar: cream, 3px ink underline, logo (30x40) and "sk8 studio" in bubble type in clay on the left, links on the right in 1.05rem Patrick Hand. The home page has one link, "play"; the crate has "the boards", "become a purist" and an external "purist" link. Hover is a 2px wavy underline. A skip link slides in from the top.
+Sticky top bar: cream, 3px ink underline, logo (30x40) and "sk8 studio" in bubble type in clay on the left, links on the right in 1.05rem Patrick Hand. Every page has the same three links, "play", "radio", "crate"; the current page's link wears the wavy underline. Below 700px the links leave the bar for an ink bar fixed to the screen bottom (cream links, spread evenly). Hover is a 2px wavy underline. A skip link slides in from the top.
 
 ### The Ride (signature component)
 A tiny skate game on a 128 x 40 canvas, scaled to the column width with `image-rendering: pixelated` (crisp-edges as the fallback) inside a button with a 3px ink line and the rink wobble. It is a copy of the same markup on the home page, the crate's non-public board and the 404; change all three together.

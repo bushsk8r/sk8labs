@@ -4,6 +4,10 @@ main > section.game {
   padding-top: clamp(1.5rem, 4vw, 2.5rem);
 }
 
+@media (min-width: 900px) {
+  main > section.game { max-width: 1400px; }
+}
+
 .backRow {
   margin-bottom: 1rem;
 }
