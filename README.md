@@ -2,7 +2,7 @@
 
 an open studio where playtime is never over — [sk8.studio](https://sk8.studio)
 
-The cover of **sk8 studio**, and the fourth repo of the atelier project. Anyone curious about the studio lands here first: a short home page with two bookmarks, *tourist* (the crate: collections, then an application to join) and *purist* (the gallery, keyword `welcome`), and one nav on every page: **play** (two games), **radio** (coming soon) and **crate**. It still holds the maker's older archive and experiments, unlinked from the home page.
+The cover of **sk8 studio**, and the fourth repo of the atelier project. Anyone curious about the studio lands here first: a short home page with two bookmarks, *tourist* (the crate: collections, then an application to join) and *purist* (the gallery, keyword `welcome`), and one nav on every page: **play** (two games), **radio** (purists' on-air playlists) and **crate**. It still holds the maker's older archive and experiments, unlinked from the home page.
 
 > **State.** The cut-down home page, the crate (`collections/`) and the application form are committed on branch `development` but **not deployed**. Plan: `../sk8labs-front-door-plan.md` (deploy order §6).
 
@@ -44,7 +44,9 @@ Any static server works (`npx` itself wants Node; `.nvmrc` pins 24.22.1, as in t
 ```
 sk8labs/
 ├── index.html                         # home: the cover (hand-written HTML)
-├── cover.css · cover.js     # its styles (brand-guide palette, @font-face; also the crate and the application form) and the bushsk8r ride
+├── cover.css                          # brand-guide palette, @font-face, the nav; also the crate, the radio and the application form
+├── entrance.css · entrance.js · entrance-boot.js # home: the long road in, ending at the studio (doors, radio tower)
+├── cover.js                           # the small endless ride on 404.html and collections/view.html
 ├── fonts/                             # self-hosted woff2 (Patrick Hand, Rubik Bubbles, Silkscreen) + OFL-*.txt
 ├── img/                               # bushsk8r-logo.png, favicon-32.png, apple-touch-icon.png
 ├── api.js                             # fetch wrapper for the public API (base URL by hostname), postJSON
@@ -64,7 +66,7 @@ sk8labs/
 │   ├── footer/                        # rock-paper-scissors-fire-water (class-based); also a standalone page
 │   ├── jukebox.js                     # track selector + Arweave media player
 │   └── helper.js · script.js          # forked copies of the root files
-├── radio/                             # index.html: the coming-soon placeholder
+├── radio/                             # index.html + radio.js: on-air channels on a dial (GET /public/radio)
 ├── play/                              # the play page: index.html + play.css, bookmarks.js (the #hash picks a game),
 │                                      #   forest.js (bushsk8r, the forest), elements.js (rps with a score)
 ├── archive/                           # the crate: works by year
@@ -86,12 +88,12 @@ sk8labs/
 
 | Path | What's there |
 |---|---|
-| `/` | The cover: two bookmarks — *tourist* → `collections/`, *purist* → `https://gallery.sk8.studio` (new tab; `.bookmarkKey` prints "the keyword is **welcome**", `aria-describedby="purist-key"`) — under the **hero** (logo, *sk8 studio*) and **the ride** (a canvas: click to kick bushsk8r along; traces kept in `localStorage` `sk8-cover-traces`, *wash the path clean* clears them). The bookmarks are the only way to the gallery and the crate; nothing links to the atelier or the API. (Plan D14: the keyword `welcome` is printed at the purist bookmark.) |
+| `/` | The cover: **the long road in** (`entrance.js`; a canvas ride *compost → analyse → edit → open source*, saved in `localStorage` `sk8-entrance`, *skip the ride* jumps to the end) ending at the **sk8 studio** building and its two doors — *tourist* → `collections/`, *purist* → `https://gallery.sk8.studio` (new tab; "the keyword is **welcome**", `aria-describedby="purist-key"`). A **radio tower** stands on the roof (`drawTower`): while `GET /public/radio` lists a channel it sends out waves, and once the studio is in view the nav's *radio* link blinks gold (`.onAir`; held still under reduced motion; ", on air" for screen readers). On desktop the world leaves 8px of sky above the roof, so the mast is small. Nothing links to the atelier or the API. (Plan D14: the keyword `welcome` is printed at the purist door.) |
 | `/collections/` · `/collections/<title-slug>` | **The crate.** Every public collection, newest first (`GET /public/collections`), then one board per page (`/public/collections/:id`): arrangement above the items; notes, artifacts and external sources as the API shows them, anything withheld a dashed placeholder; a private or unknown slug reads *this collection isn't public*. Board URLs are title slugs from `collections/slugs.js` (`slugify`, `assignSlugs` with `-2`/`-3` for repeat titles in list order, `findBoard` slug-or-uuid); an old uuid URL is rewritten to its slug with `replaceState`. API strings only through `textContent`. The list page ends in **become a purist** — name, email, what you make, optional https link, hidden honeypot `company` — posting to `POST /public/applications`; a failure keeps the answers and says why |
 | `/terrasse/` | "your terrasse — where to from here?": **shelf** ("a space to store your zines" → prints *soon come*) and **play** ("a sandbox" → prints *click the boxes*, pointing at the footer game). `shelf.js` and `play.js` are empty files |
 | `/gallery/` | "welcome to the gallery — aka the artifact archive, aka the prototype graveyard", marked `[this is a prototype]`. Nav: **about** (programmer / baking enthusiast / recorder of sounds, linking GitHub, the bakery and a `#` jukebox), **past works** (idea factory 2017, human in the loop 2020, echo chamber 2021, playin with poly 2021 — each opens its Arweave media), **currently** (experiments: minesweeper, hypermedia zine · recordings jukebox · a Spotify playlist embed) |
 | `/gallery/footer/` | The rps game as its own page, with a marquee header |
-| `/radio/` | Coming soon: a placeholder (`noindex`, kept out of the sitemap until it has content) |
+| `/radio/` | **The radio** (`radio.js`): every purist's on-air channel from `GET /public/radio`, one at a time on a **dial** (◀ ▶ and the arrow keys; shown only with two or more; `#<channelId>` remembers the station): name, who plays it, description, the playlist's **links table** (the API's rendered first table: Spotify, Tidal; new tab) and the picked arrangement with its acts. API strings via `textContent`, the rendered markdown via `markdownBody`. Indexed, in the sitemap |
 | `/play/` | **Two games behind two bookmarks** (cover look; `bookmarks.js` shows one section per `#forest` / `#elements`, and with scripts off both are simply on the page). **bushsk8r**: the home ride grown toward `../bushsk8r game design document.md`, see below. **rock paper scissors**: five elements, one player against the weighted agent or two taking turns, a score per mode in `localStorage` `sk8-play-elements-score` |
 | `/archive/` | Year selector over `crate.js` (2013–2025); a year lists its works (craft), and a chosen work plays its Arweave media or reads "private collection" when there's no `source` |
 | `/archive/loop/` · `/archive/recording/` | The "human in the loop" tracks — a vanilla player and a React build of the same material ([audio_player source](https://github.com/justinmsaga/audio_player)) |

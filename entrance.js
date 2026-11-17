@@ -231,6 +231,41 @@ function drawBuilding(ox, lit, sky) {
   R(ox + 111, GROUND + 3, 2, 1, lc); R(ox + 111, GROUND + 2, 1, 3, lc);
 }
 
+// ---- the radio tower on the studio's roof (radio/): it always stands; while a purist has a channel on air
+// (GET /public/radio) it sends out waves, and once the studio is in view the nav's radio link blinks ----
+let onAir = false;
+const radioLink = document.querySelector('.top nav a[href="/radio/"]');
+let blinking = false;
+function setBlink(on) {
+  if (on === blinking || !radioLink) return;
+  blinking = on;
+  radioLink.classList.toggle("onAir", on);
+  radioLink.querySelector(".onAirWord")?.remove();
+  if (on) { const w = document.createElement("span"); w.className = "onAirWord visually-hidden"; w.textContent = ", on air"; radioLink.append(w); }
+}
+function drawTower(ox, now) {
+  const top = 8 + Math.round((GROUND - 50) / 2); // the roof strip's top edge (drawBuilding's `top`)
+  const cx = ox + 26, th = Math.min(top - 2, 14); // a taller mast where the world has more sky
+  if (th < 4 || cx < -12 || cx > W + 12) return;
+  const tip = top - th;
+  for (let i = 0; i < th; i++) { // an A-frame mast narrowing to the tip, a crossbar every third row
+    const y = top - 1 - i, w = Math.round(((th - 1 - i) / (th - 1)) * 2);
+    R(cx - w, y, 1, 1, C.clay); R(cx + w, y, 1, 1, C.clay);
+    if (i % 3 === 2 && w > 0) R(cx - w, y, 2 * w + 1, 1, C.clay);
+  }
+  const beat = Math.floor(now / 300) % 4;
+  R(cx, tip - 1, 1, 1, onAir ? (calm.matches || beat % 2 ? C.gold : C.ember) : C.clay);
+  if (!onAir) return;
+  // three rings of waves, either side of the tip; they ripple outward (all three, still, when motion is reduced)
+  [3, 5, 7].forEach((r, k) => {
+    if (!calm.matches && beat <= k) return;
+    for (let a = -0.9; a <= 0.9; a += 0.8 / r) {
+      const x = Math.round(r * Math.cos(a)), y = tip - 1 + Math.round(r * Math.sin(a));
+      R(cx + x, y, 1, 1, C.gold); R(cx - x, y, 1, 1, C.gold);
+    }
+  });
+}
+
 function draw(now) {
   const dist = state.dist, off = Math.floor(dist), p = clamp(dist / T);
   const sky = skyAt(p), n = clamp((p - 0.74) / 0.14), line = mix(C.ink, C.cream, n);
@@ -263,6 +298,8 @@ function draw(now) {
 
   // the studio, from afar
   if (T + 160 - off > 0) drawBuilding(T - off, state.lit, sky);
+  if (T + 160 - off > 0) drawTower(T - off, now);
+  setBlink(onAir && T - off < W); // the studio is in view
 
   // props
   for (const o of OBJ) {
@@ -666,6 +703,14 @@ NARROW.addEventListener("change", refit);
 addEventListener("resize", refit); // a zoom changes devicePixelRatio without resizing the box
 
 window.__demo = { state, finish, kick };
+
+// is anyone on air? a failed read just leaves the tower quiet
+import("./api.js").then(({ getJSON }) => getJSON("/public/radio")).then((data) => {
+  onAir = Array.isArray(data?.channels) && data.channels.length > 0;
+  if (onAir) draw(performance.now());
+}).catch(() => { /* the tower stands without waves */ });
+// the ride loop stops at the doors; the waves keep rippling there on their own slow tick
+setInterval(() => { if (onAir && state.phase === "doors" && !calm.matches && !document.hidden) draw(performance.now()); }, 150);
 draw(performance.now()); news();
 addEventListener("load", () => { if (state.phase === "ride") draw(performance.now()); });
 if (FAST > 1) say("fast ride on.");

@@ -24,7 +24,10 @@ Last updated: 2026-11-17.
   answers 404.
 - [Play](https://sk8.studio/play/): two small games. `#forest` — sk8 through an endless day and
   night with bushsk8r and find a flow; `#elements` — rock, paper, scissors, fire and water.
-- Radio (`https://sk8.studio/radio/`): coming soon; nothing there yet.
+- [Radio](https://sk8.studio/radio/): the playlists purists are listening to, one channel at a
+  time on a dial. A channel shows its name, who plays it, links to the playlist (Spotify, Tidal and
+  the like) and the maker's note on why it runs in this order. Nothing plays on the page itself;
+  the links open the streaming service. A channel comes and goes as its maker puts it on or off air.
 
 Older pages (an archive and earlier experiments) remain at their paths but are not linked and are
 not part of the current site.

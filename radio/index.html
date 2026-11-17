@@ -4,12 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>radio — sk8 studio</title>
-    <meta name="description" content="sk8 studio radio: coming soon." />
-    <meta name="robots" content="noindex" />
+    <meta name="description" content="studio vibes" />
+    <link rel="canonical" href="https://sk8.studio/radio/" />
     <link rel="icon" href="/img/favicon-32.png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/patrick-hand.woff2" />
     <link rel="stylesheet" href="/cover.css" />
+    <script src="radio.js" type="module"></script>
   </head>
 
   <body>
@@ -29,10 +30,39 @@
 
     <main id="main">
       <section class="hero solo">
-        <div>
+        <div class="heroWords">
           <h1>radio</h1>
-          <p class="lead">coming soon. the studio is still tuning in.</p>
+          <p class="lead">studio vibes</p>
         </div>
+      </section>
+
+      <section class="radio" aria-labelledby="radioTitle">
+        <h2 id="radioTitle" class="visually-hidden">on air</h2>
+        <p id="status" class="status" role="status">tuning in…</p>
+
+        <!-- the dial: one stop per channel on air. filled by radio.js -->
+        <div class="dial" id="dial" hidden>
+          <button class="dialStep" id="prev" type="button" aria-label="previous channel">◀</button>
+          <div class="dialFace" aria-hidden="true">
+            <ol class="dialStops" id="stops"></ol>
+          </div>
+          <button class="dialStep" id="next" type="button" aria-label="next channel">▶</button>
+          <p class="pixel dialSay" id="dialSay" aria-live="polite"></p>
+        </div>
+
+        <article class="channel" id="channel" hidden aria-labelledby="channelName">
+          <p class="pixel onAir"><span class="onAirLamp" aria-hidden="true"></span>on air</p>
+          <h3 id="channelName" class="channelName"></h3>
+          <p class="pixel channelMeta" id="channelMeta"></p>
+          <p class="channelSay" id="channelSay" hidden></p>
+
+          <div class="playlist">
+            <h4 class="pixel" id="playlistTitle"></h4>
+            <div id="links"></div>
+          </div>
+
+          <div class="why" id="why" hidden></div>
+        </article>
       </section>
     </main>
 
