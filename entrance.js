@@ -124,10 +124,10 @@ add(565, "line", { len: 60, pages: [10, 6, 0, 10, 4, 0] });
 add(650, "line", { len: 40, pages: [6, 0, 10, 0] });
 [587, 607, 640].forEach((x, i) => add(x, "pot", { c: [C.clay, C.dusk, C.gold][i] }));
 add(715, "arrow");
-add(738, "crop"); add(758, "crop");
+add(758, "crop"); // one sheet: a second at 738 hid the "sk8 studio" arrow sign
 // produce: two signposts before the studio, "almost" then "there", drawn last so they sit over the trees
 [795, 838].forEach((x) => add(x, "tree2"));
-[["almost", 210], ["there", 40]].forEach(([word, rem]) => add(T - rem, "sign", { word }));
+[["almost", 170], ["there", 100]].forEach(([word, rem]) => add(T - rem, "sign", { word }));
 const LAMPX = [22, 58, 102, 138];
 
 const calm = matchMedia("(prefers-reduced-motion: reduce)");
@@ -157,7 +157,7 @@ const saved = readSaved();
 let arrived = saved.arrived;
 function save() { try { localStorage.setItem(KEY, JSON.stringify({ board: state.board, traces: state.traces, arrived })); } catch { /* the ride forgets when the page closes */ } }
 
-const state = { board: saved.board, grown: 0, skipped: false, carry: null, dist: 0, v: 0, flow: 0, kicks: [], kickAt: -1, flashAt: -1, stumbleAt: -1, beatGap: null,
+const state = { board: saved.board, grown: 0, guests: false, skipped: false, carry: null, dist: 0, v: 0, flow: 0, kicks: [], kickAt: -1, flashAt: -1, stumbleAt: -1, beatGap: null,
   perKick: 9, lastKickDist: 0, traces: saved.traces, sinceTrace: 0, kites: [], dropT: 0, taken: new Set(),
   phase: "ride", arrive: null, lit: 0, riderX: SX, last: 0, stage: -1, light: -1, said: false, started: false, active: 0 };
 
@@ -375,6 +375,47 @@ function draw(now) {
   else if (state.v > 1 || (state.arrive && state.riderX < CENTRE - 1)) frame = beat % 2 ? "rideB" : "rideA";
   const shake = stumbling && !calm.matches ? (Math.floor(now / 45) % 2 ? 1 : -1) : 0;
   drawSprite(ctx, frame, Math.round(state.riderX) + shake, GROUND - 16, stumbling && calm.matches ? C.ember : line, now - state.flashAt < 120 ? C.gold : C.moss, state.board);
+  if (state.guests && state.arrive) drawGuests(now, line);
+}
+
+// ---- the arrival scene: ride in rhythm (planted a dandelion, state.grown > 0) and a deer and a coyote come to meet you ----
+// hand copy of play/forest.js's DEER/COYOTE — change both. # line · c clay · y eye (gold)
+const DEER = {
+  stand: ["........#.#", "........###", ".........cc", ".ccccccccc.", "cccccccccc.", ".cccccccc..", ".c.c..c.c..", ".c.c..c.c.."],
+  run: ["........#.#", "........###", ".........cc", ".ccccccccc.", "cccccccccc.", ".cccccccc..", "c..c.c...c.", "..........."],
+};
+const COYOTE = {
+  stand: ["......#.#", "#.....#y#", "#########", ".#######.", "#.#..#.#.", "#.#..#.#."],
+  run: ["......#.#", "#.....#y#", "#########", ".#######.", "#..#.#..#", "........."],
+};
+const DEER_END = 57, COY_END = 112; // the deer stops just left of the rider (at CENTRE); the coyote sits on the roof
+// seconds into the arrival: [start, end] of the deer's walk, the coyote's run, and its leap onto the roof (all done by 1.5 s)
+const DEER_T = [0.1, 1.3], COY_RUN = [0.3, 0.9], COY_LEAP = [0.9, 1.4];
+function critter(rows, x, y, col, flip, beat) {
+  rows.forEach((row, ry) => {
+    for (let rx = 0; rx < row.length; rx++) {
+      const ch = row[rx]; if (ch === ".") continue;
+      R(x + (flip ? row.length - 1 - rx : rx), y + ry, 1, 1, ch === "c" ? C.clay : ch === "y" ? C.gold : col);
+    }
+  });
+}
+function drawGuests(now, line) {
+  const end = calm.matches || state.phase === "doors", t = end ? 99 : state.arrive.t, beat = Math.floor(now / 140) % 2;
+  const lerp = (a, b, [t0, t1]) => a + (b - a) * clamp((t - t0) / (t1 - t0));
+  // the deer walks in from the left and stands on the ground beside the rider
+  const dx = Math.round(lerp(-12, DEER_END, DEER_T)), walking = t < DEER_T[1];
+  critter(walking && beat ? DEER.run : DEER.stand, dx, GROUND - DEER.stand.length, line, false);
+  // the coyote runs in from the right, leaps onto the roof strip (top) and sits there facing the studio's front
+  const roofY = 8 + Math.round((GROUND - 50) / 2) - COYOTE.stand.length, groundY = GROUND - COYOTE.stand.length;
+  let cx, cy, rows = COYOTE.stand;
+  if (t < COY_RUN[1]) { cx = Math.round(lerp(W, 126, COY_RUN)); cy = groundY; if (t >= COY_RUN[0]) rows = beat ? COYOTE.run : COYOTE.stand; }
+  else {
+    const u = clamp((t - COY_LEAP[0]) / (COY_LEAP[1] - COY_LEAP[0]));
+    cx = Math.round(126 + (COY_END - 126) * u); cy = Math.round(groundY + (roofY - groundY) * u - Math.sin(u * Math.PI) * 8);
+    if (u < 1) rows = COYOTE.run;
+  }
+  if (t >= COY_LEAP[1]) { cx = COY_END; cy = roofY; }
+  critter(rows, cx, cy, line, true);
 }
 
 // ---- the ribbon and the news ----
@@ -464,6 +505,7 @@ function step(now) {
     if (state.dist >= T - 0.3) {
       state.dist = T; state.v = 0;
       state.arrive = { t: 0 };
+      state.guests = state.grown > 0; // rode in rhythm: sustained flow planted at least one dandelion this ride
       say("you reach the studio. the lamps are lighting.");
     }
   } else {
@@ -585,7 +627,7 @@ function again() {
   Object.assign(state, { dist: 0, v: 0, flow: 0, kicks: [], kickAt: -1, beatGap: null, kites: [], taken: new Set(), arrive: null,
     lit: 0, riderX: SX, phase: "ride", stage: -1, light: -1, started: false, lastKickDist: 0, perKick: 9, active: 0,
     said: false, dropT: 0, sinceTrace: 0, flashAt: -1, stumbleAt: -1, last: performance.now(),
-    grown: 0, skipped: false, carry: null }); // per-ride state; the dandelions are reloaded, never cleared
+    grown: 0, skipped: false, carry: null, guests: false }); // per-ride state; the dandelions are reloaded, never cleared
   if (STORED) state.traces = readSaved().traces;
   for (let i = OBJ.length - 1; i >= 0; i--) if (OBJ[i].fell) OBJ.splice(i, 1);
   document.documentElement.dataset.phase = "ride";
