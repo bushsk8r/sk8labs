@@ -622,6 +622,305 @@ div.bookmark::before {
   margin-top: 1rem;
 }
 
+/* ---------- collections page ---------- */
+
+.hero.solo {
+  grid-template-columns: 1fr;
+}
+
+.hero.solo h1 {
+  font-size: clamp(2.8rem, 10vw, 6rem);
+}
+
+.board {
+  margin-top: 1.5rem;
+  border: var(--line);
+  border-radius: 14px 22px 12px 26px / 24px 12px 22px 14px;
+}
+
+.board summary {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.2rem 1rem;
+  padding: 1.1rem 1.3rem 1.2rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.board summary::-webkit-details-marker {
+  display: none;
+}
+
+.boardNo {
+  grid-row: span 3;
+  display: grid;
+  place-items: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  background: var(--gold);
+  border: var(--line);
+  border-radius: 50%;
+  font-size: 1.1rem;
+}
+
+.boardTitle {
+  font-size: 1.6em;
+  line-height: 1.3;
+  color: var(--clay);
+}
+
+.board summary:hover .boardTitle {
+  text-decoration: underline wavy 2px;
+  text-underline-offset: 0.2em;
+}
+
+.boardMeta::after {
+  content: " · open ↓";
+}
+
+.board[open] .boardMeta::after {
+  content: " · close ↑";
+}
+
+.why {
+  margin: 0.5rem 1.3rem 0;
+  padding: 1rem 1.2rem 1.2rem;
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: var(--wobble);
+}
+
+.why h3 {
+  font-size: 1.15em;
+  color: var(--gold);
+}
+
+.items {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 1.5rem 1.3rem 1.6rem !important;
+  counter-reset: item;
+}
+
+.items li {
+  counter-increment: item;
+  position: relative;
+  max-width: none;
+  padding: 0.9rem 1.1rem 1rem 3.4rem;
+  border: 2px solid var(--ink);
+  border-radius: var(--wobble-2);
+}
+
+.items li::before {
+  content: counter(item);
+  position: absolute;
+  left: 1.1rem;
+  top: 0.9rem;
+  font-family: var(--pixel);
+  font-size: 1rem;
+  color: var(--clay);
+}
+
+.items li.unseen {
+  border-style: dashed;
+}
+
+.kind {
+  display: block;
+}
+
+.itemTitle {
+  display: inline-block;
+  font-size: 1.3em;
+  line-height: 1.3;
+}
+
+.gloss {
+  color: var(--clay);
+}
+
+.noteText {
+  margin-top: 0.6rem;
+  padding: 0.7rem 1rem 0.8rem;
+  background: var(--blush);
+  border-radius: var(--wobble);
+}
+
+/* markdown the API rendered: a sketchbook page, not a document */
+
+.markdown > :first-child { margin-top: 0; }
+.markdown > :last-child { margin-bottom: 0; }
+.markdown p,
+.markdown ul,
+.markdown ol,
+.markdown blockquote,
+.markdown pre { margin: 0 0 0.7em; }
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4 {
+  margin: 0.9em 0 0.4em;
+  font-size: 1.1em;
+  line-height: 1.3;
+}
+.markdown h1 { font-size: 1.3em; }
+.markdown ul,
+.markdown ol { padding-left: 1.3em; }
+.markdown blockquote {
+  padding-left: 0.8em;
+  border-left: 3px solid var(--clay);
+  color: var(--clay);
+}
+.markdown code { font-size: 0.92em; }
+.markdown pre { overflow-x: auto; white-space: pre; }
+.markdown img { max-width: 100%; height: auto; }
+.markdown hr { border: 0; border-top: 1px solid var(--clay); margin: 1em 0; }
+
+/* the application form sits on the night band */
+
+main > section.nightBand {
+  max-width: none;
+  background: var(--dusk);
+  color: var(--cream);
+}
+
+.nightBand .inner {
+  max-width: var(--wide);
+  margin-inline: auto;
+}
+
+.nightBand .inner > * + * {
+  margin-top: 1rem;
+}
+
+.nightBand h2,
+.nightBand .eyebrow {
+  color: var(--gold);
+}
+
+.nightBand a:hover {
+  color: var(--gold);
+}
+
+.nightBand :focus-visible {
+  outline-color: var(--cream);
+}
+
+/* the honeypot: off-screen, out of the tab order, never announced */
+.trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.formStatus {
+  max-width: 34rem;
+  padding: 0.8rem 1rem;
+  border: 2px dashed var(--blush);
+  border-radius: var(--wobble);
+}
+
+.apply {
+  display: grid;
+  gap: 1.3rem;
+  max-width: 34rem;
+  margin-top: 2rem !important;
+}
+
+.field {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.field label {
+  font-size: 1.15em;
+  line-height: 1.3;
+}
+
+.apply input,
+.apply textarea {
+  width: 100%;
+  min-height: 52px;
+  padding: 0.7rem 1rem;
+  font: inherit;
+  color: var(--ink);
+  background: var(--cream);
+  border: 3px solid var(--cream);
+  border-radius: 10px 14px 9px 15px / 14px 9px 15px 10px;
+}
+
+.apply textarea {
+  resize: vertical;
+}
+
+/* the browser's grey placeholder is 3.6:1 on cream; this is ~5.3:1 */
+.apply ::placeholder {
+  color: color-mix(in srgb, var(--ink) 70%, var(--cream));
+  opacity: 1;
+}
+
+.sendRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1.2rem;
+}
+
+.sendRow .btn.light {
+  margin-top: 0 !important;
+}
+
+.apply input:focus-visible,
+.apply textarea:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.apply [aria-invalid="true"] {
+  border-color: var(--blush);
+  border-style: dashed;
+}
+
+.hint,
+.optional {
+  font-size: 0.85em;
+}
+
+.fieldError {
+  font-size: 0.9em;
+  color: var(--cream);
+  text-decoration: underline wavy 2px var(--blush);
+  text-underline-offset: 0.25em;
+}
+
+.fieldError::before {
+  content: "↑ ";
+}
+
+.btn.light {
+  justify-self: start;
+  margin-top: 0.4rem !important;
+  background: var(--gold);
+  color: var(--ink);
+  border: 0;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn.light:hover {
+  color: var(--ink);
+  background: var(--cream);
+}
+
+.formDone {
+  padding: 0.8rem 1rem;
+  border: 2px dashed var(--gold);
+  border-radius: var(--wobble);
+}
+
 /* ---------- small screens ---------- */
 
 @media (max-width: 700px) {
