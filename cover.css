@@ -241,6 +241,26 @@ canvas {
   text-decoration: underline wavy 2px;
 }
 
+/* the cover's radio link while the ride shows the tower on air (entrance.js):
+   a gold patch that comes and goes; held still when motion is reduced */
+.top nav a.onAir {
+  padding-inline: 0.6rem;
+  border-radius: 999px;
+  animation: onAirBlink 1.2s steps(1, end) infinite;
+}
+
+@keyframes onAirBlink {
+  0% { background: var(--gold); }
+  50% { background: transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .top nav a.onAir {
+    animation: none;
+    background: var(--gold);
+  }
+}
+
 /* ---------- sections ---------- */
 
 main > section {
@@ -267,13 +287,6 @@ main > section + section:not(.ride):not(.nightBand):not(.bookmarks) {
   margin-top: 1rem;
 }
 
-.heroLogo {
-  width: min(100%, 340px);
-  height: auto;
-  justify-self: center;
-  transform: rotate(3deg);
-}
-
 .btn {
   display: inline-block;
   margin-top: 1.4rem !important;
@@ -295,38 +308,6 @@ main > section + section:not(.ride):not(.nightBand):not(.bookmarks) {
 
 .ride {
   padding-top: 0 !important;
-}
-
-/* home: the game is the hero. the title is a sticker on the rink's top edge */
-.ride.stage {
-  padding-top: clamp(1.5rem, 4vw, 2.5rem) !important;
-}
-
-.stageTitle {
-  position: relative;
-  z-index: 1;
-  display: inline-block;
-  max-width: calc(100% - 1.5rem);
-  /* the sticker overlaps the rink's top edge, but never reaches the sprite: its hair starts
-     40% of the way down the canvas (SX/H in cover.js), and the canvas is 5/16 as tall as
-     the rink is wide. on a 320px screen that leaves room for only ~20px, so the overlap
-     shrinks there (1.4rem everywhere wider) */
-  margin: 0 0 calc(-1 * min(1.4rem, 0.125 * (100vw - 2 * var(--edge)) - 16px))
-    clamp(0.6rem, 2vw, 1.5rem);
-  padding: 0.5rem 1.1rem 0.7rem;
-  background: var(--cream);
-  border: var(--line);
-  border-radius: var(--wobble);
-  transform: rotate(-1.5deg);
-}
-
-.stageTitle h1 {
-  font-size: clamp(2.6rem, 8vw, 5.5rem);
-}
-
-.stageTitle .lead {
-  margin-top: 0.3rem;
-  font-size: clamp(1.25rem, 1rem + 1vw, 1.8rem);
 }
 
 .dressUp {
@@ -601,23 +582,6 @@ div.bookmark::before {
   text-underline-offset: 0.25em;
 }
 
-.tag {
-  align-self: flex-start;
-  padding: 0.3rem 0.75rem 0.35rem;
-  border: 2px solid var(--ink);
-  border-radius: 999px;
-  white-space: nowrap;
-}
-
-.tag.open {
-  background: var(--ink);
-  color: var(--cream);
-}
-
-.tag.building {
-  background: var(--gold);
-}
-
 #bookmarks h3 {
   margin-top: 1rem;
 }
@@ -777,6 +741,164 @@ div.bookmark::before {
 .markdown img { max-width: 100%; height: auto; }
 .markdown hr { border: 0; border-top: 1px solid var(--clay); margin: 1em 0; }
 
+/* ---------- radio page ---------- */
+
+.radio {
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* the dial: two steps either side of a strip with one stop per channel */
+.dial {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.4rem 1rem;
+}
+
+.dial[hidden],
+.channel[hidden] {
+  display: none;
+}
+
+.dialStep {
+  min-width: 44px;
+  min-height: 44px;
+  font: inherit;
+  color: var(--ink);
+  background: var(--gold);
+  border: var(--line);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dialStep:hover {
+  transform: rotate(-2deg);
+}
+
+.dialStep:disabled {
+  opacity: 0.5;
+  cursor: default;
+  transform: none;
+}
+
+.dialFace {
+  padding: 0.7rem 1rem;
+  background: var(--ink);
+  border-radius: var(--wobble);
+}
+
+.dialStops {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dialStops li {
+  width: 4px;
+  height: 14px;
+  background: var(--cream);
+  border-radius: 2px;
+}
+
+.dialStops li.on {
+  width: 10px;
+  height: 22px;
+  margin-block: -4px;
+  background: var(--ember);
+  border-radius: 4px;
+}
+
+.dialSay {
+  grid-column: 1 / -1;
+  text-align: center;
+  min-height: 1.4em;
+}
+
+.channel {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1.3rem 1.4rem 1.5rem;
+  border: var(--line);
+  border-radius: 14px 22px 12px 26px / 24px 12px 22px 14px;
+}
+
+.onAir {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.onAirLamp {
+  width: 12px;
+  height: 12px;
+  background: var(--ember);
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+}
+
+.channelName {
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  line-height: 1.2;
+  color: var(--clay);
+}
+
+.playlist h4 {
+  margin: 0 0 0.5rem;
+}
+
+/* the links table: a ruled card, its links big enough to hit */
+.linksTable {
+  overflow-x: auto;
+}
+
+.linksTable table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.linksTable th,
+.linksTable td {
+  padding: 0.5rem 0.8rem;
+  text-align: left;
+  border-bottom: 2px dashed var(--ink);
+}
+
+.linksTable th {
+  font-family: var(--pixel);
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.linksTable a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--ink);
+  text-decoration: underline wavy 2px;
+  text-underline-offset: 0.2em;
+}
+
+.linksTable a::after {
+  content: " ↗";
+}
+
+.channel .why {
+  margin: 0;
+}
+
+.channel .why h4 {
+  font-size: 1.15em;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+}
+
+.channel .why .actName {
+  margin: 0.8rem 0 0.2rem;
+}
+
 /* the application form sits on the night band */
 
 main > section.nightBand {
@@ -930,13 +1052,6 @@ main > section.nightBand {
 
   .hero {
     grid-template-columns: 1fr;
-  }
-
-  .heroLogo {
-    width: 200px;
-    grid-row: 1;
-    justify-self: start;
-    margin-bottom: -1rem;
   }
 
   .ribbons.big {
