@@ -224,7 +224,6 @@ const saySlot = document.getElementById("rideTime"); // polite: "it is now dusk"
 const newsSlot = document.getElementById("rideNews"); // polite: animals, growth, days, lives
 const hint = document.getElementById("rideHelp");
 const word = document.getElementById("rideWord");
-const keep = document.getElementById("rideKeep");
 const chips = [...document.querySelectorAll("#forest .chips input")];
 
 const W = canvas.width;
@@ -351,8 +350,6 @@ function setChips() {
 }
 setChips();
 
-// be honest about the promise when nothing can be kept
-if (!STORED && keep) keep.textContent = "this forest lasts while the page is open.";
 
 // screen readers get the news in words, politely; the canvas itself is hidden from them.
 // (a live region ignores a repeat of the same text, so clear it first)
