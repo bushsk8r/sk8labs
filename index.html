@@ -29,11 +29,13 @@
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/patrick-hand.woff2" />
     <link rel="stylesheet" href="cover.css" />
-    <script src="cover.js" type="module"></script>
+    <link rel="stylesheet" href="entrance.css" />
+    <script src="entrance-boot.js"></script>
+    <script src="entrance.js" type="module"></script>
   </head>
 
   <body>
-    <a class="skip" href="#main">skip to the game</a>
+    <a class="skip" href="#rinkBtn">skip to the ride</a>
 
     <header class="top">
       <a class="home" href="#top" aria-label="sk8 studio, top of page">
@@ -46,68 +48,83 @@
     </header>
 
     <main id="main">
-      <!-- the toy. hand copies of this section also live in collections/view.html and 404.html: change all three together. -->
-      <section class="ride stage" id="top" aria-labelledby="rideTitle">
-        <div class="stageTitle">
-          <h1>sk8 studio</h1>
+      <!-- the long road in: the ride ends at the two ways in. 404.html and collections/view.html keep the small endless ride (cover.js). -->
+      <section class="entrance" id="top" aria-labelledby="entranceTitle">
+        <div class="head">
+          <h1 id="entranceTitle">sk8 studio</h1>
           <p class="lead">this is a space where you are free to play.</p>
         </div>
-        <h2 id="rideTitle" class="visually-hidden">take bushsk8r for a ride</h2>
-        <button class="rink" type="button" aria-describedby="rideHelp">
-          <canvas id="rink" width="128" height="40" aria-hidden="true"></canvas>
-          <span class="visually-hidden">kick bushsk8r</span>
+
+        <!-- the distance ribbon: decorative, the same news is spoken through #live -->
+        <div class="ribbon" aria-hidden="true">
+          <div class="bar"><i id="fill"></i></div>
+          <ol class="stops" id="stops">
+            <li class="on">compost</li>
+            <li>analyse</li>
+            <li>edit</li>
+            <li>produce</li>
+          </ol>
+        </div>
+
+        <button class="rink" id="rinkBtn" type="button" aria-describedby="hint">
+          <canvas id="rink" width="160" height="60" aria-hidden="true"></canvas>
+          <span class="visually-hidden">kick bushsk8r down the road</span>
         </button>
         <div class="rideBar">
-          <p id="rideHelp" class="pixel">
-            click or press space to kick. keep a steady beat.
-          </p>
-          <p class="pixel">time · <span id="rideClock">sunrise</span></p>
+          <p id="hint">click the rink or press space to kick. keep a steady beat.</p>
+          <button class="quiet" id="skipBtn" type="button">skip the ride</button>
         </div>
-        <!-- polite news for screen readers: the light changing, a dandelion, the wash -->
-        <p id="rideTime" class="visually-hidden" role="status" aria-live="polite"></p>
-        <p id="rideNews" class="visually-hidden" role="status" aria-live="polite"></p>
+        <p id="live" class="visually-hidden" role="status" aria-live="polite"></p>
+
+        <!-- dress up: the board only (the hair chips are gone, bushsk8r always wears the afro) -->
         <details class="dressUp">
           <summary class="pixel">dress up</summary>
-          <div class="rideBar">
           <fieldset class="chips">
             <legend class="pixel">board</legend>
             <label><input type="radio" name="board" value="sk8" checked /><span>sk8board</span></label>
             <label><input type="radio" name="board" value="banana" /><span>banana</span></label>
             <label><input type="radio" name="board" value="loaf" /><span>loaf</span></label>
           </fieldset>
-          <fieldset class="chips">
-            <legend class="pixel">hair</legend>
-            <label><input type="radio" name="hair" value="afro" checked /><span>afro</span></label>
-            <label><input type="radio" name="hair" value="none" /><span>not yet</span></label>
-          </fieldset>
-          <button class="textBtn pixel" type="button" id="wash">wash the path clean</button>
-          </div>
         </details>
-        <p class="note">
-          ride in rhythm and dandelions grow. <span id="rideKeep">they'll be here next time.</span>
-          <a class="bookmarkJump pixel" href="#bookmarks">pick a bookmark ↓</a>
-        </p>
-      </section>
+        <p class="keep" id="keep">ride in rhythm and dandelions grow. they'll be here next time.</p>
 
-      <!-- the two bookmarks -->
-      <section class="bookmarks" id="bookmarks" aria-labelledby="bookmarksTitle">
-        <h2 id="bookmarksTitle" class="visually-hidden">two ways in</h2>
-        <ul class="ribbons big" role="list">
-          <li>
-            <a class="bookmark clay" href="collections/">
-              <span class="bookmarkName">tourist</span>
-              <span class="bookmarkSay">look around, then ask to join.</span>
-              <span class="bookmarkGo">open the crate →</span>
-            </a>
-          </li>
-          <li>
-            <a class="bookmark indigo" href="https://gallery.sk8.studio" target="_blank" rel="noopener noreferrer" aria-describedby="purist-key">
-              <span class="bookmarkName">purist</span>
-              <span class="bookmarkKey" id="purist-key">the keyword is <strong>welcome</strong>. it's a handshake, not a lock.</span>
-              <span class="bookmarkGo">open the gallery ↗<span class="visually-hidden"> (opens in a new tab)</span></span>
-            </a>
-          </li>
-        </ul>
+        <!-- the two ways in -->
+        <section class="doors" id="doors" aria-labelledby="doorsTitle">
+          <h2 id="doorsTitle" tabindex="-1">two ways in</h2>
+          <ul class="plaques" role="list">
+            <li>
+              <a class="plaque tourist" href="collections/">
+                <span class="pName">tourist</span>
+                <span class="pSay">look around, then ask to join.</span>
+                <span class="pGo">open the crate →</span>
+              </a>
+            </li>
+            <li>
+              <a class="plaque purist" href="https://gallery.sk8.studio" target="_blank" rel="noopener noreferrer" aria-describedby="purist-key">
+                <span class="pName">purist</span>
+                <span class="pSay" id="purist-key">the keyword is <strong>welcome</strong>. it's a handshake, not a lock.</span>
+                <span class="pGo">open the gallery ↗<span class="visually-hidden"> (opens in a new tab)</span></span>
+              </a>
+            </li>
+          </ul>
+          <!-- your road in: this visitor's own ride, as words and a strip. filled by entrance.js -->
+          <div class="roadIn" id="roadIn">
+            <h3 class="pixel">your road in</h3>
+            <div class="roadStrip" aria-hidden="true">
+              <div class="bar" id="roadBar"></div>
+              <ol class="stops">
+                <li>compost</li>
+                <li>analyse</li>
+                <li>edit</li>
+                <li>produce</li>
+              </ol>
+            </div>
+            <p id="roadSentence"></p>
+          </div>
+          <div class="doorsFoot">
+            <button class="quiet" id="again" type="button">ride again</button>
+          </div>
+        </section>
       </section>
     </main>
 
