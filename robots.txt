@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://sk8.studio/sitemap.xml
+
+# A plain-language guide for language models: https://sk8.studio/llms.txt

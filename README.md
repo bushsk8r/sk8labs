@@ -4,7 +4,7 @@ an open studio where playtime is never over — [sk8.studio](https://sk8.studio)
 
 The cover of **sk8 studio**, and the fourth repo of the atelier project. Anyone curious about the studio lands here first: a short home page with two bookmarks, *tourist* (the crate: collections, then an application to join) and *purist* (the gallery, keyword `welcome`), and a top-bar link to **play** (two games). It still holds the maker's older archive and experiments, unlinked from the home page.
 
-> **State.** The cut-down home page, the crate (`collections/`) and the application form are built on branch `development` but **uncommitted and not deployed**. Plan: `../sk8labs-front-door-plan.md` (deploy order §6).
+> **State.** The cut-down home page, the crate (`collections/`) and the application form are committed on branch `development` but **not deployed**. Plan: `../sk8labs-front-door-plan.md` (deploy order §6).
 
 | Host | Repo | What it is |
 |---|---|---|
@@ -51,6 +51,7 @@ sk8labs/
 ├── collections/                       # the crate: index.html + collections.js (list), view.html + view.js
 │                                      #   (one board, root-absolute paths), apply.js (application form)
 ├── _redirects · serve.json            # /collections/:id -> view.html (Netlify, local `serve`)
+├── sitemap.xml · robots.txt · llms.txt # home + its links; Allow /, sitemap, a comment naming llms.txt; a plain-words guide for models (cover only, no API)
 ├── index.css                          # the old pages' styles — archive/, play/, terrasse/ (not the home page)
 ├── script.js                          # header()/footer() — footer mounts the gallery/footer rps game (terrasse/)
 ├── helper.js                          # DOM builders (createElement, createBtn, createLink, createMedia,
@@ -137,7 +138,7 @@ The home ride plus a few things from the updated game design document. **Its own
 
 ## Direction
 
-The plan is `../sk8labs-front-door-plan.md` (it supersedes §3 of `todo list.md`): cover -> *tourist* -> the crate -> **become a purist**. Built; what remains is deploy (plan §6): commit, production `CORS_ORIGIN` listing `https://sk8.studio`, Netlify picking up `_redirects`, production `GALLERY_KEYWORD`, and real public collections made in the studio. Purists read applications in the studio at `/studio/applications`. Old pages stay (O4).
+The plan is `../sk8labs-front-door-plan.md` (it supersedes §3 of `todo list.md`): cover -> *tourist* -> the crate -> **become a purist**. Built; what remains is deploy (plan §6): production `CORS_ORIGIN` listing `https://sk8.studio`, Netlify picking up `_redirects`, production `GALLERY_KEYWORD`, and real public collections made in the studio. Purists read applications in the studio at `/studio/applications`. Old pages stay (O4).
 
 ---
 

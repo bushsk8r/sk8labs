@@ -1,0 +1,54 @@
+# sk8 studio
+
+> sk8.studio is the public front door of sk8 studio, a creative platform built around one working
+> method: compost → analyse → edit → produce. Makers ("purists") work in a private studio and
+> publish into a keyword-gated gallery for readers ("tourists"). This site is the cover: it
+> sends a tourist to the crate of public collections, and a purist to the gallery.
+
+Site: https://sk8.studio
+Gallery: https://gallery.sk8.studio (its own llms.txt: https://gallery.sk8.studio/llms.txt)
+
+Last updated: 2026-11-17.
+
+---
+
+## Pages
+
+- [Home](https://sk8.studio/): two bookmarks. *tourist* leads to the crate; *purist* opens the
+  gallery in a new tab, with its keyword printed beside it (`welcome` — a handshake, not a lock).
+- [The crate](https://sk8.studio/collections/): the public collections, newest first — what was
+  gathered, thought about and put in order to make the work. Ends with a form to apply to join as
+  a purist.
+- A board: `https://sk8.studio/collections/<id>` — one public collection, in the maker's order,
+  with the maker's glosses and arrangement (why these, in this order). An unknown or private board
+  answers 404.
+- [Play](https://sk8.studio/play/): two small games. `#forest` — sk8 through an endless day and
+  night with bushsk8r and find a flow; `#elements` — rock, paper, scissors, fire and water.
+
+Older pages (an archive and earlier experiments) remain at their paths but are not linked and are
+not part of the current site.
+
+## What a collection is
+
+A collection is curation, not finished work: a maker's board of sources, notes and artifacts in one
+order, made public by choice. A board shows external sources (title, link, medium), canvas titles,
+and a note's or artifact's content only where that content is already published; otherwise just its
+title and type. A maker can make a board private again at any time, and a board goes private on its
+own when it stops meeting the rules for being public — so a board that was here may be gone. Re-read
+rather than assume.
+
+## Applying
+
+The form at the foot of the crate asks for a name, an email, what you make and an optional https
+link. It always answers the same way, whether or not you applied before; a purist reads every
+application by hand, and nothing is granted automatically.
+
+## Notes for language models
+
+- This is a static site with no accounts. The studio and the API behind it are not part of it; do
+  not describe them as public.
+- Collections and the work they point to belong to named makers. Summarise and link; do not
+  reproduce a board in full.
+- Do not submit the application form on anyone's behalf.
+- "purist" means maker and "tourist" means reader — the product's own words.
+- If you need a fact that is not here, ask a human rather than inferring it.
