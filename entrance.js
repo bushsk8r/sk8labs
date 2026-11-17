@@ -51,7 +51,8 @@ const GLYPH = {
   a: ".#.#.####.##.#", c: ".##|#..|#..|#..|.##", d: "##.|#.#|#.#|#.#|##.", e: "###|#..|##.|#..|###",
   i: "###|.#.|.#.|.#.|###", k: "#.#|#.#|##.|#.#|#.#", l: "#..|#..|#..|#..|###", m: "#.#|###|###|#.#|#.#",
   o: "###|#.#|#.#|#.#|###", r: "##.|#.#|##.|#.#|#.#", s: ".##|#..|.#.|..#|##.", t: "###|.#.|.#.|.#.|.#.",
-  u: "#.#|#.#|#.#|#.#|###", w: "#.#|#.#|###|###|#.#",
+  u: "#.#|#.#|#.#|#.#|###", w: "#.#|#.#|###|###|#.#", g: ".##|#..|#.#|#.#|.##", h: "#.#|#.#|###|#.#|#.#",
+  y: "#.#|#.#|.#.|.#.|.#.",
   0: "###|#.#|#.#|#.#|###", 1: ".#.|##.|.#.|.#.|###", 2: "###|..#|###|#..|###", 3: "###|..#|###|..#|###",
   4: "#.#|#.#|###|..#|..#", 5: "###|#..|###|..#|###", 6: "###|#..|###|#.#|###", 7: "###|..#|..#|..#|..#",
   8: "###|#.#|###|#.#|###", 9: "###|#.#|###|..#|###",
@@ -124,9 +125,9 @@ add(650, "line", { len: 40, pages: [6, 0, 10, 0] });
 [587, 607, 640].forEach((x, i) => add(x, "pot", { c: [C.clay, C.dusk, C.gold][i] }));
 add(715, "arrow");
 add(738, "crop"); add(758, "crop");
-// produce: the studio's signposts count down in kicks, drawn last so they sit over the trees
+// produce: two signposts before the studio, "almost" then "there", drawn last so they sit over the trees
 [795, 838].forEach((x) => add(x, "tree2"));
-[210, 125, 40].forEach((rem) => add(T - rem, "sign", { rem }));
+[["almost", 210], ["there", 40]].forEach(([word, rem]) => add(T - rem, "sign", { word }));
 const LAMPX = [22, 58, 102, 138];
 
 const calm = matchMedia("(prefers-reduced-motion: reduce)");
@@ -212,7 +213,7 @@ function drawBuilding(ox, lit, sky) {
   for (let i = 0; i < 5; i++) { const px = ox + 32 + i * 3; R(px, 34 + dy - (i % 2), 3, 8, pg[i]); R(px, 34 + dy - (i % 2), 3, 1, C.ink); }
   R(ox + 30, 42 + dy, 20, 8, C.clay); R(ox + 30, 42 + dy, 20, 1, C.ink); R(ox + 30, 49 + dy, 20, 1, C.ink); R(ox + 36, 45 + dy, 8, 1, C.ink);
   // the purist doorway: a door with the keyword painted above it
-  R(ox + 104, 19 + dy, 32, 9, C.gold); label("welcome", ox + 106, 21 + dy, C.ink);
+  R(ox + 104, 19 + dy, 32, 9, C.gold); label("gallery", ox + 106, 21 + dy, C.ink);
   R(ox + 109, 29 + dy, 22, 21, C.cream); R(ox + 110, 30 + dy, 20, 20, C.clay);
   R(ox + 110, 30 + dy, 3, 20, C.gold); R(ox + 125, 40 + dy, 2, 2, C.gold); R(ox + 114, 33 + dy, 9, 12, mix(C.clay, C.ink, 0.25));
   // the lamps
@@ -333,12 +334,12 @@ function draw(now) {
       for (let i = 0; i < 4; i++) R(cx - 18 + bw + i, GROUND - 24 + i, 1, 9 - i * 2, i === 3 ? line : C.gold);
       label("sk8 studio", cx - 15, GROUND - 22, C.ink);
     } else if (o.k === "sign") {
-      // the countdown signs: double glyph size (plan §6), a board 6 wider than the longer line
-      const k = kicksLeft(o.rem), t2 = k + (k === 1 ? " kick" : " kicks"), bw = Math.max(textW("studio", 2), textW(t2, 2)) + 6, bh = 28;
+      // the two signs: double glyph size (plan §6), a board 6 wider than the word
+      const bw = textW(o.word, 2) + 6, bh = 18;
       const bx = (cx - bw / 2 + 1) | 0, by = GROUND - 16 - bh;
       R(cx, GROUND - 16, 2, 16, line);
       R(bx, by, bw, bh, line); R(bx + 1, by + 1, bw - 2, bh - 2, C.gold);
-      label("studio", bx + 3, by + 4, C.ink, 2); label(t2, bx + 3, by + 16, C.ink, 2);
+      label(o.word, bx + 3, by + 4, C.ink, 2);
     }
   }
 

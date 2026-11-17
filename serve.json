@@ -1,5 +1,5 @@
 {
-  "rewrites": [{ "source": "/collections/:id", "destination": "/collections/view.html" }],
+  "rewrites": [{ "source": "/collections/:slug", "destination": "/collections/view.html" }],
   "headers": [
     {
       "source": "**",

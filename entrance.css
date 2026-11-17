@@ -8,6 +8,10 @@ main > section.entrance {
   padding: 0.9rem var(--edge) 2.5rem;
 }
 
+@media (min-width: 900px) {
+  main > section.entrance { max-width: 1400px; }
+}
+
 main > section.entrance .head {
   display: flex;
   flex-wrap: wrap;

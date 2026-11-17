@@ -10,6 +10,7 @@ import {
   curatorName,
   plainDate,
 } from "/api.js";
+import { findBoard } from "/collections/slugs.js";
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const ACTS = ["intro", "complication", "confrontation", "resolution"];
@@ -17,12 +18,17 @@ const ACTS = ["intro", "complication", "confrontation", "resolution"];
 const $ = (id) => document.getElementById(id);
 const status = $("status");
 
-// /collections/view.html?id=<uuid>, or /collections/<uuid> via a rewrite
-function boardId() {
+// /collections/<slug> or /collections/<uuid> via a rewrite, or
+// /collections/view.html?id=<slug or uuid>
+function boardKey() {
   const fromQuery = new URLSearchParams(location.search).get("id");
-  const fromPath = location.pathname.split("/").filter(Boolean).pop();
-  const id = fromQuery || fromPath;
-  return id && UUID.test(id) ? id : null;
+  const last = location.pathname.split("/").filter(Boolean).pop() ?? "";
+  let fromPath = last;
+  try {
+    fromPath = decodeURIComponent(last);
+  } catch {}
+  if (fromQuery) return fromQuery;
+  return fromPath && fromPath !== "view.html" ? fromPath : null;
 }
 
 function say(text, retry) {
@@ -161,12 +167,23 @@ function why(arrangement) {
 }
 
 async function load() {
-  const id = boardId();
-  if (!id) return notFound();
+  const key = boardKey();
+  if (!key) return notFound();
   say("opening the board…");
   let data;
   try {
+    // the API reads by id only: a slug is found in the list first
+    const { collections } = await getJSON("/public/collections");
+    const found = findBoard(Array.isArray(collections) ? collections : [], key);
+    // an unknown slug is not here; an unlisted uuid is still asked of the API
+    // (the list may be briefly stale), which answers 404 for a private board
+    const id = found?.board?.id ?? (UUID.test(key) ? key : null);
+    if (!id) return notFound();
     data = await getJSON(`/public/collections/${id}`);
+    // an old uuid link moves to the slug URL
+    if (found && key.toLowerCase() !== found.slug) {
+      history.replaceState(null, "", `/collections/${found.slug}`);
+    }
   } catch (err) {
     if (err.status === 404) return notFound();
     say(

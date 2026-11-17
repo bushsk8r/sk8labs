@@ -2,7 +2,7 @@
 
 an open studio where playtime is never over — [sk8.studio](https://sk8.studio)
 
-The cover of **sk8 studio**, and the fourth repo of the atelier project. Anyone curious about the studio lands here first: a short home page with two bookmarks, *tourist* (the crate: collections, then an application to join) and *purist* (the gallery, keyword `welcome`), and a top-bar link to **play** (two games). It still holds the maker's older archive and experiments, unlinked from the home page.
+The cover of **sk8 studio**, and the fourth repo of the atelier project. Anyone curious about the studio lands here first: a short home page with two bookmarks, *tourist* (the crate: collections, then an application to join) and *purist* (the gallery, keyword `welcome`), and one nav on every page: **play** (two games), **radio** (coming soon) and **crate**. It still holds the maker's older archive and experiments, unlinked from the home page.
 
 > **State.** The cut-down home page, the crate (`collections/`) and the application form are committed on branch `development` but **not deployed**. Plan: `../sk8labs-front-door-plan.md` (deploy order §6).
 
@@ -28,7 +28,7 @@ The tourist/purist split, the rock-paper-scissors-fire-water elements that name 
 A static site: hand-written HTML, CSS and vanilla ES modules. **No `package.json`, no build step, no dependencies, no tests.**
 
 ```bash
-npx serve . -l 5500   # 5500 is in atelier/.env CORS_ORIGIN and studio_client NEXT_PUBLIC_SK8_URL; serve.json handles /collections/<id>
+npx serve . -l 5500   # 5500 is in atelier/.env CORS_ORIGIN and studio_client NEXT_PUBLIC_SK8_URL; serve.json handles /collections/<slug>
 ```
 
 Any static server works (`npx` itself wants Node; `.nvmrc` pins 24.22.1, as in the other three repos). Opening `index.html` from disk doesn't: the pages load `type="module"` scripts, which browsers refuse over `file://`.
@@ -50,7 +50,7 @@ sk8labs/
 ├── api.js                             # fetch wrapper for the public API (base URL by hostname), postJSON
 ├── collections/                       # the crate: index.html + collections.js (list), view.html + view.js
 │                                      #   (one board, root-absolute paths), apply.js (application form)
-├── _redirects · serve.json            # /collections/:id -> view.html (Netlify, local `serve`)
+├── _redirects · serve.json            # /collections/:slug -> view.html (Netlify, local `serve`)
 ├── sitemap.xml · robots.txt · llms.txt # home + its links; Allow /, sitemap, a comment naming llms.txt; a plain-words guide for models (cover only, no API)
 ├── index.css                          # the old pages' styles — archive/, play/, terrasse/ (not the home page)
 ├── script.js                          # header()/footer() — footer mounts the gallery/footer rps game (terrasse/)
@@ -64,6 +64,7 @@ sk8labs/
 │   ├── footer/                        # rock-paper-scissors-fire-water (class-based); also a standalone page
 │   ├── jukebox.js                     # track selector + Arweave media player
 │   └── helper.js · script.js          # forked copies of the root files
+├── radio/                             # index.html: the coming-soon placeholder
 ├── play/                              # the play page: index.html + play.css, bookmarks.js (the #hash picks a game),
 │                                      #   forest.js (bushsk8r, the forest), elements.js (rps with a score)
 ├── archive/                           # the crate: works by year
@@ -86,17 +87,18 @@ sk8labs/
 | Path | What's there |
 |---|---|
 | `/` | The cover: two bookmarks — *tourist* → `collections/`, *purist* → `https://gallery.sk8.studio` (new tab; `.bookmarkKey` prints "the keyword is **welcome**", `aria-describedby="purist-key"`) — under the **hero** (logo, *sk8 studio*) and **the ride** (a canvas: click to kick bushsk8r along; traces kept in `localStorage` `sk8-cover-traces`, *wash the path clean* clears them). The bookmarks are the only way to the gallery and the crate; nothing links to the atelier or the API. (Plan D14: the keyword `welcome` is printed at the purist bookmark.) |
-| `/collections/` · `/collections/<id>` | **The crate.** Every public collection, newest first (`GET /public/collections`), then one board per page (`/public/collections/:id`): arrangement above the items; notes, artifacts and external sources as the API shows them, anything withheld a dashed placeholder; a private or unknown id reads *this collection isn't public*. API strings only through `textContent`. The list page ends in **become a purist** — name, email, what you make, optional https link, hidden honeypot `company` — posting to `POST /public/applications`; a failure keeps the answers and says why |
+| `/collections/` · `/collections/<title-slug>` | **The crate.** Every public collection, newest first (`GET /public/collections`), then one board per page (`/public/collections/:id`): arrangement above the items; notes, artifacts and external sources as the API shows them, anything withheld a dashed placeholder; a private or unknown slug reads *this collection isn't public*. Board URLs are title slugs from `collections/slugs.js` (`slugify`, `assignSlugs` with `-2`/`-3` for repeat titles in list order, `findBoard` slug-or-uuid); an old uuid URL is rewritten to its slug with `replaceState`. API strings only through `textContent`. The list page ends in **become a purist** — name, email, what you make, optional https link, hidden honeypot `company` — posting to `POST /public/applications`; a failure keeps the answers and says why |
 | `/terrasse/` | "your terrasse — where to from here?": **shelf** ("a space to store your zines" → prints *soon come*) and **play** ("a sandbox" → prints *click the boxes*, pointing at the footer game). `shelf.js` and `play.js` are empty files |
 | `/gallery/` | "welcome to the gallery — aka the artifact archive, aka the prototype graveyard", marked `[this is a prototype]`. Nav: **about** (programmer / baking enthusiast / recorder of sounds, linking GitHub, the bakery and a `#` jukebox), **past works** (idea factory 2017, human in the loop 2020, echo chamber 2021, playin with poly 2021 — each opens its Arweave media), **currently** (experiments: minesweeper, hypermedia zine · recordings jukebox · a Spotify playlist embed) |
 | `/gallery/footer/` | The rps game as its own page, with a marquee header |
+| `/radio/` | Coming soon: a placeholder (`noindex`, kept out of the sitemap until it has content) |
 | `/play/` | **Two games behind two bookmarks** (cover look; `bookmarks.js` shows one section per `#forest` / `#elements`, and with scripts off both are simply on the page). **bushsk8r**: the home ride grown toward `../bushsk8r game design document.md`, see below. **rock paper scissors**: five elements, one player against the weighted agent or two taking turns, a score per mode in `localStorage` `sk8-play-elements-score` |
 | `/archive/` | Year selector over `crate.js` (2013–2025); a year lists its works (craft), and a chosen work plays its Arweave media or reads "private collection" when there's no `source` |
 | `/archive/loop/` · `/archive/recording/` | The "human in the loop" tracks — a vanilla player and a React build of the same material ([audio_player source](https://github.com/justinmsaga/audio_player)) |
 | `/forest/` | Seven may field/wind recordings with a track selector |
 | `/bakery/` | "the baked chronicles — a study of data sonification": an audio protocol for documenting recipes. Vol 0 (cookies, banana bread, cake, ube, retrospective) · vol 1 (the croissant, in progress) · vol 2 (the cronut, not started) |
 
-**The home page links none of the older pages** (its top bar links `/play/`, which is a new page). `/gallery/`, `/terrasse/`, `/archive/`, `/forest/`, `/archive/loop/` and `/archive/recording/` are reachable by URL only, kept at their paths (plan O4); root `index.css`/`script.js`/`helper.js` stay because they import them. `/bakery/` is linked from gallery/about.
+**The home page links none of the older pages** (its nav links only the new pages `/play/`, `/radio/` and `/collections/`). `/gallery/`, `/terrasse/`, `/archive/`, `/forest/`, `/archive/loop/` and `/archive/recording/` are reachable by URL only, kept at their paths (plan O4); root `index.css`/`script.js`/`helper.js` stay because they import them. `/bakery/` is linked from gallery/about.
 
 ### The rps game
 
@@ -164,4 +166,4 @@ all creations: [CC0 vibes](https://creativecommons.org/public-domain/cc0/) — p
 
 ## Link previews
 
-Shared `/collections/<id>` links get their own card through `netlify/edge-functions/collection-meta.js` (plan: `../sk8labs-link-previews-plan.md`). It rewrites the `<!--meta-->` block in `collections/view.html`; keep those markers. The `.ride` markup is hand-copied in `index.html`, `collections/view.html` and `404.html`; change all three together. `npx serve` skips edge functions; use `npx netlify dev`.
+Shared `/collections/<slug>` links get their own card through `netlify/edge-functions/collection-meta.js` (plan: `../sk8labs-link-previews-plan.md`). It rewrites the `<!--meta-->` block in `collections/view.html`; keep those markers. The `.ride` markup is hand-copied in `index.html`, `collections/view.html` and `404.html`; change all three together. `npx serve` skips edge functions; use `npx netlify dev`.
