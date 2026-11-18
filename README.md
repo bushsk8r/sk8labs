@@ -66,7 +66,7 @@ sk8labs/
 │   ├── footer/                        # rock-paper-scissors-fire-water (class-based); also a standalone page
 │   ├── jukebox.js                     # track selector + Arweave media player
 │   └── helper.js · script.js          # forked copies of the root files
-├── radio/                             # index.html + radio.js: on-air channels on a dial (GET /public/radio)
+├── radio/                             # index.html + radio.js: on-air channels on a dial (GET /public/radio); the channel markup + its cover.css rules are hand-copied in the studio's RadioPreview (change both)
 ├── play/                              # the play page: index.html + play.css, bookmarks.js (the #hash picks a game),
 │                                      #   forest.js (bushsk8r, the forest), elements.js (rps with a score)
 ├── archive/                           # the crate: works by year
