@@ -897,6 +897,30 @@ div.bookmark::before {
 
 .channel .why .actName {
   margin: 0.8rem 0 0.2rem;
+  font-size: 1.1rem;
+}
+
+/* a table in the arrangement: ruled on every row and column, scrolling sideways when wide */
+.channel .why .arrangementText table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 0.6rem 0;
+}
+
+.channel .why .arrangementText th,
+.channel .why .arrangementText td {
+  padding: 0.4rem 0.7rem;
+  text-align: left;
+  vertical-align: top;
+  border: 2px solid currentColor;
+}
+
+.channel .why .arrangementText th {
+  font-family: var(--pixel);
+  font-size: 0.875rem;
+  font-weight: 400;
 }
 
 /* the application form sits on the night band */

@@ -29,7 +29,7 @@ function show(index, announce) {
   const c = channels[at];
 
   $("channelName").textContent = c.name;
-  $("channelMeta").textContent = `played by ${curatorName(c.maker)}`;
+  $("channelMeta").textContent = `curated by ${curatorName(c.maker)}`;
   const desc = $("channelSay");
   desc.textContent = c.description ?? "";
   desc.hidden = !c.description;
@@ -45,7 +45,7 @@ function show(index, announce) {
     if (a.textHtml) why.append(...markdownBody(a.textHtml, "", "arrangementText"));
     for (const key of ACTS) {
       const html = a.actsHtml?.[key];
-      if (html) why.append(el("h5", "pixel actName", key), ...markdownBody(html, "", "arrangementText"));
+      if (html) why.append(el("h5", "pixel actName", `act ${ACTS.indexOf(key) + 1}: ${key}`), ...markdownBody(html, "", "arrangementText"));
     }
     why.hidden = false;
   } else why.hidden = true;
