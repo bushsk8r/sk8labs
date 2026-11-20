@@ -39,16 +39,18 @@
 
       <section class="radio" aria-labelledby="radioTitle">
         <h2 id="radioTitle" class="visually-hidden">on air</h2>
+        <p class="radioLede">each maker airs one playlist at a time. the links open on other sites.</p>
         <p id="status" class="status" role="status">tuning in…</p>
 
-        <!-- the dial: one stop per channel on air. filled by radio.js -->
+        <!-- the dial: one button stop per channel on air. filled by radio.js -->
         <div class="dial" id="dial" hidden>
           <button class="dialStep" id="prev" type="button" aria-label="previous channel">◀</button>
-          <div class="dialFace" aria-hidden="true">
-            <ol class="dialStops" id="stops"></ol>
+          <div class="dialFace">
+            <ol class="dialStops" id="stops" aria-label="channels on air"></ol>
           </div>
           <button class="dialStep" id="next" type="button" aria-label="next channel">▶</button>
-          <p class="pixel dialSay" id="dialSay" aria-live="polite"></p>
+          <p class="pixel dialSay" id="dialSay"></p>
+          <p class="visually-hidden" id="dialLive" aria-live="polite"></p>
         </div>
 
         <article class="channel" id="channel" hidden aria-labelledby="channelName">
@@ -58,11 +60,11 @@
           <p class="channelSay" id="channelSay" hidden></p>
 
           <div class="playlist">
-            <h4 class="pixel" id="playlistTitle"></h4>
+            <h4 id="playlistTitle"></h4>
             <div id="links"></div>
           </div>
 
-          <div class="why" id="why" hidden></div>
+          <details class="why" id="why" hidden></details>
         </article>
       </section>
     </main>
