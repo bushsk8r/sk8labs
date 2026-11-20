@@ -772,7 +772,8 @@ div.bookmark::before {
   cursor: pointer;
 }
 
-.dialStep:hover {
+.dialStep:hover:not(:disabled),
+.dialStep:focus-visible:not(:disabled) {
   transform: rotate(-2deg);
 }
 
@@ -783,38 +784,91 @@ div.bookmark::before {
 }
 
 .dialFace {
-  padding: 0.7rem 1rem;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 0.4rem;
   background: var(--ink);
   border-radius: var(--wobble);
 }
 
+.dialFace::-webkit-scrollbar {
+  display: none;
+}
+
+/* one 44px button per channel; the ember mark slides under the current one */
 .dialStops {
+  position: relative;
   display: flex;
-  justify-content: space-between;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.dialStops li {
+.dialStops li:not(.dialMark) {
+  flex: 1 0 44px;
+}
+
+.dialStop {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-width: 44px;
+  height: 44px;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.dialStop:focus-visible {
+  outline: 3px solid var(--cream);
+  outline-offset: -5px;
+}
+
+.dialTick {
   width: 4px;
   height: 14px;
   background: var(--cream);
   border-radius: 2px;
 }
 
-.dialStops li.on {
+.dialStop:hover .dialTick,
+.dialStop:focus-visible .dialTick {
+  height: 20px;
+}
+
+.dialMark {
+  position: absolute;
+  top: 11px;
+  left: 0;
   width: 10px;
   height: 22px;
-  margin-block: -4px;
   background: var(--ember);
   border-radius: 4px;
+  pointer-events: none;
+  transition: transform 0.15s ease-out;
 }
 
 .dialSay {
   grid-column: 1 / -1;
   text-align: center;
   min-height: 1.4em;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.radioLede {
+  max-width: 62ch;
+}
+
+.channel.fade {
+  animation: channelIn 0.15s ease-out;
+}
+
+@keyframes channelIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .channel {
@@ -843,10 +897,15 @@ div.bookmark::before {
   font-size: clamp(1.8rem, 5vw, 2.6rem);
   line-height: 1.2;
   color: var(--clay);
+  overflow-wrap: anywhere;
 }
 
+/* the playlist carries the weight under the name */
 .playlist h4 {
   margin: 0 0 0.5rem;
+  font-size: 1.5em;
+  font-weight: 400;
+  line-height: 1.15;
 }
 
 /* the links table: a ruled card, its links big enough to hit */
@@ -864,6 +923,7 @@ div.bookmark::before {
   padding: 0.5rem 0.8rem;
   text-align: left;
   border-bottom: 2px dashed var(--ink);
+  overflow-wrap: break-word;
 }
 
 .linksTable th {
@@ -885,12 +945,33 @@ div.bookmark::before {
   content: " ↗";
 }
 
+/* the arrangement: quiet while shut (a dashed line), the ink card when opened */
 .channel .why {
   margin: 0;
+  padding: 0 1.2rem;
+  background: none;
+  color: var(--ink);
+  border: 2px dashed var(--ink);
 }
 
-.channel .why h4 {
-  font-size: 1.15em;
+.channel .why[open] {
+  padding-bottom: 1.2rem;
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+}
+
+.channel .why summary {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 1em;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.channel .why[open] summary {
   color: var(--gold);
   margin-bottom: 0.4rem;
 }
@@ -898,6 +979,7 @@ div.bookmark::before {
 .channel .why .actName {
   margin: 0.8rem 0 0.2rem;
   font-size: 1.1rem;
+  color: var(--gold);
 }
 
 /* a table in the arrangement: ruled on every row and column, scrolling sideways when wide */
@@ -915,6 +997,7 @@ div.bookmark::before {
   text-align: left;
   vertical-align: top;
   border: 2px solid currentColor;
+  overflow-wrap: break-word;
 }
 
 .channel .why .arrangementText th {
@@ -1138,6 +1221,14 @@ main > section.nightBand {
   .bookmark {
     transition: none;
   }
+
+  .dialMark {
+    transition: none;
+  }
+
+  .channel.fade {
+    animation: none;
+  }
 }
 
 /* ---------- the crate (collections) ---------- */
@@ -1209,4 +1300,44 @@ main > section.nightBand {
 
 .why > * + p {
   margin-top: 0.5rem;
+}
+
+/* long urls in a cell break anywhere; short words in it never do */
+.linksTable a,
+.channel .why td a {
+  overflow-wrap: anywhere;
+}
+
+/* the playlist's links, one line each: a label, then "listen ↗" (radio.js linksList) */
+.linksList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.linksList li {
+  display: flex;
+  border-bottom: 2px dashed var(--ink);
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 1rem;
+}
+
+.linksList .linkLabel {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.linksList a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--ink);
+  text-decoration: underline wavy 2px;
+  text-underline-offset: 0.2em;
+}
+
+.linksList a::after {
+  content: " ↗";
 }
