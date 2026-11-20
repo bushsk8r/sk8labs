@@ -1,4 +1,4 @@
-// the radio: every purist's on-air channel, one at a time on a dial.
+// the radio: every on-air channel (up to five per purist), one at a time on a dial.
 // a channel is a playlist's links table (the first table in its text, rendered
 // by the API: markdownBody) and the arrangement note its maker picked.
 import { getJSON, el, markdownBody, curatorName } from "../api.js";
@@ -80,9 +80,9 @@ function show(index, announce) {
 
   $("channelName").textContent = c.name;
   $("channelMeta").textContent = `curated by ${curatorName(c.maker)}`;
-  const desc = $("channelSay");
-  desc.textContent = c.description ?? "";
-  desc.hidden = !c.description;
+  const list = $("channelPlaylist");
+  list.textContent = c.playlist?.title ?? "";
+  list.hidden = !c.playlist?.title;
 
   $("links").replaceChildren(...linksList(c.playlist?.linksHtml));
 

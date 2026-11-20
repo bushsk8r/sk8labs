@@ -242,11 +242,17 @@ canvas {
 }
 
 /* the cover's radio link while the ride shows the tower on air (entrance.js):
-   a gold patch that comes and goes; held still when motion is reduced */
+   a gold patch that comes and goes for 5s (4 × 1.25s = entrance.js AIR_MS — change both), then holds;
+   held from the start when motion is reduced, and when the studio comes back into view after the run */
 .top nav a.onAir {
   padding-inline: 0.6rem;
   border-radius: 999px;
-  animation: onAirBlink 1.2s steps(1, end) infinite;
+  background: var(--gold);
+  animation: onAirBlink 1.25s steps(1, end) 4;
+}
+
+.top nav a.onAir.airStill {
+  animation: none;
 }
 
 @keyframes onAirBlink {
@@ -257,7 +263,6 @@ canvas {
 @media (prefers-reduced-motion: reduce) {
   .top nav a.onAir {
     animation: none;
-    background: var(--gold);
   }
 }
 
