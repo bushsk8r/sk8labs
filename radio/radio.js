@@ -12,8 +12,8 @@ const ACT_GLOSS = {
   resolution: "where it lands",
 };
 // the playlist's links table as one line per row: a label (the row's first
-// plain cell, else the link's site) and a short "listen" link. a row with
-// several links names each by its site. a table with no links shows as sent.
+// plain cell with its column header, "21 tracks") and each link named by its
+// own words (spotify, tidal), else its site. a table with no links shows as sent.
 // hand copy in the studio's RadioPreview (linkRows) — change both.
 function siteOf(href) {
   try { return new URL(href).hostname.replace(/^www\./, ""); } catch { return "link"; }
@@ -24,18 +24,27 @@ function linksList(html) {
   const box = document.createElement("div");
   box.innerHTML = html;
   const items = [];
+  const heads = [...box.querySelectorAll("thead th")].map((th) => th.textContent.trim());
   for (const tr of box.querySelectorAll("tbody tr")) {
     const links = [...tr.querySelectorAll("a[href]")];
     if (!links.length) continue;
-    const plain = [...tr.cells].find((td) => !td.querySelector("a") && td.textContent.trim());
+    // a plain cell (e.g. the track count) is labelled by its column's header: "21 tracks"
+    const cells = [...tr.cells];
+    const plain = cells.find((td) => !td.querySelector("a") && td.textContent.trim());
     const li = el("li");
-    if (plain) li.append(el("span", "linkLabel", plain.textContent.trim()));
+    if (plain) {
+      const head = heads[cells.indexOf(plain)];
+      const text = plain.textContent.trim();
+      li.append(el("span", "linkLabel", head ? `${text} ${head}` : text));
+    }
     for (const a of links) {
-      const out = el("a", null, plain && links.length === 1 ? "listen" : siteOf(a.href));
+      // the link is named by its own words (spotify, tidal), else its site
+      const name = a.textContent.trim() || siteOf(a.href);
+      const out = el("a", null, name);
       out.href = a.href;
       out.target = "_blank";
       out.rel = "noopener noreferrer";
-      if (plain && links.length === 1) out.setAttribute("aria-label", `listen on ${plain.textContent.trim()} (opens in a new tab)`);
+      out.setAttribute("aria-label", `listen on ${name} (opens in a new tab)`);
       li.append(out);
     }
     items.push(li);
