@@ -874,6 +874,11 @@ a.ticket:hover {
   overflow-wrap: anywhere;
 }
 
+/* the description rides in the heading after the name, smaller */
+.channelDesc {
+  font-size: 0.55em;
+}
+
 /* the playlist carries the weight under the name, set off by a dashed rule */
 /* the links: a cream ticket laid on the card, its "links" tab an ink plaque
    on the top edge. each cell is one whole hit target that takes a gold patch
