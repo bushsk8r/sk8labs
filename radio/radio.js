@@ -78,7 +78,9 @@ function show(index, announce) {
   at = (index + channels.length) % channels.length;
   const c = channels[at];
 
-  $("channelName").textContent = c.name;
+  // the heading reads "name - description" (the description smaller); no description, just the name
+  const desc = c.description?.trim();
+  $("channelName").replaceChildren(c.name, ...(desc ? [el("span", "channelDesc", ` - ${desc}`)] : []));
   $("channelMeta").textContent = `curated by ${curatorName(c.maker)}`;
   const list = $("channelPlaylist");
   list.textContent = c.playlist?.title ?? "";
