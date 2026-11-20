@@ -234,12 +234,18 @@ function drawBuilding(ox, lit, sky) {
 // ---- the radio tower on the studio's roof (radio/): it always stands; while a purist has a channel on air
 // (GET /public/radio) it sends out waves, and once the studio is in view the nav's radio link blinks ----
 let onAir = false;
+// the waves and the nav's blink play for AIR_MS from the moment the studio comes into view, then hold still
+// (the reduced-motion look); the nav's run is timed in cover.css (.onAir: 4 × 1.25s) — change both
+const AIR_MS = 5000;
+let airSince = null;
+const airMoving = (now) => !calm.matches && airSince !== null && now - airSince < AIR_MS;
 const radioLink = document.querySelector('.top nav a[href="/radio/"]');
 let blinking = false;
-function setBlink(on) {
+function setBlink(on, now) {
   if (on === blinking || !radioLink) return;
   blinking = on;
   radioLink.classList.toggle("onAir", on);
+  radioLink.classList.toggle("airStill", on && !airMoving(now)); // back in view after the run: no second blink
   radioLink.querySelector(".onAirWord")?.remove();
   if (on) { const w = document.createElement("span"); w.className = "onAirWord visually-hidden"; w.textContent = ", on air"; radioLink.append(w); }
 }
@@ -254,11 +260,13 @@ function drawTower(ox, now) {
     if (i % 3 === 2 && w > 0) R(cx - w, y, 2 * w + 1, 1, C.clay);
   }
   const beat = Math.floor(now / 300) % 4;
-  R(cx, tip - 1, 1, 1, onAir ? (calm.matches || beat % 2 ? C.gold : C.ember) : C.clay);
+  const still = !airMoving(now);
+  R(cx, tip - 1, 1, 1, onAir ? (still || beat % 2 ? C.gold : C.ember) : C.clay);
   if (!onAir) return;
-  // three rings of waves, either side of the tip; they ripple outward (all three, still, when motion is reduced)
+  // three rings of waves, either side of the tip; they ripple outward for AIR_MS, then all three hold still
+  // (from the start when motion is reduced)
   [3, 5, 7].forEach((r, k) => {
-    if (!calm.matches && beat <= k) return;
+    if (!still && beat <= k) return;
     for (let a = -0.9; a <= 0.9; a += 0.8 / r) {
       const x = Math.round(r * Math.cos(a)), y = tip - 1 + Math.round(r * Math.sin(a));
       R(cx + x, y, 1, 1, C.gold); R(cx - x, y, 1, 1, C.gold);
@@ -297,9 +305,11 @@ function draw(now) {
   R(0, GROUND, W, 1, line);
 
   // the studio, from afar
+  const studioInView = onAir && T - off < W;
+  if (studioInView && airSince === null) airSince = now; // starts the wave and blink run
   if (T + 160 - off > 0) drawBuilding(T - off, state.lit, sky);
   if (T + 160 - off > 0) drawTower(T - off, now);
-  setBlink(onAir && T - off < W); // the studio is in view
+  setBlink(studioInView, now);
 
   // props
   for (const o of OBJ) {
@@ -709,8 +719,13 @@ import("./api.js").then(({ getJSON }) => getJSON("/public/radio")).then((data) =
   onAir = Array.isArray(data?.channels) && data.channels.length > 0;
   if (onAir) draw(performance.now());
 }).catch(() => { /* the tower stands without waves */ });
-// the ride loop stops at the doors; the waves keep rippling there on their own slow tick
-setInterval(() => { if (onAir && state.phase === "doors" && !calm.matches && !document.hidden) draw(performance.now()); }, 150);
+// the ride loop stops at the doors; the waves keep rippling there on their own slow tick until the run ends
+// (one more tick after it draws the still frame)
+setInterval(() => {
+  const now = performance.now();
+  if (airSince !== null && now - airSince > AIR_MS + 300) return;
+  if (onAir && state.phase === "doors" && !calm.matches && !document.hidden) draw(now);
+}, 150);
 draw(performance.now()); news();
 addEventListener("load", () => { if (state.phase === "ride") draw(performance.now()); });
 if (FAST > 1) say("fast ride on.");
