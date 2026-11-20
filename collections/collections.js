@@ -4,7 +4,6 @@ import { assignSlugs } from "./slugs.js";
 
 const status = document.getElementById("status");
 const list = document.getElementById("boards");
-const legend = document.getElementById("legend");
 const order = document.getElementById("order");
 
 function say(text, retry) {
@@ -49,7 +48,6 @@ function board(entry, index, slug) {
 async function load() {
   say("opening the crate…");
   list.hidden = true;
-  legend.hidden = true;
   let data;
   try {
     data = await getJSON("/public/collections");
@@ -76,7 +74,6 @@ async function load() {
   const slugs = assignSlugs(boards);
   list.replaceChildren(...boards.map((entry, i) => board(entry, i, slugs[i])));
   list.hidden = false;
-  legend.hidden = false;
 }
 
 load();

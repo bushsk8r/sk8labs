@@ -76,10 +76,11 @@ components:
     textColor: "{colors.hemp-cream}"
     rounded: "{rounded.wobble}"
     padding: "1.5rem 0.9rem 0.9rem"
-  bookmark:
+  ticket:
     backgroundColor: "{colors.hemp-cream}"
     textColor: "{colors.walnut-ink}"
-    padding: "4.3rem 1.1rem 3.8rem"
+    rounded: "{rounded.field}"
+    padding: "1.2rem 1.3rem 1.4rem"
   chip-selected:
     backgroundColor: "{colors.walnut-ink}"
     textColor: "{colors.hemp-cream}"
@@ -132,7 +133,7 @@ Scope: the cover only (the home page with its long road, the crate under `collec
 
 **Creative North Star: "The Dyer's Sketchbook"**
 
-A maker's notebook, not an app. Every colour is a natural dye, every frame is drawn with a thick walnut-ink line, and nothing is quite straight: corners are wobbly cut paper, and plaques, bookmarks and buttons lean when you touch them. The front page is a toy first. A 16-pixel skater called bushsk8r rides a long road through the four stages of the loop (compost, analyse, edit, open source) to the studio's door, and the page's job is to let a visitor play before it asks anything of them: only at the end of the road do the two ways in appear.
+A maker's notebook, not an app. Every colour is a natural dye, every frame is drawn with a thick walnut-ink line, and nothing is quite straight: corners are wobbly cut paper, and plaques, tickets and buttons lean when you touch them. The front page is a toy first. A 16-pixel skater called bushsk8r rides a long road through the four stages of the loop (compost, analyse, edit, open source) to the studio's door, and the page's job is to let a visitor play before it asks anything of them: only at the end of the road do the two ways in appear.
 
 The system is flat and warm. Depth comes from line weight, overlap and dashed versus solid strokes, never from shadow. Type is hand lettering: a bubbly display face for titles, a handwritten body, and a pixel face for furniture and labels. The fonts are self-hosted placeholders until the handwriting font exists, so the pairing is provisional while the roles are not. Copy is lowercase and plain, in the voice of a note tucked into a sketchbook.
 
@@ -141,7 +142,7 @@ The one place the notebook goes dark is the night band, where the application fo
 **Key Characteristics:**
 - Thick walnut-ink line (3px) around every drawn thing, dashed (3px) as the section divider.
 - Wobbly cut-paper corners from one two-radius recipe, mirrored for variety.
-- Things lean, never lift: plaques rotate -1deg on hover, buttons -2deg, a bookmark skews -2deg.
+- Things lean, never lift: plaques rotate -1deg on hover, buttons -2deg, a game ticket lifts 4px and tips 1deg.
 - Natural-dye palette on hemp cream, ink never pure black.
 - Hand, bubble and pixel lettering, all lowercase in voice.
 - No shadows, no gradients; light is the clock inside the ride.
@@ -155,15 +156,15 @@ A palette of eight natural dyes on warm hemp paper, with walnut ink for every li
 
 ### Secondary
 - **Dandelion Gold** (#d8a93f): patches and level-up moments: the board number disc, the distance ribbon's fill, the light button and dial steps, the on-air nav pill and tower waves, the ride's flowing trail and dandelions, and accents on dark grounds (plaque names, night band, why-note).
-- **Indigo Dusk** (#2f4a6b): night. The application band and the ride's night sky; also the indigo bookmark's band.
+- **Indigo Dusk** (#2f4a6b): night. The application band and the ride's night sky.
 
 ### Tertiary
-- **Onion Ember** (#c46a2c): shapes only: wheels, the dusk sky, one bookmark band, the on-air lamp and the dial's current tick. Never small text.
-- **Yarrow Moss** (#6f7843): shapes only: trees, grass, shoes, dandelion stems, one bookmark band. Never small text.
-- **Avocado Blush** (#dda7a0): soft fills: the sunrise sky, the note text patch, invalid-field and status dashes on night.
+- **Onion Ember** (#c46a2c): shapes only: wheels, the dusk sky, one ticket stub, the on-air lamp and the dial's current tick. Never small text.
+- **Yarrow Moss** (#6f7843): shapes only: trees, grass, shoes, dandelion stems, one ticket stub. Never small text.
+- **Avocado Blush** (#dda7a0): soft fills: the radio card and crate boards (washed 40% into cream), the sunrise sky, the note text patch, invalid-field and status dashes on night.
 
 ### Neutral
-- **Hemp Cream** (#ede4d0): the page, stickers, bookmarks, fields, midday sky, text on ink and dusk.
+- **Hemp Cream** (#ede4d0): the page, stickers, game tickets, fields, midday sky, text on ink and dusk.
 - **Walnut Ink** (#2a221d): all body text, every line, the phone nav bar, the plaques, the why-note, the dial strip, the ride's line colour by day.
 
 The dyes are listed in tonal ramps in the sidecar; the frontmatter is normative for values.
@@ -188,9 +189,9 @@ The dyes are listed in tonal ramps in the sidecar; the frontmatter is normative 
 ### Hierarchy
 - **Display** (400, clamp(3.4rem, 13vw, 8rem), 1): the page h1 in madder clay; on the crate and radio pages clamp(2.8rem, 10vw, 6rem), and on the home page's title row a smaller clamp(2.2rem, 9vw, 3.6rem) so the ride stays the hero.
 - **Headline** (400, clamp(2.4rem, 7vw, 4rem), 1): section h2 in madder clay, gold on the night band. Balanced wrapping.
-- **Title** (400, 1.5em, 1.15): h3 and bookmark names (1.6em). Plaque names go back to bubble, in gold, at clamp(1.7rem, 6vw, 2.4rem). Board titles are 1.6em in clay; channel names clamp(1.8rem, 5vw, 2.6rem) in clay.
+- **Title** (400, 1.5em, 1.15): h3; game ticket names clamp(1.6rem, 4vw, 2rem). Plaque names go back to bubble, in gold, at clamp(1.7rem, 6vw, 2.4rem). Board titles are 1.6em in clay; channel names clamp(1.8rem, 5vw, 2.6rem) in clay.
 - **Body** (400, clamp(1.2rem, 1.05rem + 0.5vw, 1.4rem), 1.5): everything else; lead paragraphs are 1.25em at 1.35. Paragraphs max 62ch with pretty wrapping.
-- **Label** (400, 0.875rem, 0.02em, lowercase): Silkscreen on ride readouts, the ribbon's stops (0.68rem), "two ways in" (0.8rem), dress-up legends, board numbers (1rem), item counters, the on-air line, the dial's station line, eyebrows and the bookmark-jump chip. The ride's help line returns to Patrick Hand at 1rem.
+- **Label** (400, 0.875rem, 0.02em, lowercase): Silkscreen on ride readouts, the ribbon's stops (0.68rem), "two ways in" (0.8rem), dress-up legends, board numbers (1rem), item counters, the on-air line, the dial's station line, eyebrows and the back-to-games chip. The ride's help line returns to Patrick Hand at 1rem.
 
 ### Named Rules
 **The Lowercase Voice Rule.** Copy is lowercase, short and plain: "a space where you are free to play." Labels are never uppercased.
@@ -199,22 +200,22 @@ The dyes are listed in tonal ramps in the sidecar; the frontmatter is normative 
 
 ## Layout
 
-A single centred column, max 1080px (`--wide`), with a fluid side gutter of clamp(16px, 5vw, 48px) (`--edge`). Sections pad clamp(2.5rem, 8vw, 5rem) vertically and are separated by a 3px dashed ink rule, except around the ride, the bookmarks and the night band. The night band runs full width with its content held to the same 1080px.
+A single centred column, max 1080px (`--wide`), with a fluid side gutter of clamp(16px, 5vw, 48px) (`--edge`). Sections pad clamp(2.5rem, 8vw, 5rem) vertically and are separated by a 3px dashed ink rule, except around the ride, the game tickets and the night band. The night band runs full width with its content held to the same 1080px.
 
-The home page is its own narrower column: 880px, widening to 1400px from 900px up, with the title and lead on one baseline row. Below them, the distance ribbon, the rink and its help bar all take the rink's exact width (a whole-number multiple of the canvas, centred), so no pixel column is ever stretched unevenly. When the road ends, the ride bar gives way to "two ways in": two plaques side by side (a two-column grid at every width, 12px gap), each hung from the doorway on a 3px ink string, then the "your road in" strip and "ride again". There is no footer. The play page's game bookmarks are a two-column grid, a single column from 700px down. Two breakpoints: 700px (the nav moves to the bottom bar, grids stack) and 520px (the ride's world grows from 60 to 90 pixels tall, plaques tighten). The top bar is sticky, 3px ink underline, with nav links at least 44px tall; below 700px the nav becomes a bar fixed to the screen bottom. Route any new sticky offset through the 5rem scroll padding already set.
+The home page is its own narrower column: 880px, widening to 1400px from 900px up, with the title and lead on one baseline row. Below them, the distance ribbon, the rink and its help bar all take the rink's exact width (a whole-number multiple of the canvas, centred), so no pixel column is ever stretched unevenly. When the road ends, the ride bar gives way to "two ways in": two plaques side by side (a two-column grid at every width, 12px gap), each hung from the doorway on a 3px ink string, then the "your road in" strip and "ride again". There is no footer. The play page's game tickets are a two-column grid, a single column from 700px down. Two breakpoints: 700px (the nav moves to the bottom bar, grids stack) and 520px (the ride's world grows from 60 to 90 pixels tall, plaques tighten). The top bar is sticky, 3px ink underline, with nav links at least 44px tall; below 700px the nav becomes a bar fixed to the screen bottom. Route any new sticky offset through the 5rem scroll padding already set.
 
-Touch targets are at least 44px (chips, nav links, summary, bookmark-jump chip, fields 52px). Spacing is rem-based and tight: 0.4, 0.6, 1, 1.5rem gaps do most of the work.
+Touch targets are at least 44px (chips, nav links, summary, back-to-games chip, fields 52px). Spacing is rem-based and tight: 0.4, 0.6, 1, 1.5rem gaps do most of the work.
 
 ## Elevation & Depth
 
-Flat, no shadows, no gradients. Depth is drawn: a 3px ink line, a hang (the plaques hang on 3px ink strings from the doorways above them), and the contrast of solid versus dashed borders (a broken-line bookmark or dashed item means "still in the studio, not open yet"). State is conveyed by movement, not lift: buttons rotate -2deg on hover, a plaque -1deg, a bookmark skews -2deg from its top-left corner. The doors rise 8px into place once (0.35s), and not at all with reduced motion. Menus and popovers do not exist here.
+Flat, no shadows, no gradients. Depth is drawn: a 3px ink line, a hang (the plaques hang on 3px ink strings from the doorways above them), and the contrast of solid versus dashed borders (a dashed item means "still in the studio, not open yet"). State is conveyed by movement, not lift: buttons rotate -2deg on hover, a plaque -1deg, a game ticket lifts 4px and tips 1deg. The doors rise 8px into place once (0.35s), and not at all with reduced motion. Menus and popovers do not exist here.
 
 ### Named Rules
 **The Drawn-Not-Lit Rule.** Separation comes from ink lines, overlap and dash patterns. Do not add box-shadow, blur or glow.
 
 ## Shapes
 
-Hand-cut paper. The signature corner is the wobble: opposing long and short elliptical radii (255px 18px 225px 18px / 18px 225px 18px 255px) with a mirrored second form (`wobble-2`) so neighbours do not match. The rink and boards use a gentler four-value wobble (14px 22px 12px 26px / 24px 12px 22px 14px) and form fields a small one (10px 14px 9px 15px / 14px 9px 15px 10px). The on-air nav link is a full pill, board numbers and dial steps are circles, and bookmarks are ribbons: straight sides, a dyed band across the top and a swallowtail notch cut into the foot. Lines are 3px solid ink for containers, 2px for chips, items and media, 3px dashed for section dividers and unseen things. Focus is a 3px ink outline offset 4px (cream on the phone nav bar and night band, gold on form fields).
+Hand-cut paper. The signature corner is the wobble: opposing long and short elliptical radii (255px 18px 225px 18px / 18px 225px 18px 255px) with a mirrored second form (`wobble-2`) so neighbours do not match. The rink and boards use a gentler four-value wobble (14px 22px 12px 26px / 24px 12px 22px 14px) and form fields a small one (10px 14px 9px 15px / 14px 9px 15px 10px). The on-air nav link is a full pill, board numbers and dial steps are circles, and game tickets are cut on the small field wobble with a dashed tear line before their stub. Lines are 3px solid ink for containers, 2px for chips, items and media, 3px dashed for section dividers and unseen things. Focus is a 3px ink outline offset 4px (cream on the phone nav bar and night band, gold on form fields).
 
 ### Named Rules
 **The Never-Square Rule.** Containers, buttons and chips carry a wobble, pill, circle or arch. Nothing hand-drawn has a plain 90-degree corner.
@@ -238,9 +239,9 @@ Hand-cut and tactile: thick walnut-ink lines, wobbly cut-paper corners, stickers
 
 ### Cards / Containers
 - **Plaques (the two ways in):** the home page's doors. Ink cards, 3px ink line, wobble corners, at least 12rem tall: a dyed band across the top (clay for tourist, dusk for purist) over a thin cream stripe, both hard stops; the name in gold bubble type, a cream line of what is behind the door, and a gold wavy-underlined way in at the foot. A ride that carried scraps pins them along the tourist plaque's foot in their own colours.
-- **Bookmarks:** ribbons, cream, a 3px ink line all round, a dyed band across the top (clay, indigo, moss, gold, ember, ink or blush) and a swallowtail notch at the foot. The band is a hard-stop fill, never a blend. A real link bookmark is solid and a not-yet-open one has a broken line. The play page uses two, one per game.
-- **Boards (the crate):** each a link: 3px ink line with the rink-style wobble, a gold numbered disc, a clay title in 1.6em (wavy-underlined on hover), a pixel meta line, and an "open →" cue appended in CSS.
-- **Channel card (the radio):** 3px ink line with the rink wobble; a pixel "on air" with an ember lamp (a 12px circle, 2px ink line), the name in clay, a pixel "curated by", the links table (pixel headers, rows ruled in 2px dashed ink, wavy-underlined links at least 44px tall with a ↗), then the why-note: the arrangement, each act under a 1.1rem pixel "act N: <name>" heading, any table in it ruled on every row and column (2px solid, the text colour) and scrolling sideways when wide.
+- **Game tickets (play):** one per game, two side by side (stacked below 700px). A cream ticket, 3px ink line, the field wobble: a pixel "no. N" after a dye dot (2px ink ring), the name in Patrick Hand at clamp(1.6rem, 4vw, 2rem), the pitch; then a dyed stub (moss, ember) behind a 3px dashed ink tear line, the call to play ("take the board", "throw a hand") in pixel type reading bottom to top, cream on moss and ink on ember. The whole ticket is the link; it lifts 4px and tips 1deg on hover, still under reduced motion.
+- **Boards (the crate):** each a link on the radio card's blush wash: 3px ink line with the rink-style wobble, a gold numbered disc, a clay title in 1.6em (wavy-underlined on hover), a pixel meta line, and an "open →" cue appended in CSS.
+- **Channel card (the radio):** a blush wash (40% avocado blush into hemp cream) inside a 3px ink line with the rink wobble. The head: a gold pill "on air" (2px ink line) holding the ember lamp (a 12px circle, 2px ink line), the name in clay, a pixel "curated by", the description. The links: an ink plaque tab lettered "links" in pixel type on the top edge of a cream ticket (3px ink line, the field wobble, solid 2px ink rules between cells), each cell one link at least 48px tall and 9rem wide, wavy clay underline, a ↗, a gold patch on hover. From 700px the head and the links sit side by side, split by a 2px dashed ink line, the links centred top to bottom; narrower they stack with the dashed line between. Then, across the foot, the why-note (cream while shut): the arrangement, each act under a 1.1rem pixel "act N: <name>" heading, any table in it ruled on every row and column (2px solid, the text colour) and scrolling sideways when wide.
 - **Why-note:** ink fill, cream text, gold headings, wobble corners; it states why a board's items belong together.
 - **Items:** 2px ink line, mirrored wobble, a pixel counter on the left; unseen items are dashed. A note's text sits on an avocado-blush patch.
 - **Shadow Strategy:** none; see Elevation & Depth.
