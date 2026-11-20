@@ -858,10 +858,6 @@ div.bookmark::before {
   overflow-wrap: anywhere;
 }
 
-.radioLede {
-  max-width: 62ch;
-}
-
 .channel.fade {
   animation: channelIn 0.15s ease-out;
 }
@@ -1308,7 +1304,7 @@ main > section.nightBand {
   overflow-wrap: anywhere;
 }
 
-/* the playlist's links, one line each: a label, then "listen ↗" (radio.js linksList) */
+/* the playlist's links, one line each: a label ("21 tracks"), then each link by name ("spotify ↗") (radio.js linksList) */
 .linksList {
   list-style: none;
   margin: 0;
