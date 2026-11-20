@@ -314,7 +314,7 @@ main > section + section:not(.ride):not(.nightBand):not(.bookmarks) {
   margin-top: 0.6rem;
 }
 
-/* the way down to the bookmarks, as a thumb-sized chip beside the note rather than a small link */
+/* the way back to the two games, as a thumb-sized chip beside the note rather than a small link */
 .bookmarkJump {
   display: inline-flex;
   align-items: center;
@@ -349,7 +349,7 @@ main > section.backLink {
   text-decoration: none;
 }
 
-/* the bookmarks sit between the hero and the ride: no dashed rule above them */
+/* the tickets sit between the hero and the games: no dashed rule above them */
 main > section.bookmarks {
   border-top: 0;
   padding-top: clamp(2rem, 6vw, 3.5rem);
@@ -471,115 +471,77 @@ main > section.bookmarks {
   max-width: none;
 }
 
-/* a ribbon bookmark: a dyed band at the top, a swallowtail at the foot.
-   the outline is two clipped layers (ink, then cream 3px in) rather than a border or a
-   clip on the link itself, so the focus ring is never cut off */
-.bookmark {
-  --accent: var(--clay);
-  --band: 3.2rem; /* the dyed top */
-  --tail: 2.4rem; /* how deep the notch is cut */
-  position: relative;
-  isolation: isolate;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
+/* a game ticket: a cream ticket with a pixel number in its dye, a handwritten
+   name and the pitch, and a dyed stub behind a dashed tear line that reads the
+   call to play sideways. lifts and tips on hover. */
+.ticket {
+  --dye: var(--clay);
+  --on-dye: var(--cream);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   width: 100%;
-  min-height: 17rem;
-  padding: calc(var(--band) + 1.1rem) 1.1rem calc(var(--tail) + 1.4rem);
+  background: var(--cream);
   color: var(--ink);
+  border: var(--line);
+  border-radius: 10px 14px 9px 15px / 14px 9px 15px 10px;
+  overflow: hidden;
   text-decoration: none;
   transition: transform 0.18s ease-out;
-  transform-origin: top left;
 }
 
-.bookmark::before,
-.bookmark::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-}
-
-/* the ink line */
-.bookmark::before {
-  inset: 0;
-  background: var(--ink);
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - var(--tail)), 0 100%);
-}
-
-/* the paper inside it, with the band */
-.bookmark::after {
-  inset: 3px 3px 0;
-  background: linear-gradient(
-    var(--accent) 0 var(--band),
-    var(--ink) var(--band) calc(var(--band) + 3px),
-    var(--cream) calc(var(--band) + 3px)
-  );
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% calc(100% - 4px),
-    50% calc(100% - var(--tail) - 3px),
-    0 calc(100% - 4px)
-  );
-}
-
-a.bookmark:hover {
+a.ticket:hover {
   color: var(--ink);
-  transform: skewY(-2deg);
+  transform: translateY(-4px) rotate(1deg);
 }
 
-/* not open yet: a broken line */
-div.bookmark::before {
-  background: repeating-linear-gradient(var(--ink) 0 10px, transparent 10px 18px);
+.ticket.moss { --dye: var(--moss); }
+/* ember is shapes only: ink, not cream, reads on it */
+.ticket.ember { --dye: var(--ember); --on-dye: var(--ink); }
+
+.ticketBody {
+  display: grid;
+  align-content: start;
+  gap: 0.4rem;
+  padding: 1.2rem 1.3rem 1.4rem;
 }
 
-.big .bookmark {
-  --band: 4rem;
-  --tail: 3.4rem;
-  min-height: 21rem;
+.ticketNo {
+  color: var(--ink);
 }
 
-.bookmark.clay { --accent: var(--clay); }
-.bookmark.indigo { --accent: var(--dusk); }
-.bookmark.moss { --accent: var(--moss); }
-.bookmark.gold { --accent: var(--gold); }
-.bookmark.ember { --accent: var(--ember); }
-.bookmark.ink { --accent: var(--ink); }
-.bookmark.blush { --accent: var(--blush); }
+.ticketNo::before {
+  content: "";
+  display: inline-block;
+  width: 0.7em;
+  height: 0.7em;
+  margin-right: 0.5em;
+  background: var(--dye);
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  vertical-align: -0.05em;
+}
 
-.bookmarkName {
-  font-size: 1.6em;
+.ticketName {
+  font-size: clamp(1.6rem, 4vw, 2rem);
   line-height: 1.05;
 }
 
-.big .bookmarkName {
-  font-family: var(--bubble);
-  font-size: clamp(2rem, 6vw, 3rem);
-  color: var(--clay);
-}
-
-.bookmarkSay {
+.ticketSay {
   line-height: 1.3;
-  padding-right: 1.2rem;
 }
 
-.bookmarkKey {
-  line-height: 1.3;
-  padding-right: 1.2rem;
-}
-
-.bookmarkKey strong {
-  font-family: var(--bubble);
-  font-weight: 400;
-  font-size: 1.3em;
-  color: var(--clay);
-}
-
-.bookmarkGo {
-  margin-top: auto;
-  padding-top: 0.8rem;
-  text-decoration: underline wavy 2px;
-  text-underline-offset: 0.25em;
+.ticketStub {
+  display: grid;
+  place-items: center;
+  padding: 1rem 0.9rem;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  background: var(--dye);
+  color: var(--on-dye);
+  border-right: 3px dashed var(--ink);
+  font-family: var(--pixel);
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
 }
 
 #bookmarks h3 {
@@ -596,8 +558,10 @@ div.bookmark::before {
   font-size: clamp(2.8rem, 10vw, 6rem);
 }
 
+/* a board is dyed like the radio card: a blush wash off the cream page */
 .board {
   margin-top: 1.5rem;
+  background: color-mix(in srgb, var(--blush) 40%, var(--cream));
   border: var(--line);
   border-radius: 14px 22px 12px 26px / 24px 12px 22px 14px;
 }
@@ -867,18 +831,27 @@ div.bookmark::before {
   to { opacity: 1; }
 }
 
+/* the card is dyed: a blush wash off the cream page, the table and the shut
+   arrangement back on cream so they read as paper laid on it */
 .channel {
   display: grid;
   gap: 0.8rem;
   padding: 1.3rem 1.4rem 1.5rem;
+  background: color-mix(in srgb, var(--blush) 40%, var(--cream));
   border: var(--line);
   border-radius: 14px 22px 12px 26px / 24px 12px 22px 14px;
 }
 
-.onAir {
+/* on air: a gold patch, the ember lamp in it (the card's, not the nav link's .onAir) */
+.channel .onAir {
   display: inline-flex;
   align-items: center;
+  justify-self: start;
   gap: 0.5rem;
+  padding: 0.25rem 0.8rem 0.3rem 0.6rem;
+  background: var(--gold);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
 }
 
 .onAirLamp {
@@ -896,56 +869,130 @@ div.bookmark::before {
   overflow-wrap: anywhere;
 }
 
-/* the playlist carries the weight under the name */
-.playlist h4 {
-  margin: 0 0 0.5rem;
-  font-size: 1.5em;
-  font-weight: 400;
-  line-height: 1.15;
+/* the playlist carries the weight under the name, set off by a dashed rule */
+/* the links: a cream ticket laid on the card, its "links" tab an ink plaque
+   on the top edge. each cell is one whole hit target that takes a gold patch
+   on hover. the table keeps its ruled cells (solid ink) but the ticket's own
+   corners wobble, never square. */
+.playlist {
+  display: grid;
+  justify-items: center;
+  margin-top: 0.4rem;
+  padding-top: 1.2rem;
+  border-top: 2px dashed var(--ink);
 }
 
-/* the links table: a ruled card, its links big enough to hit */
+.playlist h4 {
+  margin: 0;
+  padding: 0.3rem 1.1rem 0.15rem;
+  font-family: var(--pixel);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: 10px 14px 0 0 / 9px 12px 0 0;
+}
+
 .linksTable {
+  max-width: 100%;
   overflow-x: auto;
 }
 
 .linksTable table {
-  width: 100%;
-  border-collapse: collapse;
+  width: auto;
+  margin-inline: auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 3px solid var(--ink);
+  border-radius: 10px 14px 9px 15px / 14px 9px 15px 10px;
+  background: var(--cream);
+  overflow: hidden;
 }
 
 .linksTable th,
 .linksTable td {
-  padding: 0.5rem 0.8rem;
-  text-align: left;
-  border-bottom: 2px dashed var(--ink);
+  padding: 0;
+  min-width: 9rem;
+  text-align: center;
   overflow-wrap: break-word;
 }
 
+/* inner rules only: the ticket's own edge is the table border */
+.linksTable tr + tr > * {
+  border-top: 2px solid var(--ink);
+}
+
+.linksTable :is(th, td) + :is(th, td) {
+  border-left: 2px solid var(--ink);
+}
+
 .linksTable th {
+  padding: 0.4rem 1rem;
   font-family: var(--pixel);
   font-size: 0.875rem;
   font-weight: 400;
 }
 
 .linksTable a {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  min-height: 44px;
+  justify-content: center;
+  gap: 0.3rem;
+  min-height: 48px;
+  padding: 0.4rem 1.2rem;
   color: var(--ink);
   text-decoration: underline wavy 2px;
-  text-underline-offset: 0.2em;
+  text-decoration-color: var(--clay);
+  text-underline-offset: 0.25em;
+  transition: background-color 0.15s ease-out;
 }
 
 .linksTable a::after {
-  content: " ↗";
+  content: "↗";
+  text-decoration: none;
+}
+
+.linksTable a:hover {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+/* the head and the links side by side once there's room; the arrangement
+   runs under both. narrow, they stack with the dashed rule between. */
+.channelHead {
+  display: grid;
+  gap: 0.8rem;
+  align-content: start;
+}
+
+@media (min-width: 700px) {
+  .channel {
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 2rem;
+  }
+
+  .channel .playlist {
+    margin-top: 0;
+    padding-top: 0;
+    padding-left: 2rem;
+    border-top: 0;
+    border-left: 2px dashed var(--ink);
+    align-self: stretch;
+    align-content: center;
+  }
+
+  .channel .why {
+    grid-column: 1 / -1;
+  }
 }
 
 /* the arrangement: quiet while shut (a dashed line), the ink card when opened */
 .channel .why {
   margin: 0;
   padding: 0 1.2rem;
-  background: none;
+  background: var(--cream);
   color: var(--ink);
   border: 2px dashed var(--ink);
 }
@@ -1161,10 +1208,6 @@ main > section.nightBand {
     grid-template-columns: 1fr;
   }
 
-  .big .bookmark {
-    min-height: 17rem;
-  }
-
   .rideSoft {
     display: none;
   }
@@ -1214,7 +1257,7 @@ main > section.nightBand {
   }
 
   .btn,
-  .bookmark {
+  .ticket {
     transition: none;
   }
 

@@ -4,55 +4,49 @@
 import { getJSON, el, markdownBody, curatorName } from "../api.js";
 
 const ACTS = ["intro", "complication", "confrontation", "resolution"];
-// a few plain words for strangers; hand copy in the studio's RadioPreview
-const ACT_GLOSS = {
-  intro: "where it starts",
-  complication: "where it gets tangled",
-  confrontation: "where it comes to a head",
-  resolution: "where it lands",
-};
-// the playlist's links table as one line per row: a label (the row's first
-// plain cell with its column header, "21 tracks") and each link named by its
-// own words (spotify, tidal), else its site. a table with no links shows as sent.
+
+// the playlist's links table, links only: one row per row that holds a link,
+// one cell per link, named by its words (a bare url by the row's plain cell). a table with no links shows as sent.
 // hand copy in the studio's RadioPreview (linkRows) — change both.
 function siteOf(href) {
   try { return new URL(href).hostname.replace(/^www\./, ""); } catch { return "link"; }
 }
 
+const isUrl = (t) => /^https?:\/\//i.test(t);
+
 function linksList(html) {
   if (typeof html !== "string" || !html) return [];
   const box = document.createElement("div");
   box.innerHTML = html;
-  const items = [];
-  const heads = [...box.querySelectorAll("thead th")].map((th) => th.textContent.trim());
+  const rows = [];
   for (const tr of box.querySelectorAll("tbody tr")) {
     const links = [...tr.querySelectorAll("a[href]")];
     if (!links.length) continue;
-    // a plain cell (e.g. the track count) is labelled by its column's header: "21 tracks"
-    const cells = [...tr.cells];
-    const plain = cells.find((td) => !td.querySelector("a") && td.textContent.trim());
-    const li = el("li");
-    if (plain) {
-      const head = heads[cells.indexOf(plain)];
-      const text = plain.textContent.trim();
-      li.append(el("span", "linkLabel", head ? `${text} ${head}` : text));
-    }
+    // a bare url is no name: the row's plain cell ("Morning") names it, else its site
+    const plain = [...tr.cells].find((td) => !td.querySelector("a") && td.textContent.trim());
+    const row = el("tr");
     for (const a of links) {
-      // the link is named by its own words (spotify, tidal), else its site
-      const name = a.textContent.trim() || siteOf(a.href);
+      const own = a.textContent.trim();
+      const name = own && !isUrl(own) ? own : plain?.textContent.trim() || siteOf(a.href);
       const out = el("a", null, name);
       out.href = a.href;
       out.target = "_blank";
       out.rel = "noopener noreferrer";
       out.setAttribute("aria-label", `listen on ${name} (opens in a new tab)`);
-      li.append(out);
+      const td = el("td");
+      td.append(out);
+      row.append(td);
     }
-    items.push(li);
+    rows.push(row);
   }
-  if (!items.length) return markdownBody(html, "", "linksTable");
-  const ul = el("ul", "linksList");
-  ul.append(...items);
-  return [ul];
+  if (!rows.length) return markdownBody(html, "", "linksTable");
+  const tbody = el("tbody");
+  tbody.append(...rows);
+  const table = el("table");
+  table.append(tbody);
+  const wrap = el("div", "linksTable");
+  wrap.append(table);
+  return [wrap];
 }
 
 const $ = (id) => document.getElementById(id);
@@ -90,7 +84,6 @@ function show(index, announce) {
   desc.textContent = c.description ?? "";
   desc.hidden = !c.description;
 
-  $("playlistTitle").textContent = c.playlist?.title || "the playlist";
   $("links").replaceChildren(...linksList(c.playlist?.linksHtml));
 
   const why = $("why");
@@ -98,14 +91,15 @@ function show(index, announce) {
   why.open = false;
   const a = c.arrangement;
   if (a && (a.textHtml || a.actsHtml)) {
-    why.append(el("summary", null, "the arrangement"));
+    why.append(el("summary", null, "arrangement"));
     if (a.textHtml) why.append(...markdownBody(a.textHtml, "", "arrangementText"));
     for (const key of ACTS) {
       const html = a.actsHtml?.[key];
-      if (html) why.append(el("h4", "pixel actName", `act ${ACTS.indexOf(key) + 1}: ${key} — ${ACT_GLOSS[key]}`), ...markdownBody(html, "", "arrangementText"));
+      if (html) why.append(el("h4", "pixel actName", `act ${ACTS.indexOf(key) + 1}: ${key}`), ...markdownBody(html, "", "arrangementText"));
     }
     why.hidden = false;
   } else why.hidden = true;
+
 
   const stopBtns = [...stops.querySelectorAll("button")];
   stopBtns.forEach((b, i) => {

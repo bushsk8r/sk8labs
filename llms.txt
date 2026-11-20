@@ -8,13 +8,13 @@
 Site: https://sk8.studio
 Gallery: https://gallery.sk8.studio (its own llms.txt: https://gallery.sk8.studio/llms.txt)
 
-Last updated: 2026-11-17.
+Last updated: 2026-11-20
 
 ---
 
 ## Pages
 
-- [Home](https://sk8.studio/): two bookmarks. *tourist* leads to the crate; *purist* opens the
+- [Home](https://sk8.studio/): two doors. *tourist* leads to the crate; *purist* opens the
   gallery in a new tab, with its keyword printed beside it (`welcome`).
 - [The crate](https://sk8.studio/collections/): the public collections, newest first — what was
   gathered, thought about and put in order to make the work. Ends with a form to apply to join as
